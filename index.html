@@ -640,6 +640,28 @@ window.TUBAL_EMAILJS_CONFIG = Object.freeze({
 </div>
 
 <div class="cookie" id="cookieBox"><div><b>🍪 Cookies</b><span>We use cookies to improve your experience.</span></div><button id="acceptCookie">Accept</button></div>
+<script id="tubalShopNavigationFix">
+(function(){
+  function openShop(){
+    var base=document.baseURI || window.location.href;
+    var target=new URL('pages/shop.html', base).href;
+    window.location.assign(target);
+  }
+  document.addEventListener('click',function(e){
+    var link=e.target.closest && e.target.closest('a[href$="pages/shop.html"]');
+    if(!link) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    openShop();
+  },true);
+  document.querySelectorAll('a[href$="pages/shop.html"]').forEach(function(link){
+    link.style.setProperty('pointer-events','auto','important');
+    link.style.setProperty('cursor','pointer','important');
+    link.style.setProperty('position','relative','important');
+    link.style.setProperty('z-index','100000','important');
+  });
+})();
+</script>
 <script src="assets/js/app.js?v=1.2.16"></script>
 <script src="assets/js/main.js?v=1.2.16"></script>
 <script src="assets/js/theme.js"></script>
