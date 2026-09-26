@@ -34,4 +34,4 @@ const auth = initializeAuth(app, {
   ]
 });
 
-export { app, auth };
+export { app, auth, isConfigured };
