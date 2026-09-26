@@ -1,4 +1,4 @@
-import {app,auth} from "./firebase-config.js";
+import {app,auth,isConfigured} from "./firebase-config.js";
 import {getFirestore,collection,onSnapshot,getDocs,query,where} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import {onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import {getFunctions,httpsCallable} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-functions.js";
@@ -584,6 +584,13 @@ window.addEventListener("keydown",e=>{
   else if(els.cartDrawer.classList.contains("open"))closeCart();
 });
 
-loadCart();loadWishlist();updateCounts();updateCartUI();updateCollectionUI();listenToRealProducts();
-onAuthStateChanged(auth,user=>listenToOwnedProducts(user));
+loadCart();loadWishlist();updateCounts();updateCartUI();updateCollectionUI();
+// Demo build: the catalog remains fully usable before a buyer connects Firebase.
+if(isConfigured){
+  listenToRealProducts();
+  onAuthStateChanged(auth,user=>listenToOwnedProducts(user));
+}else{
+  console.info("[TUBAL HUB Shop] Demo catalog mode: Firebase not configured.");
+  renderMyProducts();
+}
 setTimeout(()=>burstAt(document.getElementById("heroShopNow"),6),450);
