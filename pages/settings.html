@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#020604">
+<meta name="description" content="TUBAL HUB real account, appearance, notification, privacy, sound, language and account settings.">
+<title>Settings — TUBAL HUB</title>
+<link rel="icon" type="image/png" href="../tubal-hub-logo.png">
+<link rel="stylesheet" href="../assets/css/global-theme.css?v=20260924">
+<link rel="stylesheet" href="../assets/css/premium-logos.css?v=20260924-logo1">
+<link rel="stylesheet" href="../assets/css/settings.css?v=20260924-v2">
+</head>
+<body class="settings-page theme-midnight">
+<header class="settings-header glass">
+  <a class="settings-brand" href="../index.html" aria-label="Back to TUBAL HUB">
+    <span class="brand-mark"><span class="emoji" aria-hidden="true">⚙️</span></span>
+    <span><strong>TUBAL HUB</strong><small>REAL SETTINGS</small></span>
+  </a>
+  <div class="header-copy">
+    <span class="eyebrow">CONTROL CENTER</span>
+    <h1>Settings</h1>
+    <p>Your preferences are saved on this device unless a setting uses your real account.</p>
+  </div>
+  <a class="back-link" href="../index.html">← Back to Hub</a>
+</header>
+
+<main class="settings-shell">
+  <aside class="settings-sidebar glass" aria-label="Settings">
+    <div class="sidebar-title"><span>SETTINGS</span><small>YOUR CONTROL</small></div>
+    <nav class="settings-tabs">
+      <button type="button" class="active" data-tab="profile"><span class="emoji" aria-hidden="true">👤</span>Profile</button>
+      <button type="button" data-tab="appearance"><span class="emoji" aria-hidden="true">🎨</span>Appearance</button>
+      <button type="button" data-tab="notifications"><span class="emoji" aria-hidden="true">🔔</span>Notifications</button>
+      <button type="button" data-tab="privacy"><span class="emoji" aria-hidden="true">🔒</span>Privacy</button>
+      <button type="button" data-tab="sound"><span class="emoji" aria-hidden="true">🔊</span>Sound</button>
+      <button type="button" data-tab="language"><span class="emoji" aria-hidden="true">🌐</span>Language</button>
+      <button type="button" data-tab="account"><span class="emoji" aria-hidden="true">⚙️</span>Account</button>
+    </nav>
+    <div class="sidebar-foot">
+      <span class="status-dot" id="sidebarStatusDot" aria-hidden="true"></span>
+      <span id="sidebarStatusText">Checking connection…</span>
+    </div>
+  </aside>
+
+  <section class="settings-content glass" aria-live="polite">
+    <div class="settings-scroll">
+      <section class="settings-panel active" data-panel="profile">
+        <div class="panel-head"><span class="eyebrow">01 / PROFILE</span><h2>Profile</h2><p>Use your own information. Your local profile fields stay in this browser.</p></div>
+        <div class="profile-card">
+          <div class="profile-top">
+            <div class="avatar-wrap">
+              <div class="avatar-preview" id="avatarPreview"><span class="emoji" aria-hidden="true">👤</span></div>
+              <label class="avatar-upload" for="avatarInput">Change avatar</label>
+              <input id="avatarInput" type="file" accept="image/*" hidden>
+              <button id="removeAvatar" class="mini-danger" type="button">Remove</button>
+            </div>
+            <div class="account-identity">
+              <span class="eyebrow">AUTHENTICATED EMAIL</span>
+              <strong id="accountEmail">Not signed in</strong>
+              <small id="accountProvider">Real Firebase account status</small>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>Full name<input id="profileName" maxlength="100" type="text" autocomplete="name" placeholder="Your name"></label>
+            <label>Username<input id="profileUsername" maxlength="40" type="text" autocomplete="username" placeholder="Your username"></label>
+          </div>
+          <label>Bio<textarea id="profileBio" maxlength="500" placeholder="Tell people a little about yourself."></textarea></label>
+          <button id="saveProfile" class="gradient-btn" type="button">Save Profile</button>
+        </div>
+      </section>
+
+      <section class="settings-panel" data-panel="appearance">
+        <div class="panel-head"><span class="eyebrow">02 / APPEARANCE</span><h2>Choose your theme</h2><p>Changes apply instantly and are saved with the shared TUBAL HUB theme preference.</p></div>
+        <div class="theme-options">
+          <button type="button" class="theme-card theme-midnight-card" data-theme-choice="midnight">
+            <div class="mini-browser midnight-preview"><span class="mini-top"></span><span class="mini-side"></span><span class="mini-main"></span><span class="mini-line"></span></div>
+            <strong>Midnight</strong><small>Sharp 10px • circuit grid • neon <span>#1dff91</span></small>
+          </button>
+          <button type="button" class="theme-card theme-forest-card" data-theme-choice="forest">
+            <div class="mini-browser forest-preview"><span class="leaf-blob"></span><span class="mini-glass"></span><span class="mini-line"></span></div>
+            <strong>Forest</strong><small>Organic 26px • leaf glow • <span>#0a1f12</span></small>
+          </button>
+          <button type="button" class="theme-card theme-light-card" data-theme-choice="light">
+            <div class="mini-browser light-preview"><span class="mini-top"></span><span class="mini-side"></span><span class="mini-main"></span><span class="mini-line"></span></div>
+            <strong>Light</strong><small>Minimal white • pastel • <span>#f8faf8</span></small>
+          </button>
+        </div>
+        <div class="theme-preview-live glass">
+          <div><span class="eyebrow">LIVE PREVIEW</span><strong id="themePreviewTitle">Midnight</strong><small id="themePreviewText">Circuit neon and sharp glass.</small></div>
+          <div class="preview-actions"><span></span><span></span><span></span></div>
+        </div>
+      </section>
+
+      <section class="settings-panel" data-panel="notifications">
+        <div class="panel-head"><span class="eyebrow">03 / NOTIFICATIONS</span><h2>Notification controls</h2><p>Each switch is a real browser preference. Website Updates controls the 30-second update checker.</p></div>
+        <div class="setting-list">
+          <div class="setting-row"><div><strong>New Messages</strong><small>Show message notifications when supported by the site.</small></div><label class="switch"><input data-setting-toggle="tubalhub_notif_messages" type="checkbox"><span></span></label></div>
+          <div class="setting-row"><div><strong>Feed Likes</strong><small>Keep your feed-like notification preference.</small></div><label class="switch"><input data-setting-toggle="tubalhub_notif_likes" type="checkbox"><span></span></label></div>
+          <div class="setting-row"><div><strong>Comments</strong><small>Keep your comment notification preference.</small></div><label class="switch"><input data-setting-toggle="tubalhub_notif_comments" type="checkbox"><span></span></label></div>
+          <div class="setting-row"><div><strong>Live Listeners</strong><small>Use your preference for listener activity notifications.</small></div><label class="switch"><input data-setting-toggle="tubalhub_notif_live_listeners" type="checkbox"><span></span></label></div>
+          <div class="setting-row"><div><strong>Website Updates</strong><small>Real version.json + index signature polling every 30 seconds when enabled.</small></div><label class="switch"><input id="websiteUpdatesToggle" data-setting-toggle="tubalhub_notif_website_updates" type="checkbox" checked><span></span></label></div>
+          <div class="setting-row"><div><strong>Push Notifications</strong><small>Uses the browser Notification API and asks for permission when enabled.</small></div><label class="switch"><input id="pushNotificationsToggle" data-setting-toggle="tubalhub_notif_push" type="checkbox"><span></span></label></div>
+          <div class="setting-row"><div><strong>Sound</strong><small>Enable notification sound preference.</small></div><label class="switch"><input data-setting-toggle="tubalhub_notif_sound" type="checkbox"><span></span></label></div>
+        </div>
+      </section>
+
+      <section class="settings-panel" data-panel="privacy">
+        <div class="panel-head"><span class="eyebrow">04 / PRIVACY</span><h2>Privacy</h2><p>These controls are saved locally and privacy-sensitive settings are sent to the presence system where applicable.</p></div>
+        <div class="setting-list">
+          <div class="setting-row"><div><strong>Show Online Status</strong><small>When off, presence is published as offline and the red/black status indicator is not shown as online to other users.</small></div><label class="switch"><input id="onlineStatusToggle" data-setting-toggle="tubalhub_privacy_online" type="checkbox" checked><span></span></label></div>
+          <div class="setting-row"><div><strong>Show Email</strong><small>Controls your local preference for displaying your email in TUBAL HUB UI.</small></div><label class="switch"><input data-setting-toggle="tubalhub_privacy_email" type="checkbox"><span></span></label></div>
+          <div class="setting-row"><div><strong>Allow Tagging</strong><small>Controls your preference for being tagged in future community UI.</small></div><label class="switch"><input data-setting-toggle="tubalhub_privacy_tagging" type="checkbox" checked><span></span></label></div>
+          <div class="setting-row"><div><strong>Data Saver</strong><small>Lets supported pages reduce optional media behavior when they honor this preference.</small></div><label class="switch"><input data-setting-toggle="tubalhub_privacy_data_saver" type="checkbox"><span></span></label></div>
+        </div>
+        <div class="privacy-indicator glass"><span id="privacyLiveDot" class="privacy-dot"></span><div><strong id="privacyStatusTitle">Online status enabled</strong><small id="privacyStatusText">Your presence can be published while signed in.</small></div></div>
+      </section>
+
+      <section class="settings-panel" data-panel="sound">
+        <div class="panel-head"><span class="eyebrow">05 / SOUND</span><h2>Sound</h2><p>Volume is applied to audio and video elements on this page and dispatched as a global preference event.</p></div>
+        <div class="sound-card glass">
+          <div class="sound-value"><strong>Master volume</strong><span id="volumeValue">100%</span></div>
+          <input id="masterVolume" type="range" min="0" max="1" step="0.01" value="1">
+        </div>
+        <div class="sound-card glass">
+          <div class="sound-value"><strong>Message Sound</strong><span>Preview</span></div>
+          <div class="sound-select-row">
+            <select id="messageSound">
+              <option value="pop">Pop</option>
+              <option value="soft">Soft</option>
+              <option value="chime">Chime</option>
+            </select>
+            <button id="previewSound" class="secondary-btn" type="button">▶ Preview</button>
+          </div>
+        </div>
+        <div class="setting-row standalone glass"><div><strong>Voice Message</strong><small>Allow voice-message UI to use your saved sound preference.</small></div><label class="switch"><input data-setting-toggle="tubalhub_sound_voice" type="checkbox"><span></span></label></div>
+      </section>
+
+      <section class="settings-panel" data-panel="language">
+        <div class="panel-head"><span class="eyebrow">06 / LANGUAGE</span><h2>Language</h2><p>Choose the language preference used by supported TUBAL HUB UI.</p></div>
+        <div class="language-card glass">
+          <label for="languageSelect">Interface language</label>
+          <select id="languageSelect">
+            <option value="English">English</option>
+            <option value="Tagalog">Tagalog</option>
+            <option value="Bisaya">Bisaya</option>
+          </select>
+          <button id="saveLanguage" class="gradient-btn" type="button">Save Language</button>
+        </div>
+      </section>
+
+      <section class="settings-panel" data-panel="account">
+        <div class="panel-head"><span class="eyebrow">07 / ACCOUNT</span><h2>Account</h2><p>Real Firebase account actions. Password changes require a recent authenticated session.</p></div>
+
+        <div class="account-status glass">
+          <span class="emoji" aria-hidden="true">🔐</span>
+          <div><strong id="accountState">Checking account…</strong><small id="accountDetails">Firebase Authentication</small></div>
+        </div>
+
+        <form id="passwordForm" class="security-form glass">
+          <div class="card-title"><span class="emoji" aria-hidden="true">🔑</span><strong>Change Password</strong></div>
+          <label>Current password<input id="currentPassword" type="password" autocomplete="current-password"></label>
+          <label>New password<input id="newPassword" type="password" minlength="8" autocomplete="new-password"></label>
+          <label>Confirm new password<input id="confirmPassword" type="password" minlength="8" autocomplete="new-password"></label>
+          <button class="gradient-btn" type="submit">Update Password</button>
+        </form>
+
+        <div class="account-actions">
+          <button id="logoutBtn" class="secondary-btn" type="button"><span class="emoji" aria-hidden="true">↪</span> Logout</button>
+          <button id="deleteAccountBtn" class="danger-btn" type="button"><span class="emoji" aria-hidden="true">⚠️</span> Delete Account</button>
+        </div>
+      </section>
+
+      <div id="settingsToast" class="settings-toast" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+</main>
+
+<div id="deleteModal" class="modal-backdrop" hidden>
+  <section class="delete-modal glass" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+    <button id="closeDeleteModal" class="modal-close" type="button" aria-label="Close">×</button>
+    <span class="danger-symbol emoji" aria-hidden="true">⚠️</span>
+    <h2 id="deleteModalTitle">Delete your account?</h2>
+    <p>This is a real Firebase account action. Your authentication account will be deleted only after you type DELETE and confirm.</p>
+    <label>Type DELETE to continue<input id="deleteConfirmInput" type="text" autocomplete="off" spellcheck="false"></label>
+    <div class="modal-actions"><button id="cancelDelete" class="secondary-btn" type="button">Cancel</button><button id="confirmDelete" class="danger-btn" type="button" disabled>Delete Account</button></div>
+  </section>
+</div>
+
+<script type="module" src="../assets/js/settings.js?v=20260924-v3"></script>
+<script src="../assets/js/theme.js?v=20260924" defer></script>
+</body>
+</html>

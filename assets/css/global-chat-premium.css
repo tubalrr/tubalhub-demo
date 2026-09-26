@@ -1,0 +1,840 @@
+@import url("./premium-logos.css?v=20260924-logo1");
+/* =========================================================
+   TUBAL HUB GLOBAL CHAT — PREMIUM REACTION MOTION SYSTEM
+   Real-time reactions • theme-aware • transform/opacity motion path
+   ========================================================= */
+
+.reaction-bar{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+  margin-top:8px!important;
+  min-height:0!important;
+  overflow:visible!important;
+}
+
+.reaction-chip{
+  position:relative!important;
+  isolation:isolate!important;
+  width:auto!important;
+  min-width:28px!important;
+  height:28px!important;
+  min-height:28px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  padding:0 8px!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.08)!important;
+  color:#eef8f3!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.05)!important;
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  cursor:pointer!important;
+  transform:translate3d(0,0,0) scale(1);
+  transform-origin:center!important;
+  will-change:transform,opacity!important;
+  transition:
+    transform .3s cubic-bezier(.16,1,.3,1),
+    background .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease!important;
+}
+
+.reaction-chip::after{
+  content:""!important;
+  position:absolute!important;
+  inset:-4px!important;
+  z-index:-1!important;
+  border-radius:inherit!important;
+  background:linear-gradient(135deg,rgba(29,255,145,.95),rgba(125,90,255,.95))!important;
+  filter:blur(8px)!important;
+  opacity:0;
+  pointer-events:none!important;
+  transform:translate3d(0,0,0) scale(.96);
+  will-change:opacity,transform!important;
+}
+
+.reaction-chip:hover{
+  transform:translate3d(0,-2px,0) scale(1.15);
+  background:rgba(29,255,145,.14)!important;
+  border-color:#1dff91!important;
+  box-shadow:0 0 18px rgba(29,255,145,.35),inset 0 1px rgba(255,255,255,.07)!important;
+}
+
+.reaction-chip.active{
+  color:#fff!important;
+  border-color:#1dff91!important;
+  background:linear-gradient(135deg,#1dff91,#7d5aff)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.22)!important;
+}
+
+.reaction-chip.active::after{
+  animation:reactionActivePulse 1.5s ease-in-out infinite!important;
+}
+
+@keyframes reactionActivePulse{
+  0%,100%{opacity:.28;transform:translate3d(0,0,0) scale(.96)}
+  50%{opacity:.72;transform:translate3d(0,0,0) scale(1.02)}
+}
+
+.react-emoji{
+  display:inline-block!important;
+  font-size:14px!important;
+  line-height:1!important;
+  transform:translate3d(0,0,0);
+  transform-origin:center!important;
+  will-change:transform!important;
+  animation:reactionEmojiFloat 2s ease-in-out infinite!important;
+}
+
+.react-count{
+  display:inline-block!important;
+  min-width:8px!important;
+  color:inherit!important;
+  font:600 12px/1 Inter,system-ui,sans-serif!important;
+  transform:translate3d(0,0,0);
+  will-change:transform,opacity!important;
+}
+
+.react-count.count-update{
+  animation:reactionCountUpdate .32s cubic-bezier(.16,1,.3,1) both!important;
+}
+
+@keyframes reactionCountUpdate{
+  0%{opacity:.7;transform:translate3d(0,8px,0)}
+  55%{opacity:1;transform:translate3d(0,-8px,0)}
+  100%{opacity:1;transform:translate3d(0,0,0)}
+}
+
+.reaction-chip:hover .react-emoji{
+  animation:reactionEmojiJiggle .25s ease both!important;
+}
+
+@keyframes reactionEmojiFloat{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(0,-2px,0)}
+}
+@keyframes reactionEmojiJiggle{
+  0%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+  25%{transform:translate3d(0,0,0) rotate(-15deg) scale(1.18)}
+  50%{transform:translate3d(0,0,0) rotate(15deg) scale(1.3)}
+  75%{transform:translate3d(0,0,0) rotate(-8deg) scale(1.2)}
+  100%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+}
+
+/* Click / pop animation */
+.reaction-chip.reaction-pop,
+.quick-reaction.reaction-pop,
+.reaction-menu-choice.reaction-pop{
+  animation:reactionPopBounce .45s cubic-bezier(.34,1.56,.64,1) both!important;
+}
+
+@keyframes reactionPopBounce{
+  0%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}
+  30%{transform:translate3d(0,0,0) scale(.85) rotate(0deg)}
+  60%{transform:translate3d(0,0,0) scale(1.35) rotate(8deg)}
+  100%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}
+}
+
+/* Newly introduced reaction pill */
+.reaction-chip.reaction-new{
+  animation:reactionNewIn .45s var(--reaction-delay,0s) cubic-bezier(.16,1,.3,1) both!important;
+}
+@keyframes reactionNewIn{
+  0%{opacity:0;transform:translate3d(0,12px,0) scale(.72)}
+  58%{opacity:1;transform:translate3d(0,-2px,0) scale(1.08)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+.reaction-chip.reaction-new .react-emoji{
+  animation:reactionNewEmoji .45s var(--reaction-delay,0s) cubic-bezier(.16,1,.3,1) both!important;
+}
+@keyframes reactionNewEmoji{
+  0%{transform:translate3d(0,7px,0) rotate(-10deg) scale(.65)}
+  55%{transform:translate3d(0,-2px,0) rotate(12deg) scale(1.38)}
+  100%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+}
+
+/* Hover reaction bar — five quick actions */
+.quick-reaction-bar{
+  position:absolute!important;
+  right:2px!important;
+  top:100%!important;
+  z-index:8!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:4px!important;
+  padding:5px!important;
+  margin-top:3px!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+  border-radius:999px!important;
+  background:rgba(6,10,16,.72)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.30),inset 0 1px rgba(255,255,255,.05)!important;
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  opacity:0;
+  transform:translate3d(0,6px,0) scale(.97)!important;
+  pointer-events:none!important;
+  will-change:transform,opacity!important;
+  transition:opacity .2s ease,transform .2s cubic-bezier(.16,1,.3,1)!important;
+}
+.msg:hover .quick-reaction-bar,
+.msg.selected .quick-reaction-bar{
+  opacity:1!important;
+  transform:translate3d(0,0,0) scale(1)!important;
+  pointer-events:auto!important;
+}
+
+.quick-reaction{
+  position:relative!important;
+  width:28px!important;
+  height:28px!important;
+  min-width:28px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  color:#fff!important;
+  cursor:pointer!important;
+  transform:translate3d(0,0,0) scale(.78);
+  opacity:0;
+  will-change:transform,opacity!important;
+}
+.msg:hover .quick-reaction,
+.msg.selected .quick-reaction{
+  animation:quickReactionIn .24s var(--quick-delay) cubic-bezier(.16,1,.3,1) both!important;
+}
+.quick-reaction:hover{
+  transform:translate3d(0,-2px,0) scale(1.18);
+  background:rgba(29,255,145,.12)!important;
+}
+.quick-reaction span{
+  display:block!important;
+  font-size:16px!important;
+  line-height:1!important;
+  transform:translate3d(0,0,0);
+  will-change:transform!important;
+}
+.quick-reaction:hover span{
+  animation:reactionEmojiJiggle .25s ease both!important;
+}
+@keyframes quickReactionIn{
+  0%{opacity:0;transform:translate3d(0,5px,0) scale(.7)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+
+/* Inline reaction picker */
+.inline-reactions,
+.reply-inline-reactions{
+  border:1px solid rgba(255,255,255,.12)!important;
+  border-radius:16px!important;
+  background:rgba(6,10,16,.84)!important;
+  box-shadow:0 18px 45px rgba(0,0,0,.40)!important;
+  backdrop-filter:blur(16px)!important;
+  -webkit-backdrop-filter:blur(16px)!important;
+}
+.reaction-menu-choice{
+  transform:translate3d(0,4px,0) scale(.82);
+  opacity:0;
+}
+.inline-reactions .reaction-menu-choice{
+  animation:quickReactionIn .24s var(--quick-delay) cubic-bezier(.16,1,.3,1) both!important;
+}
+
+/* Six-dot click burst */
+.reaction-particle-burst{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:1px!important;
+  height:1px!important;
+  pointer-events:none!important;
+  z-index:30!important;
+}
+.reaction-particle-burst i{
+  position:absolute!important;
+  left:0!important;
+  top:0!important;
+  width:4px!important;
+  height:4px!important;
+  border-radius:50%!important;
+  background:#1dff91!important;
+  box-shadow:0 0 8px rgba(29,255,145,.65)!important;
+  opacity:0;
+  transform:translate3d(0,0,0) scale(.7);
+  animation:reactionParticleBurst .6s var(--p-delay,0s) cubic-bezier(.16,1,.3,1) both!important;
+  will-change:transform,opacity!important;
+}
+.reaction-particle-burst i:nth-child(even){
+  background:#7d5aff!important;
+  box-shadow:0 0 8px rgba(125,90,255,.58)!important;
+}
+@keyframes reactionParticleBurst{
+  0%{opacity:0;transform:rotate(var(--p-angle)) translate3d(0,0,0) scale(.55)}
+  18%{opacity:1}
+  100%{opacity:0;transform:rotate(var(--p-angle)) translate3d(24px,0,0) scale(.15)}
+}
+
+/* Twelve-dot celebration burst at count >= 5 */
+.reaction-confetti{
+  position:absolute!important;
+  right:26px!important;
+  top:50%!important;
+  width:1px!important;
+  height:1px!important;
+  pointer-events:none!important;
+  z-index:35!important;
+}
+.reaction-confetti i{
+  position:absolute!important;
+  left:0!important;
+  top:0!important;
+  width:4px!important;
+  height:4px!important;
+  opacity:0;
+  transform:translate3d(0,0,0) scale(.75);
+  animation:reactionConfetti80 .72s var(--c-delay,0s) cubic-bezier(.16,1,.3,1) both!important;
+  will-change:transform,opacity!important;
+}
+@keyframes reactionConfetti80{
+  0%{opacity:0;transform:rotate(var(--c-angle)) translate3d(0,0,0) scale(.65)}
+  18%{opacity:1}
+  100%{opacity:0;transform:rotate(var(--c-angle)) translate3d(80px,0,0) scale(.2)}
+}
+
+/* =========================================================
+   THEME PACKS — each theme gets a distinct reaction language
+   ========================================================= */
+
+/* Midnight — sharp / angular / hard green glow */
+body.theme-midnight .reaction-chip{
+  border-radius:8px!important;
+  background:rgba(255,255,255,.055)!important;
+}
+body.theme-midnight .reaction-chip:hover{
+  background:rgba(29,255,145,.16)!important;
+  border-color:#1dff91!important;
+  box-shadow:0 0 18px rgba(29,255,145,.45),inset 0 1px rgba(255,255,255,.07)!important;
+}
+body.theme-midnight .reaction-chip.active{
+  background:linear-gradient(135deg,#1dff91,#7d5aff)!important;
+  border-color:#1dff91!important;
+}
+body.theme-midnight .reaction-chip.active::after{
+  filter:blur(7px)!important;
+}
+body.theme-midnight .reaction-chip.reaction-pop,
+body.theme-midnight .quick-reaction.reaction-pop{
+  animation-name:reactionPopMidnight!important;
+}
+@keyframes reactionPopMidnight{
+  0%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}
+  30%{transform:translate3d(0,0,0) scale(.85) rotate(-2deg)}
+  60%{transform:translate3d(0,0,0) scale(1.35) rotate(8deg)}
+  100%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}
+}
+body.theme-midnight .reaction-particle-burst i{
+  border-radius:2px!important;
+  box-shadow:0 0 10px rgba(29,255,145,.82)!important;
+}
+body.theme-midnight .reaction-particle-burst i:nth-child(even){
+  box-shadow:0 0 10px rgba(125,90,255,.72)!important;
+}
+body.theme-midnight .reaction-confetti i{
+  border-radius:1px!important;
+  background:#1dff91!important;
+  box-shadow:0 0 6px rgba(29,255,145,.62)!important;
+}
+body.theme-midnight .reaction-confetti i:nth-child(3n){
+  background:#7d5aff!important;
+  box-shadow:0 0 6px rgba(125,90,255,.58)!important;
+}
+
+/* Forest — organic / leaf / sage softness */
+body.theme-forest .reaction-chip{
+  border-radius:999px!important;
+  background:rgba(229,255,236,.08)!important;
+  border-color:rgba(167,222,180,.20)!important;
+}
+body.theme-forest .reaction-chip:hover{
+  background:rgba(137,210,151,.15)!important;
+  border-color:#9fe4ae!important;
+  box-shadow:0 0 18px rgba(135,207,151,.27)!important;
+}
+body.theme-forest .reaction-chip.active{
+  background:linear-gradient(135deg,#9fe4ae,#6bbf85)!important;
+  border-color:#c8f7d1!important;
+  color:#0b2615!important;
+}
+body.theme-forest .reaction-chip.active::after{
+  background:linear-gradient(135deg,rgba(159,228,174,.86),rgba(91,153,111,.74))!important;
+  filter:blur(10px)!important;
+}
+body.theme-forest .reaction-chip.reaction-pop,
+body.theme-forest .quick-reaction.reaction-pop{
+  animation-name:reactionPopForest!important;
+}
+@keyframes reactionPopForest{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  30%{transform:translate3d(0,0,0) scale(.92)}
+  62%{transform:translate3d(0,-1px,0) scale(1.22)}
+  82%{transform:translate3d(0,0,0) scale(.98)}
+  100%{transform:translate3d(0,0,0) scale(1)}
+}
+body.theme-forest .reaction-particle-burst i{
+  width:5px!important;
+  height:8px!important;
+  border-radius:80% 0 80% 0!important;
+  background:#9fe4ae!important;
+  box-shadow:0 0 8px rgba(137,210,151,.38)!important;
+  transform-origin:0 0!important;
+}
+body.theme-forest .reaction-particle-burst i:nth-child(even){
+  background:#7892ff!important;
+  box-shadow:0 0 8px rgba(125,145,255,.25)!important;
+}
+body.theme-forest .reaction-confetti i{
+  width:5px!important;
+  height:8px!important;
+  border-radius:80% 0 80% 0!important;
+  background:#9fe4ae!important;
+}
+body.theme-forest .reaction-confetti i:nth-child(3n){
+  background:#7d5aff!important;
+}
+
+/* Light — minimal / circular / pastel */
+body.theme-light .reaction-chip{
+  color:#263328!important;
+  background:rgba(255,255,255,.72)!important;
+  border-color:rgba(44,61,48,.12)!important;
+  box-shadow:0 4px 16px rgba(65,84,70,.08),inset 0 1px rgba(255,255,255,.84)!important;
+}
+body.theme-light .reaction-chip:hover{
+  background:rgba(233,255,243,.96)!important;
+  border-color:#88d8aa!important;
+  box-shadow:0 0 18px rgba(136,216,170,.30),0 6px 18px rgba(61,85,68,.10)!important;
+}
+body.theme-light .reaction-chip.active{
+  background:linear-gradient(135deg,#b7f2d1,#c9c0ff)!important;
+  border-color:#83cfa2!important;
+  color:#16251a!important;
+}
+body.theme-light .reaction-chip.active::after{
+  background:linear-gradient(135deg,rgba(183,242,209,.78),rgba(201,192,255,.68))!important;
+  filter:blur(10px)!important;
+}
+body.theme-light .reaction-chip.reaction-pop,
+body.theme-light .quick-reaction.reaction-pop{
+  animation-name:reactionPopLight!important;
+}
+@keyframes reactionPopLight{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  30%{transform:translate3d(0,0,0) scale(.93)}
+  60%{transform:translate3d(0,-1px,0) scale(1.18)}
+  100%{transform:translate3d(0,0,0) scale(1)}
+}
+body.theme-light .reaction-particle-burst i{
+  border-radius:50%!important;
+  background:#a9e8c2!important;
+  box-shadow:0 0 7px rgba(143,213,170,.24)!important;
+}
+body.theme-light .reaction-particle-burst i:nth-child(even){
+  background:#beb1ff!important;
+  box-shadow:0 0 7px rgba(190,177,255,.24)!important;
+}
+body.theme-light .reaction-confetti i{
+  border-radius:50%!important;
+  background:#a9e8c2!important;
+  box-shadow:0 0 5px rgba(143,213,170,.18)!important;
+}
+body.theme-light .reaction-confetti i:nth-child(3n){
+  background:#beb1ff!important;
+}
+
+/* Reply reaction pills inherit the premium system without changing their layout. */
+.reply-reaction-chip{
+  min-width:28px!important;
+  height:28px!important;
+}
+
+/* Mobile — no hover dependency */
+@media(max-width:760px){
+  .quick-reaction-bar{
+    position:relative!important;
+    top:auto!important;
+    right:auto!important;
+    width:max-content!important;
+    margin:5px 0 0!important;
+    opacity:1!important;
+    transform:none!important;
+    pointer-events:auto!important;
+  }
+  .quick-reaction{
+    opacity:1!important;
+    transform:none!important;
+    animation:none!important;
+  }
+}
+
+/* Reduced motion: retain state and usability, remove motion only. */
+@media(prefers-reduced-motion:reduce){
+  .reaction-chip,
+  .quick-reaction,
+  .reaction-menu-choice,
+  .reaction-particle-burst i,
+  .reaction-confetti i,
+  .react-emoji,
+  .react-count{
+    animation:none!important;
+    transition:none!important;
+  }
+  .reaction-chip,
+  .quick-reaction,
+  .reaction-menu-choice{ transform:none!important; }
+  .quick-reaction{
+    opacity:1!important;
+  }
+}
+
+/* Quick reactions stay hidden until the message's React button is pressed. */
+.quick-reaction-bar{display:none!important;}
+.msg.reaction-open .quick-reaction-bar{display:flex!important;}
+.msg.selected .quick-reaction-bar{display:none!important;}
+
+/* Final reaction visibility rule: no five-button bar until React is clicked. */
+.msg .quick-reaction-bar{display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;}
+.msg.reaction-open .quick-reaction-bar{display:flex!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;}
+
+/* Message reaction button + picker must be directly clickable. */
+.msg .inline-react-btn{
+  pointer-events:auto!important;
+  z-index:40!important;
+}
+.inline-reactions{
+  pointer-events:auto!important;
+  z-index:1000!important;
+}
+.inline-reactions .reaction-menu-choice{
+  pointer-events:auto!important;
+  opacity:1!important;
+  visibility:visible!important;
+  cursor:pointer!important;
+  z-index:1001!important;
+}
+
+
+/* =========================================================
+   TUBAL HUB GLOBAL CHAT — PREMIUM COMMERCIAL SHELL
+   Real-data presentation only. No mock users/messages.
+   ========================================================= */
+body.global-chat-page{
+  background:
+    radial-gradient(900px 600px at 12% 8%,rgba(29,255,145,.075),transparent 62%),
+    radial-gradient(800px 600px at 88% 82%,rgba(125,90,255,.075),transparent 62%),
+    #020604!important;
+  color:#f1fff7!important;
+  font-family:Inter,Sora,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  letter-spacing:-.15px;
+}
+body.global-chat-page .topbar{
+  height:64px!important;
+  position:sticky!important;
+  top:0!important;
+  z-index:10!important;
+  padding:0 20px 0 72px!important;
+  background:rgba(8,20,12,.90)!important;
+  border-bottom:1px solid rgba(120,255,170,.12)!important;
+  backdrop-filter:blur(24px)!important;
+  -webkit-backdrop-filter:blur(24px)!important;
+  box-shadow:0 14px 45px rgba(0,0,0,.22)!important;
+}
+body.global-chat-page .topbar .brand{
+  min-width:0!important;
+  gap:10px!important;
+}
+body.global-chat-page .topbar .brand img{
+  width:34px!important;height:34px!important;
+  border-radius:10px;
+}
+body.global-chat-page .topbar .brand strong{
+  font-size:14px!important;
+  font-weight:800!important;
+  letter-spacing:-.5px!important;
+}
+body.global-chat-page .topbar .brand small{display:none!important}
+.global-chat-version-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:4px 8px;
+  border:1px solid rgba(29,255,145,.35);
+  border-radius:999px;
+  background:rgba(29,255,145,.08);
+  color:#1dff91;
+  font:800 9px/1 Inter,Sora,sans-serif;
+  white-space:nowrap;
+  box-shadow:0 0 18px rgba(29,255,145,.08);
+}
+.global-chat-menu-toggle{
+  position:fixed!important;
+  left:16px!important;
+  top:16px!important;
+  width:44px!important;
+  height:44px!important;
+  min-width:44px!important;
+  min-height:44px!important;
+  padding:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  border:1px solid rgba(120,255,170,.20)!important;
+  border-radius:12px!important;
+  background:rgba(0,0,0,.40)!important;
+  backdrop-filter:blur(16px)!important;
+  -webkit-backdrop-filter:blur(16px)!important;
+  z-index:1002!important;
+  cursor:pointer!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.24);
+}
+.global-chat-menu-toggle span{
+  width:20px!important;
+  height:2px!important;
+  min-height:2px!important;
+  flex:none!important;
+  background:#fff!important;
+  border-radius:999px!important;
+  transition:transform .22s ease,opacity .18s ease,width .22s ease!important;
+}
+.global-chat-menu-toggle.is-active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.global-chat-menu-toggle.is-active span:nth-child(2){opacity:0}
+.global-chat-menu-toggle.is-active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+body.global-chat-page .chat-layout{
+  min-height:calc(100vh - 64px)!important;
+  background:transparent!important;
+}
+body.global-chat-page .chat-main{
+  padding:14px 18px 20px!important;
+}
+body.global-chat-page .chat-focus-grid{
+  display:grid!important;
+  grid-template-columns:280px minmax(0,1fr) 300px!important;
+  gap:14px!important;
+  height:calc(100vh - 98px)!important;
+  min-height:620px!important;
+}
+body.global-chat-page .chat-rail,
+body.global-chat-page .chat-center{
+  border:1px solid rgba(120,255,170,.14)!important;
+  background:rgba(255,255,255,.04)!important;
+  backdrop-filter:blur(24px)!important;
+  -webkit-backdrop-filter:blur(24px)!important;
+  border-radius:24px!important;
+  box-shadow:0 22px 70px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.045)!important;
+}
+body.global-chat-page .chat-rail{
+  background:rgba(0,0,0,.26)!important;
+}
+body.global-chat-page .chat-center{
+  position:relative;
+  overflow:hidden!important;
+  background:
+    radial-gradient(700px 500px at 18% 8%,rgba(29,255,145,.08),transparent 60%),
+    radial-gradient(600px 500px at 82% 92%,rgba(125,90,255,.08),transparent 62%),
+    rgba(255,255,255,.035)!important;
+}
+body.global-chat-page .chat-center::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.03),transparent 45%,rgba(125,90,255,.025));
+}
+body.global-chat-page .chat-left.global-chat-sidebar-collapsed{
+  display:none!important;
+}
+body.global-chat-page .chat-left.global-chat-sidebar-collapsed + .chat-center{
+  grid-column:1 / 3;
+}
+body.global-chat-page .channel-list-real{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+body.global-chat-page .channels .rail-section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.channel-source-real{
+  color:rgba(120,255,170,.55);
+  font:800 8px/1 Inter,Sora,sans-serif;
+  letter-spacing:1.4px;
+}
+.channelReal{
+  width:100%;
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:0 11px;
+  border:1px solid transparent;
+  border-radius:12px;
+  background:transparent;
+  color:rgba(255,255,255,.62);
+  text-align:left;
+  font:750 12px/1 Inter,Sora,sans-serif;
+  cursor:pointer;
+  transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease;
+}
+.channelReal:hover{
+  color:#fff;
+  background:rgba(255,255,255,.05);
+  transform:translateX(2px);
+}
+.channelReal.active{
+  color:#1dff91;
+  background:linear-gradient(90deg,rgba(29,255,145,.14),rgba(125,90,255,.06));
+  border-color:rgba(29,255,145,.18);
+  box-shadow:inset 3px 0 #1dff91,0 10px 26px rgba(29,255,145,.05);
+}
+.channel-count-real{
+  min-width:18px;
+  height:18px;
+  padding:0 5px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  color:rgba(255,255,255,.45);
+  font:800 9px/1 Inter,Sora,sans-serif;
+}
+.channelReal.active .channel-count-real{
+  background:rgba(29,255,145,.13);
+  color:#1dff91;
+}
+.channel-real-note{
+  margin-top:7px;
+  color:rgba(255,255,255,.36);
+  font:500 9px/1.45 Inter,Sora,sans-serif;
+}
+body.global-chat-page .chat-build-marker-real{
+  align-self:center;
+  width:max-content;
+  max-width:100%;
+  margin:8px auto 6px;
+  padding:6px 10px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:999px;
+  background:rgba(255,255,255,.045);
+  color:rgba(255,255,255,.45);
+  font:700 9px/1 Inter,Sora,sans-serif;
+  letter-spacing:.4px;
+}
+body.global-chat-page #globalChatChannelTitle{
+  font-weight:800!important;
+  letter-spacing:-.5px!important;
+}
+body.global-chat-page .empty-chat{
+  width:min(460px,100%);
+  margin:auto;
+  padding:60px 24px!important;
+  border:1px dashed rgba(120,255,170,.10);
+  border-radius:22px;
+  background:rgba(255,255,255,.02);
+}
+body.global-chat-page .empty-chat strong{
+  color:#f2fff7!important;
+  font-size:16px!important;
+}
+body.global-chat-page .empty-chat span{
+  display:block;
+  margin-top:7px;
+  color:rgba(255,255,255,.42);
+  font-size:11px;
+}
+body.global-chat-page .chat-composer{
+  background:rgba(0,0,0,.26)!important;
+  backdrop-filter:blur(22px)!important;
+  -webkit-backdrop-filter:blur(22px)!important;
+}
+body.global-chat-page .chat-composer input{
+  border-color:rgba(120,255,170,.15)!important;
+}
+body.global-chat-page .chat-composer input:focus{
+  border-color:rgba(29,255,145,.40)!important;
+  box-shadow:0 0 0 3px rgba(29,255,145,.055)!important;
+}
+body.global-chat-page .chat-composer .send{
+  background:linear-gradient(135deg,#1dff91,#7d5aff)!important;
+  color:#020604!important;
+  font-weight:850!important;
+}
+@media(max-width:1100px){
+  body.global-chat-page .chat-focus-grid{
+    grid-template-columns:250px minmax(0,1fr)!important;
+    height:auto!important;
+    min-height:calc(100vh - 98px)!important;
+  }
+  body.global-chat-page .chat-right{display:none!important}
+  body.global-chat-page .chat-left.global-chat-sidebar-collapsed + .chat-center{grid-column:1 / 3}
+}
+@media(max-width:900px){
+  body.global-chat-page .topbar{
+    padding-left:72px!important;
+    padding-right:12px!important;
+  }
+  body.global-chat-page .chat-focus-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    min-height:0!important;
+    height:calc(100vh - 88px)!important;
+  }
+  body.global-chat-page .chat-left{
+    position:fixed!important;
+    left:0!important;
+    top:64px!important;
+    bottom:0!important;
+    width:min(280px,86vw)!important;
+    height:calc(100dvh - 64px)!important;
+    z-index:1001!important;
+    transform:translateX(-105%)!important;
+    transition:transform .28s cubic-bezier(.16,1,.3,1)!important;
+    border-radius:0 24px 24px 0!important;
+  }
+  body.global-chat-page .chat-left.open{
+    transform:translateX(0)!important;
+  }
+  body.global-chat-page .chat-center{grid-column:1!important}
+  .global-chat-version-badge{display:none!important}
+}
+@media(max-width:600px){
+  body.global-chat-page .chat-main{padding:8px 8px 12px!important}
+  body.global-chat-page .chat-focus-grid{height:calc(100dvh - 82px)!important}
+  body.global-chat-page .chat-center{border-radius:18px!important}
+  body.global-chat-page .chat-focus-head{min-height:70px!important;padding:10px 11px!important}
+  body.global-chat-page .chat-focus-head h1{font-size:18px!important}
+  body.global-chat-page .chat-focus-head p{font-size:9px!important}
+  body.global-chat-page .chat-focus-head .count{font-size:9px!important;padding:6px 8px!important}
+  body.global-chat-page .chat-messages{min-height:260px!important;height:auto!important}
+  body.global-chat-page .chat-composer{flex-wrap:nowrap!important;padding:8px!important}
+  body.global-chat-page .chat-composer .composer-tools{width:auto!important}
+  body.global-chat-page .chat-composer input{min-width:0!important}
+  body.global-chat-page .chat-composer .send{min-width:48px!important;padding:0 12px!important}
+  .global-chat-menu-toggle{top:16px!important;left:12px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body.global-chat-page *{scroll-behavior:auto!important}
+  .global-chat-menu-toggle span,.channelReal{transition:none!important}
+}

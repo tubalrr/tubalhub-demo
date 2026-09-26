@@ -1,0 +1,42 @@
+<div class="th-update-system" id="thUpdateSystem" aria-live="polite">
+  <div class="th-update-toast" id="thUpdateToast" hidden>
+    <div class="th-update-toast-icon" aria-hidden="true"><span>✨</span></div>
+    <div class="th-update-toast-copy">
+      <strong id="thUpdateToastTitle">May bago!</strong>
+      <span id="thUpdateToastMessage"></span>
+    </div>
+    <button class="th-update-toast-close" id="thUpdateToastClose" type="button" aria-label="Close update notice">×</button>
+    <div class="th-update-toast-progress" aria-hidden="true"><i id="thUpdateToastProgress"></i></div>
+  </div>
+
+  <div class="th-update-overlay" id="thUpdateOverlay" hidden>
+    <section class="th-update-modal" id="thUpdateModal" role="dialog" aria-modal="true" aria-labelledby="thUpdateTitle">
+      <header class="th-update-modal-header">
+        <div>
+          <span class="th-update-kicker"><span aria-hidden="true">🎉</span> TUBAL HUB UPDATE</span>
+          <h2 id="thUpdateTitle">Ano Bago sa Update</h2>
+          <p id="thUpdateDate">Date unavailable</p>
+        </div>
+        <button class="th-update-close" id="thUpdateClose" type="button" aria-label="Close update">×</button>
+      </header>
+
+      <main class="th-update-modal-body">
+        <div class="th-update-intro">
+          <span class="th-update-version" id="thUpdateVersion">v—</span>
+          <span id="thUpdateIntroText">Real changes from the current TUBAL HUB release.</span>
+        </div>
+        <div class="th-update-changelog" id="thUpdateChangelog"></div>
+      </main>
+
+      <footer class="th-update-modal-footer">
+        <button class="th-update-primary" id="thUpdateWhatsNew" type="button">What's New</button>
+        <button class="th-update-secondary" id="thUpdateDismiss" type="button">Dismiss</button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="th-version-badge" id="thVersionBadge" aria-label="TUBAL HUB version">
+    <span class="th-version-dot" aria-hidden="true"></span>
+    <span id="thVersionText">v—</span>
+  </div>
+</div>

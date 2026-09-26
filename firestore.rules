@@ -1,0 +1,527 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =========================================================
+    // AUTH / ROLE HELPERS
+    // =========================================================
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function realUser() {
+      return signedIn()
+        && request.auth.token.firebase.sign_in_provider != 'anonymous';
+    }
+
+    // Current TUBAL HUB admin account.
+    // Long-term, migrate this to a Firebase custom admin claim.
+    function adminUser() {
+      return realUser()
+        && request.auth.token.admin == true;
+    }
+
+    function ownsNew() {
+      return realUser()
+        && request.resource.data.uid == request.auth.uid;
+    }
+
+    function ownsExisting() {
+      return realUser()
+        && resource.data.uid == request.auth.uid;
+    }
+
+    // =========================================================
+    // CHAT STATUS / TIMED BAN
+    // =========================================================
+
+    function chatAllowed() {
+      let u = get(
+        /databases/$(database)/documents/users/$(request.auth.uid)
+      ).data;
+
+      return realUser()
+        && (
+          !('chatStatus' in u)
+          || u.chatStatus == 'active'
+          || (
+            u.chatStatus == 'banned'
+            && 'banUntil' in u
+            && u.banUntil != null
+            && u.banUntil <= request.time
+          )
+        )
+        && (
+          !('mutedUntil' in u)
+          || u.mutedUntil == null
+          || u.mutedUntil <= request.time
+        );
+    }
+
+    // =========================================================
+    // GLOBAL CHAT
+    // =========================================================
+
+    match /globalChats/{messageId} {
+      allow read: if adminUser() || chatAllowed();
+
+      // Global Chat writes are server-only. Client content must pass through
+      // sendMessageReal/sendGlobalMediaMessageReal for validation, rate limiting,
+      // moderation and trusted metadata.
+      allow create: if false;
+
+      // Message content is server-managed after creation.
+      allow update: if adminUser();
+
+      allow delete: if ownsExisting() || adminUser();
+    }
+
+    // =========================================================
+    // GLOBAL CHAT REPLIES
+    // =========================================================
+
+    match /globalChatReplies/{replyId} {
+      allow read: if chatAllowed();
+
+      // Replies are written by sendReplyReal (Admin SDK), not by direct client addDoc.
+      allow create: if false;
+      allow update: if adminUser();
+      allow delete: if ownsExisting() || adminUser();
+    }
+
+    // =========================================================
+    // GLOBAL CHAT REACTIONS
+    // =========================================================
+
+    match /globalChatReactions/{reactionId} {
+      allow read: if chatAllowed();
+
+      allow create: if chatAllowed()
+        && ownsNew()
+        && request.resource.data.uid == request.auth.uid
+        && (
+          request.resource.data.messageId is string
+          || request.resource.data.replyId is string
+        )
+        && request.resource.data.reactions is list
+        && request.resource.data.reactions.size() <= 10;
+
+      allow update: if (
+        chatAllowed()
+        && ownsExisting()
+        && request.resource.data.uid == request.auth.uid
+        && (
+          request.resource.data.messageId == resource.data.messageId
+          || request.resource.data.replyId == resource.data.replyId
+        )
+        && request.resource.data.reactions is list
+        && request.resource.data.reactions.size() <= 10
+      ) || adminUser();
+
+      allow delete: if ownsExisting() || adminUser();
+    }
+
+    // =========================================================
+    // PRESENCE
+    // =========================================================
+
+    match /presence/{userId} {
+      allow read: if realUser();
+
+      allow create, update: if realUser()
+        && userId == request.auth.uid;
+
+      allow delete: if realUser()
+        && userId == request.auth.uid;
+    }
+
+    // =========================================================
+    // USERS
+    // =========================================================
+
+    match /users/{userId} {
+      // User documents are private. Admin/backend may read all; a member may
+      // read only their own profile. Public profile/presence data belongs in
+      // dedicated public collections.
+      allow read: if adminUser()
+        || (realUser() && userId == request.auth.uid);
+
+      // Users may create their own profile, but role/admin/moderation fields
+      // are server/admin managed and cannot be self-assigned.
+      allow create: if realUser()
+        && userId == request.auth.uid
+        && request.resource.data.uid == request.auth.uid
+        && !('roleReal' in request.resource.data)
+        && !('isAdmin' in request.resource.data)
+        && !('strikesReal' in request.resource.data)
+        && !('chatStatus' in request.resource.data)
+        && !('banUntil' in request.resource.data)
+        && !('banReason' in request.resource.data);
+
+      allow update: if adminUser()
+        || (
+          realUser()
+          && userId == request.auth.uid
+          && request.resource.data.uid == resource.data.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasNone([
+            'roleReal',
+            'isAdmin',
+            'strikesReal',
+            'chatStatus',
+            'warnings',
+            'mutedUntil',
+            'banReason',
+            'moderatedBy',
+            'moderatedAt',
+            'banned',
+            'bannedAt',
+            'bannedBy',
+            'banUntil',
+            'lastStrikeAt',
+            'lastModerationReasonReal',
+            'lastModerationMessageIdReal'
+          ])
+        );
+
+      allow delete: if realUser()
+        && userId == request.auth.uid;
+    }
+
+    // =========================================================
+    // ADMIN GLOBAL CHAT
+    // =========================================================
+
+    match /globalChat/{messageId} {
+      allow read, delete: if adminUser();
+      allow create, update: if false;
+    }
+
+    // =========================================================
+    // ADMIN QUOTES
+    // =========================================================
+
+    match /adminQuotes/{quoteId} {
+      allow read, write: if adminUser();
+    }
+
+    // =========================================================
+    // PRIVATE MESSAGES
+    // =========================================================
+
+    match /messages/{messageId} {
+      allow read: if realUser()
+        && (
+          adminUser()
+          || request.auth.uid in resource.data.participants
+        );
+
+      // Private messages are server-generated only. The callable function
+      // performs moderation and rate limiting before writing.
+      allow create, update: if false;
+
+      allow delete: if realUser()
+        && (
+          adminUser()
+          || (
+            resource.data.uid == request.auth.uid
+            && resource.data.senderId == request.auth.uid
+          )
+        );
+    }
+
+    // =========================================================
+    // VIDEO CALLS
+    // =========================================================
+
+    match /videoCalls/{callId} {
+      allow create: if realUser()
+        && request.resource.data.callerId == request.auth.uid
+        && request.resource.data.calleeId is string
+        && request.resource.data.calleeId != request.auth.uid
+        && request.resource.data.status == 'ringing';
+
+      allow read: if realUser()
+        && (
+          resource.data.callerId == request.auth.uid
+          || resource.data.calleeId == request.auth.uid
+        );
+
+      allow update: if realUser()
+        && (
+          resource.data.callerId == request.auth.uid
+          || resource.data.calleeId == request.auth.uid
+        )
+        && request.resource.data.callerId == resource.data.callerId
+        && request.resource.data.calleeId == resource.data.calleeId;
+
+      allow delete: if realUser()
+        && (
+          resource.data.callerId == request.auth.uid
+          || resource.data.calleeId == request.auth.uid
+        );
+
+      match /candidates/{candidateId} {
+        allow read: if realUser()
+          && (
+            get(/databases/$(database)/documents/videoCalls/$(callId)).data.callerId == request.auth.uid
+            || get(/databases/$(database)/documents/videoCalls/$(callId)).data.calleeId == request.auth.uid
+          );
+
+        allow create: if realUser()
+          && request.resource.data.senderId == request.auth.uid
+          && (
+            get(/databases/$(database)/documents/videoCalls/$(callId)).data.callerId == request.auth.uid
+            || get(/databases/$(database)/documents/videoCalls/$(callId)).data.calleeId == request.auth.uid
+          );
+
+        allow delete: if realUser()
+          && (
+            get(/databases/$(database)/documents/videoCalls/$(callId)).data.callerId == request.auth.uid
+            || get(/databases/$(database)/documents/videoCalls/$(callId)).data.calleeId == request.auth.uid
+          );
+      }
+    }
+
+    // =========================================================
+    // UNIFIED HUB CONTENT FEED
+    // =========================================================
+    // One publish can surface in the appropriate TUBAL HUB areas:
+    // Feeds plus the source section such as News, Shop, Games, etc.
+    match /hubPosts/{postId} {
+      allow read: if true;
+
+      allow create: if realUser()
+        && request.resource.data.createdBy == request.auth.uid
+        && request.resource.data.contentType in [
+          'post','product','game','news','video','announcement','event','story'
+        ]
+        && request.resource.data.status == 'published'
+        && request.resource.data.destinations is list
+        && request.resource.data.destinations.size() > 0
+        && request.resource.data.destinations.size() <= 10
+        && request.resource.data.title is string
+        && request.resource.data.text is string
+        && request.resource.data.title.size() <= 240
+        && request.resource.data.text.size() <= 4000;
+
+      allow update, delete: if adminUser()
+        || (
+          realUser()
+          && resource.data.createdBy == request.auth.uid
+          && request.resource.data.createdBy == resource.data.createdBy
+        );
+    }
+
+    // =========================================================
+    // SPONSORS — PUBLIC READ / ADMIN WRITE
+    // =========================================================
+    match /sponsors/{sponsorId} {
+      allow read: if true;
+      allow create, update, delete: if adminUser();
+    }
+
+    // =========================================================
+    // PUBLIC CONTENT — ADMIN WRITE
+    // =========================================================
+
+    match /news/{newsId} {
+      allow read: if true;
+      allow create, update, delete: if adminUser();
+    }
+
+    match /announcements/{announcementId} {
+      allow read: if true;
+      allow create, update, delete: if adminUser();
+    }
+
+    match /events/{eventId} {
+      allow read: if true;
+      allow create, update, delete: if adminUser();
+    }
+
+    match /systemSettings/{settingId} {
+      allow read: if true;
+      allow create, update, delete: if adminUser();
+    }
+
+    match /systemStats/{statId} {
+      allow read: if adminUser();
+      allow create, update, delete: if false;
+    }
+
+    match /facebookVideos/{videoId} {
+      allow read: if true;
+
+      allow create: if adminUser()
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0
+        && request.resource.data.title.size() <= 200
+        && request.resource.data.url is string
+        && request.resource.data.url.size() > 0
+        && request.resource.data.url.size() <= 2000
+        && (
+          !('thumbnail' in request.resource.data)
+          || request.resource.data.thumbnail is string
+        )
+        && request.resource.data.createdBy == request.auth.uid;
+
+      allow update: if adminUser()
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0
+        && request.resource.data.title.size() <= 200
+        && request.resource.data.url is string
+        && request.resource.data.url.size() > 0
+        && request.resource.data.url.size() <= 2000;
+
+      allow delete: if adminUser();
+    }
+
+    // =========================================================
+    // SHOP PRODUCTS — ADMIN WRITE
+    // =========================================================
+
+    match /products/{productId} {
+      allow read: if true;
+
+      allow create: if adminUser()
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 200
+        && request.resource.data.category in ['merchandise', 'clothing', 'accessories', 'digital-products', 'apps-software', 'gaming', 'mods-addons', 'media', 'wellness', 'other']
+        && request.resource.data.price is string
+        && request.resource.data.price.size() <= 100
+        && request.resource.data.description is string
+        && request.resource.data.description.size() <= 2000
+        && request.resource.data.createdBy == request.auth.uid
+        && request.resource.data.get('icon', '') is string
+        && request.resource.data.get('badge', '') is string
+        && request.resource.data.get('imageUrl', '') is string
+        && request.resource.data.get('productUrl', '') is string
+        && !('downloadUrl' in request.resource.data);
+
+      allow update: if adminUser()
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 200
+        && request.resource.data.category in ['merchandise', 'clothing', 'accessories', 'digital-products', 'apps-software', 'gaming', 'mods-addons', 'media', 'wellness', 'other']
+        && request.resource.data.price is string
+        && request.resource.data.price.size() <= 100
+        && request.resource.data.description is string
+        && request.resource.data.description.size() <= 2000
+        && request.resource.data.createdBy == resource.data.createdBy
+        && request.resource.data.get('icon', '') is string
+        && request.resource.data.get('badge', '') is string
+        && request.resource.data.get('imageUrl', '') is string
+        && request.resource.data.get('productUrl', '') is string
+        && !('downloadUrl' in request.resource.data);
+
+      allow delete: if adminUser();
+    }
+
+    match /productSecrets/{productId} {
+      // Actual download source/path is never public.
+      allow read, write: if adminUser();
+    }
+
+    match /shopRateLimits/{userId} {
+      // Rate-limit state is maintained by trusted server code.
+      allow read, write: if adminUser();
+    }
+
+    // =========================================================
+    // SHOP ORDERS / DIGITAL OWNERSHIP / VERSIONS
+    // =========================================================
+
+    match /productVersions/{versionId} {
+      allow read: if true;
+      allow create, update, delete: if adminUser()
+        && !('downloadUrl' in request.resource.data);
+    }
+
+    match /orders/{orderId} {
+      // Order/ownership records are server-generated only.
+      allow create, update, delete: if adminUser();
+      // Buyers can read only their own orders; admins can review all orders
+      // for manual payment verification.
+      allow read: if adminUser()
+        || (realUser() && resource.data.uid == request.auth.uid);
+    }
+
+    match /licenses/{licenseId} {
+      // Licenses are issued or upgraded only by trusted server code.
+      allow create, update, delete: if adminUser();
+      allow read: if realUser()
+        && resource.data.uid == request.auth.uid;
+    }
+
+    match /downloads/{downloadId} {
+      // Download records are server-generated only.
+      allow create, update, delete: if adminUser();
+      allow read: if realUser()
+        && resource.data.uid == request.auth.uid;
+    }
+
+    match /upgrades/{upgradeId} {
+      // Upgrade records are server-generated only.
+      allow create, update, delete: if adminUser();
+      allow read: if realUser()
+        && resource.data.uid == request.auth.uid;
+    }
+
+    // =========================================================
+    // NOTIFICATIONS
+    // =========================================================
+
+    match /notifications/{notificationId} {
+      allow read: if realUser()
+        && resource.data.recipientUid == request.auth.uid;
+
+      // Notification writers are restricted to the admin/backend path.
+      allow create: if adminUser()
+        && request.resource.data.recipientUid is string
+        && request.resource.data.type is string
+        && request.resource.data.title is string
+        && request.resource.data.title.size() <= 240;
+
+      allow update: if adminUser()
+        || (
+          realUser()
+          && resource.data.recipientUid == request.auth.uid
+          && request.resource.data.recipientUid == resource.data.recipientUid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            'read',
+            'readAt'
+          ])
+        );
+
+      allow delete: if adminUser()
+        || (
+          realUser()
+          && resource.data.recipientUid == request.auth.uid
+        );
+    }
+
+    // =========================================================
+    // SERVER MODERATION / RATE LIMIT STATE
+    // =========================================================
+
+    match /moderationLogs/{logId} {
+      allow read: if adminUser();
+      allow create, update, delete: if false;
+    }
+
+    match /rateLimits/{uid} {
+      allow read, write: if false;
+    }
+
+    // =========================================================
+    // DEFAULT DENY
+    // =========================================================
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

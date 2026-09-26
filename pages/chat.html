@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Global Chat | TUBAL HUB</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/video-call.css">
+<link rel="stylesheet" href="../assets/css/global-chat-redesign.css?v=20260920">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#020807;color:#eef5f0;font-family:Arial,Helvetica,sans-serif;min-height:100vh}a{text-decoration:none;color:inherit}
+.topbar{height:72px;background:rgba(2,10,8,.96);border-bottom:1px solid #123a2b;display:flex;align-items:center;padding:0 30px;position:sticky;top:0;z-index:20;box-shadow:0 8px 30px #0008}.brand{display:flex;align-items:center;gap:12px;min-width:255px}.brand img{width:47px;height:47px;object-fit:contain}.brand strong{font-size:23px;letter-spacing:1px}.brand small{display:block;color:#9aa9a1;font-size:8px;letter-spacing:3px;margin-top:3px}.topnav{display:flex;gap:28px;align-items:center;flex:1;justify-content:center}.topnav a{font-size:14px;color:#d5ded9;padding:26px 5px;border-bottom:2px solid transparent}.topnav a.active{color:#fff;border-bottom-color:#26ff72;text-shadow:0 0 12px #25ff7266}.profile{display:flex;align-items:center;gap:10px;min-width:190px;justify-content:flex-end}.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(145deg,#1b4534,#0a1511);border:1px solid #487a60;display:grid;place-items:center;font-weight:800;overflow:hidden}.avatar img,.msg-avatar img,.mini img{width:100%;height:100%;object-fit:cover}.online{color:#63f58a;font-size:11px}.profile-name{font-size:13px;font-weight:700;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hamb{font-size:20px;color:#b8c8bf}
+.layout{display:grid;grid-template-columns:235px 1fr;min-height:calc(100vh - 72px)}.sidebar{background:linear-gradient(180deg,#03110d,#02100c 65%,#041e14);border-right:1px solid #123629;padding:42px 18px;display:flex;flex-direction:column;gap:7px}.side a{display:flex;align-items:center;gap:18px;padding:13px 20px;border-radius:14px;color:#cbd5d0;font-size:16px}.side a:hover,.side a.active{background:linear-gradient(90deg,#0e6f42,#063a27);color:#fff;box-shadow:inset 3px 0 #36ff79,0 0 25px #16e96d1c}.side .ico{width:23px;text-align:center;font-size:21px}.quote{margin:55px 14px 0;color:#aab9b0;font-style:italic;line-height:1.5;font-size:14px}
+.main{padding:0 0 18px;min-width:0}.hero{height:190px;margin:0;border-bottom:1px solid #174735;background:radial-gradient(circle at 70% 20%,#315e3a55,transparent 35%),linear-gradient(100deg,#06130f,#10271d 55%,#263b2d);position:relative;overflow:hidden;padding:25px 64px;display:flex;align-items:center}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#06110e 0%,transparent 55%,#06110eaa 100%)}.hero>*{position:relative;z-index:1}.kicker{display:inline-block;border:1px solid #b6d7c9;border-radius:20px;padding:6px 15px;font-size:11px;letter-spacing:1px}.hero h1{font-size:55px;line-height:1;margin:10px 0 4px;font-weight:900;font-style:italic;letter-spacing:-2px}.hero h1 em{color:#57f979}.hero p{font-size:17px;margin:0;color:#e0e8e3}.hero-note{margin-left:auto;text-align:right;font-size:23px;font-style:italic;line-height:1.35;color:#fff;max-width:250px}
+.chat-grid{display:grid;grid-template-columns:minmax(0,1fr) 318px;gap:14px;padding:14px 18px 0}.panel{background:linear-gradient(145deg,#061612e8,#03100d);border:1px solid #15744a;border-radius:16px;box-shadow:0 10px 35px #0007}.chat-panel{min-width:0}.chat-head{min-height:86px;padding:17px 18px;border-bottom:1px solid #14372b;display:flex;align-items:center;justify-content:space-between}.chat-title{display:flex;align-items:center;gap:14px}.globe{width:58px;height:58px;border-radius:16px;border:1px solid #18e76d;background:#073b25;color:#8dffb1;display:grid;place-items:center;font-size:30px;box-shadow:0 0 25px #17e76d22}.chat-title h2{margin:0;font-size:22px}.chat-title p{margin:5px 0 0;color:#9baaa2;font-size:13px}.count{border:1px solid #18b95d;border-radius:16px;padding:11px 15px;color:#72f58f;font-weight:700;white-space:nowrap}.messages{height:520px;overflow:auto;padding:8px 18px}.msg{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid #0d251d}.msg-avatar{width:52px;height:52px;flex:0 0 52px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#315d7a,#10273b);border:1px solid #77a2c1;font-size:20px;overflow:hidden}.msg-body{max-width:86%;min-width:0}.msg-meta{display:flex;gap:9px;align-items:center;margin:1px 0 7px;flex-wrap:wrap}.msg-meta b{font-size:15px}.time{font-size:12px;color:#718078}.bubble{display:inline-block;background:#12242a;border-radius:0 13px 13px 13px;padding:9px 13px;font-size:14px;line-height:1.35;white-space:pre-wrap;overflow-wrap:anywhere}.msg.me .msg-avatar{background:linear-gradient(145deg,#3c7652,#0b321f);border-color:#5df08d}.msg.me .bubble{background:#075d31}.admin{background:#2bf36b;color:#06240f;border-radius:5px;padding:3px 7px;font-size:9px}.media{display:block;max-width:min(420px,100%);max-height:330px;border-radius:12px;border:1px solid #24694b;margin-top:3px;object-fit:contain;background:#020807}.file-label{font-size:11px;color:#94aaa0;margin-top:5px}.message-content{position:relative;display:inline-block;max-width:100%;padding-right:0}.message-content .media{display:block}.inline-react-btn{position:absolute;right:6px;bottom:6px;width:32px;height:32px;border:1px solid #2b7b58;background:rgba(3,16,12,.92);color:#fff;border-radius:50%;display:grid;place-items:center;font-size:16px;cursor:pointer;box-shadow:0 4px 14px #0008;backdrop-filter:blur(5px);z-index:2}.inline-react-btn:hover{border-color:#4dff88;background:#0a3824;transform:scale(1.06)}.message-content .bubble{padding-right:42px}.reaction-bar{margin-top:6px}.message-actions{margin-top:5px}.action-btn{border:1px solid #1c4938;background:#06130f;color:#b9cbc2;border-radius:9px;padding:5px 8px;font-size:11px;cursor:pointer}.action-btn:hover{border-color:#2df878;color:#fff;background:#092219}.reaction-bar{display:flex;gap:4px;flex-wrap:wrap}.reaction-chip{border:1px solid #25533f;background:#061a12;color:#dcebe3;border-radius:999px;padding:4px 8px;font-size:11px;cursor:pointer}.reaction-chip.active{border-color:#2df878;background:#0a472a;color:#fff}.reply-box{margin-top:9px;border-left:2px solid #1ecf68;padding-left:10px}.reply-item{padding:6px 0;border-bottom:1px solid #0d251d}.reply-item:last-child{border-bottom:0}.reply-meta{font-size:10px;color:#80928a;margin-bottom:3px}.reply-text{font-size:12px;color:#dbe6e0;white-space:pre-wrap;overflow-wrap:anywhere}.reply-composer{display:none;margin-top:8px;gap:6px}.reply-composer input{flex:1;background:#061411;border:1px solid #287154;border-radius:9px;color:#fff;padding:8px 10px;outline:none;font-size:12px}.reply-composer button{border:1px solid #26774f;background:#0b8e44;color:#fff;border-radius:9px;padding:8px 10px;font-weight:700;font-size:11px}.empty-chat{text-align:center;padding:100px 20px;color:#82958b}.empty-chat strong{display:block;color:#d9e8df;font-size:18px;margin-bottom:6px}
+.composer{display:flex;gap:10px;padding:12px 17px;border-top:1px solid #14372b;position:relative}.composer-tools{display:flex;gap:5px;align-items:center}.tool{width:45px;height:45px;border:1px solid #1d7550;background:#061713;color:#e3ede7;border-radius:13px;font-size:19px;cursor:pointer}.tool:hover{border-color:#4dff88;box-shadow:0 0 14px #19ed6b2b}.composer input{flex:1;background:#061411;border:1px solid #287154;border-radius:13px;color:#fff;padding:0 15px;outline:none;font-size:14px}.send{border:0;border-radius:13px;padding:0 23px;background:#12b957;color:white;font-weight:800;font-size:14px;box-shadow:0 0 20px #15e86b33;cursor:pointer}.send:disabled{opacity:.5;cursor:not-allowed}.picker{position:absolute;left:17px;bottom:69px;background:#061713;border:1px solid #1d7550;border-radius:14px;padding:10px;box-shadow:0 18px 45px #000b;z-index:8;display:none}.emoji-grid{display:grid;grid-template-columns:repeat(8,34px);gap:4px}.emoji-choice{border:0;background:transparent;color:#fff;font-size:20px;border-radius:7px;padding:5px;cursor:pointer}.emoji-choice:hover{background:#0d3c29}.file-note{font-size:11px;color:#8ca199;margin:0 0 7px 2px}.replying{display:none;padding:8px 17px;background:#071b14;border-top:1px solid #153e2d;color:#a8bbb1;font-size:11px}.replying b{color:#fff}.replying button{float:right;border:0;background:transparent;color:#7dfb9b;cursor:pointer}
+.right{display:flex;flex-direction:column;gap:13px}.right .panel{padding:17px}.panel-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.panel-title h3{font-size:15px;margin:0}.view{font-size:12px;color:#6dff96}.member{display:flex;align-items:center;gap:10px;padding:7px 0}.mini{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#173b31;border:1px solid #416d59;overflow:hidden}.member-info{flex:1;min-width:0}.member-info .private-member-name{display:block;width:100%;padding:0;border:0;background:transparent;color:#eef5f0;text-align:left;font:inherit;font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;pointer-events:auto;position:relative;z-index:60}.member-info .private-member-name:hover{color:#70ffe0;text-decoration:underline}.member-info span{font-size:10px;color:#63e783}.you-tag{color:#6fff95;font-size:10px;font-weight:700}.empty-side{color:#7f9188;font-size:12px;padding:10px 0}.channels div{display:flex;justify-content:space-between;padding:8px 8px;border-radius:8px;color:#c8d2cc;font-size:13px}.channels div.active{background:#0a8e43;color:#fff}.rules li{font-size:12px;color:#b4c0b9;padding:4px 0}
+.lock-wrap{padding:70px 25px;display:none}.lock-card{max-width:650px;margin:auto;text-align:center;padding:48px 30px;border:1px solid #1c8150;border-radius:18px;background:linear-gradient(145deg,#061711,#020a07);box-shadow:0 20px 55px #0009}.lock-icon{font-size:54px}.lock-card h2{font-size:30px;margin:12px 0 8px}.lock-card p{color:#99aaa1;line-height:1.7;font-size:14px}.lock-actions{display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap}.lock-actions a{padding:13px 22px;border-radius:10px;font-weight:800}.login{background:#49fa73;color:#061108}.signup{border:1px solid #37634d;color:#c6dfcf}.status-msg{padding:9px 18px;color:#8da198;font-size:11px;border-bottom:1px solid #10271f}.status-msg.error{color:#ff8c8c}.footer{border-top:1px solid #123629;margin-top:15px;padding:18px 30px;display:flex;justify-content:space-between;color:#83928b;font-size:11px}.footer b{color:#dff6e6;font-size:16px}.footer span{margin-left:8px}.social{font-size:16px;letter-spacing:12px}
+@media(max-width:1100px){.topnav{gap:12px}.topnav a{font-size:12px}.layout{grid-template-columns:190px 1fr}.hero{padding-left:35px}.hero h1{font-size:45px}.hero-note{display:none}.chat-grid{grid-template-columns:1fr}.right{display:grid;grid-template-columns:1fr 1fr}.messages{height:440px}}
+@media(max-width:760px){.topbar{padding:0 12px}.brand{min-width:auto}.brand strong{font-size:17px}.brand small{display:none}.topnav,.profile-name,.profile .online{display:none}.profile{min-width:auto}.layout{display:block}.sidebar{display:none}.hero{height:170px;padding:22px}.hero h1{font-size:38px}.chat-grid{padding:10px}.right{display:flex}.right .panel{display:block}.right .panel:first-child #memberList{display:block}.right .panel:first-child .member{min-width:0;max-width:none;padding:7px 0;border:0;border-radius:0;background:transparent}.right .panel:not(:first-child){display:none}.chat-head{height:auto;gap:10px}.chat-title p{display:none}.count{padding:8px 10px}.messages{height:55vh}.composer{flex-wrap:wrap}.composer input{height:44px;order:2;flex-basis:100%}.send{height:44px}.footer{display:block;text-align:center;line-height:2}.social{margin-top:6px}.emoji-grid{grid-template-columns:repeat(6,34px)}}
+.moderation-notice{display:none;margin:10px 18px;padding:12px 14px;border:1px solid #ffb020;border-radius:10px;background:rgba(90,55,0,.22);color:#ffd98a;font-size:13px;font-weight:700;box-shadow:0 8px 24px #0005}.moderation-notice.show{display:block}.moderation-notice.danger{border-color:#ff5b5b;background:rgba(100,0,0,.22);color:#ffb1b1}
+/* GLOBAL CHAT — ADVANCED MODERN UI */
+body{background:radial-gradient(circle at 75% 0%,#17345d55,transparent 30%),radial-gradient(circle at 25% 80%,#0b765333,transparent 28%),#03050b!important;color:#eef7f4}
+.topbar{height:68px!important;background:rgba(5,7,17,.78)!important;border-bottom:1px solid #ffffff12!important;backdrop-filter:blur(22px);box-shadow:0 12px 45px #0007!important}.topnav a{transition:.2s}.topnav a:hover{color:#70ffe0!important;transform:translateY(-1px)}.profile .online{color:#70ffe0}.avatar{border-color:#70ffe055!important;box-shadow:0 0 22px #70ffe01c}
+.layout{grid-template-columns:220px 1fr!important}.sidebar{background:rgba(5,7,17,.82)!important;border-right:1px solid #ffffff10!important;backdrop-filter:blur(20px)}.side a{border:1px solid transparent;transition:.2s}.side a:hover,.side a.active{background:linear-gradient(135deg,#70ffe018,#8c7cff18)!important;border-color:#70ffe022!important;box-shadow:inset 3px 0 #70ffe0,0 8px 28px #0005!important}
+.hero{height:220px!important;padding:30px 52px!important;background:radial-gradient(circle at 75% 25%,#8c7cff4d,transparent 24%),radial-gradient(circle at 35% 90%,#70ffe02b,transparent 28%),linear-gradient(120deg,#060914,#11172c 55%,#1a1026)!important;border-bottom:1px solid #ffffff10!important}.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff04 1px,transparent 1px),linear-gradient(90deg,#ffffff04 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent);pointer-events:none}.hero:after{background:linear-gradient(90deg,#05071188,transparent 55%,#05071199)!important}.kicker{border-color:#70ffe033!important;background:#70ffe008}.hero h1 em{background:linear-gradient(90deg,#70ffe0,#8c7cff,#ff76d8);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:#b9c9c7!important}.chat-grid{grid-template-columns:minmax(0,1fr) 330px!important;gap:16px;padding:16px 20px 0!important}.panel{border:1px solid #ffffff10!important;border-radius:20px!important;background:linear-gradient(145deg,#ffffff09,#ffffff03)!important;backdrop-filter:blur(18px);box-shadow:0 18px 55px #0007!important}.chat-head{min-height:92px!important;border-bottom:1px solid #ffffff0d!important}.globe{background:linear-gradient(145deg,#70ffe01a,#8c7cff1a)!important;border-color:#70ffe044!important;color:#70ffe0!important;box-shadow:0 0 30px #70ffe018!important}.count{border-color:#70ffe033!important;background:#70ffe009;color:#70ffe0!important}.messages{scrollbar-width:thin;scrollbar-color:#70ffe033 transparent}.msg{border-bottom:1px solid #ffffff08!important}.msg-avatar{border-color:#ffffff15!important;background:linear-gradient(145deg,#25315a,#101528)!important}.bubble{background:linear-gradient(135deg,#10192a,#101620)!important;border:1px solid #ffffff0b;box-shadow:0 7px 22px #0003}.msg.me .bubble{background:linear-gradient(135deg,#075d43,#164b52)!important;border-color:#70ffe01c}.reaction-chip,.action-btn{background:#ffffff06!important;border-color:#ffffff12!important}.reaction-chip.active{background:#70ffe018!important;border-color:#70ffe055!important}.composer{background:#05071188;border-top:1px solid #ffffff0d!important;backdrop-filter:blur(16px)}.tool{background:#ffffff06!important;border-color:#ffffff12!important}.tool:hover{border-color:#70ffe055!important;box-shadow:0 0 20px #70ffe01a!important}.composer input{background:#030711!important;border-color:#ffffff12!important;box-shadow:inset 0 0 20px #0004}.send{background:linear-gradient(135deg,#70ffe0,#8c7cff)!important;color:#050711!important;box-shadow:0 0 25px #70ffe01c!important}.picker{background:#080c18!important;border-color:#70ffe033!important}.right .panel{padding:18px!important}.member{border-radius:12px;padding:9px 8px!important;transition:.2s}.member:hover{background:#ffffff06}.mini{border-color:#ffffff15!important;background:#11182b!important}.channels div.active{background:linear-gradient(135deg,#70ffe01c,#8c7cff18)!important;border:1px solid #70ffe022}.rules li{color:#a9b9b6!important}.footer{border-color:#ffffff0d!important;background:#04060c}.lock-card{background:linear-gradient(145deg,#0b1020f5,#07131af5)!important;border-color:#70ffe033!important;backdrop-filter:blur(18px)}
+.private-chat-panel{position:fixed!important;right:22px;bottom:22px;width:min(390px,calc(100vw - 28px));height:min(620px,calc(100vh - 100px));z-index:80;border:1px solid #70ffe033!important;border-radius:22px!important;background:rgba(5,7,17,.94)!important;backdrop-filter:blur(22px);box-shadow:0 30px 100px #000b!important;overflow:hidden}.private-chat-head{height:66px!important;background:#ffffff06!important;border-bottom:1px solid #ffffff0d!important}.private-back,.private-call{background:#ffffff08!important;border:1px solid #ffffff12!important;color:#dce9e6!important;border-radius:10px}.private-avatar{border-color:#70ffe044!important;background:linear-gradient(145deg,#70ffe018,#8c7cff18)!important}.private-chat-status{color:#70ffe0!important}.private-messages{background:radial-gradient(circle at 80% 10%,#8c7cff0a,transparent 35%)}.private-bubble{background:#10192a!important;border:1px solid #ffffff0b!important}.private-msg.mine .private-bubble{background:linear-gradient(135deg,#075d43,#164b52)!important}
+@media(max-width:1100px){.chat-grid{grid-template-columns:1fr!important}.right{display:grid!important;grid-template-columns:repeat(2,1fr);gap:13px}.hero{padding-left:35px!important}}@media(max-width:760px){.hero{height:190px!important;padding:24px 20px!important}.hero h1{font-size:39px!important}.chat-grid{padding:10px!important}.right{display:flex!important}.chat-head{padding:14px!important}.messages{height:58vh!important}.private-chat-panel{right:10px;bottom:10px;width:calc(100vw - 20px);height:calc(100vh - 90px)}}
+@media(prefers-reduced-motion:no-preference){.hero{animation:chatAmbient 14s ease-in-out infinite alternate}@keyframes chatAmbient{from{background-position:0 0}to{background-position:12px -8px}}}
+
+
+</style>
+<link rel="stylesheet" href="../assets/css/global-theme.css?v=20260922">
+<link rel="stylesheet" href="../assets/css/global-chat-premium.css?v=20260924-v6">
+<link rel="stylesheet" href="../assets/css/global-chat-emoji.css?v=20260924-v3">
+<link rel="stylesheet" href="../assets/css/global-chat-gif-stickers.css?v=20260924-v1">
+<link rel="stylesheet" href="../assets/css/global-chat-focus.css?v=20260924-v4">
+  <link rel="stylesheet" href="../assets/css/premium-logos.css?v=20260924-logo1">
+</head>
+<body class="global-chat-page">
+<button id="sidebarToggle" class="global-chat-menu-toggle" type="button" aria-controls="chatLeftRail" aria-expanded="false" aria-label="Toggle Global Chat sidebar" title="Toggle sidebar">
+  <span></span><span></span><span></span>
+</button>
+<header class="topbar"><a class="brand" href="../index.html"><img src="../tubal-hub-logo.png" loading="eager" decoding="async" fetchpriority="high" width="180" height="180" alt="TUBAL HUB"><div><strong>TUBAL HUB</strong><small>PLAY • CREATE • CONNECT</small></div><span id="globalChatVersionBadge" class="global-chat-version-badge">● LIVE v1.2.10</span></a><nav class="topnav"><a href="../index.html">⌂ Home</a><a href="games.html">🎮 Games</a><button id="videoBtnReal" type="button" aria-label="Open TUBAL HUB Videos" aria-expanded="false" title="TUBAL HUB Videos Real" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(120,255,170,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:inherit;">📹</button><a href="community.html">♟ Community</a><a class="active" href="chat.html">💬 Global Chat</a><a href="about.html">ⓘ About</a><a href="contact.html">✉ Contact</a></nav><div class="profile"><div><div class="profile-name" id="profileName">TUBAL HUB</div><div class="online" id="profileStatus">● Checking...</div></div><div class="avatar" id="profileAvatar">TH</div><button type="button" class="mobile-rail-toggle topbar-rail-toggle" id="topOpenMembers" aria-label="Online members">☷</button><button type="button" class="mobile-rail-toggle topbar-rail-toggle" id="topOpenDMs" aria-label="Private chats">✉</button></div></header>
+<div class="layout chat-layout">
+<main class="main chat-main">
+<section id="chatLock" class="lock-wrap"><div class="lock-card"><div class="lock-icon">🔐</div><h2>Login Required</h2><p>Global Chat is available to registered TUBAL HUB members. Create an account or log in to join the conversation.</p><div class="lock-actions"><a class="login" href="login.html?returnTo=chat.html">Login</a><a class="signup" href="signup.html?returnTo=chat.html">Create Account</a></div></div></section>
+
+<section id="chatContent" class="chat-grid chat-focus-grid" aria-hidden="true" style="display:none">
+  <aside class="chat-rail chat-left" id="chatLeftRail" aria-label="Online members">
+    <div class="chat-rail-head">
+      <div>
+        <span class="rail-kicker">COMMUNITY</span>
+        <h2>Online Members <span class="rail-count">(<span id="onlineMembers">0</span>)</span></h2>
+      </div>
+      <span class="live-pill"><i></i>Live</span>
+    </div>
+    <div id="presenceDebug" class="presence-debug">Presence: checking…</div>
+    <div class="rail-search"><span>⌕</span><input id="memberSearch" type="search" autocomplete="off" placeholder="Search members..." aria-label="Search members"></div>
+    <div id="memberList" class="member-list"><div class="empty-side">No members are online right now.</div></div>
+
+    <div class="rail-section channels">
+      <div class="rail-section-head"><h3>Chat Channels</h3><span class="channel-source-real">FIRESTORE</span></div>
+      <div class="channel-list-real" role="tablist" aria-label="Global Chat channels">
+        <button type="button" class="channelReal active" data-channel="general" role="tab" aria-selected="true"><span># general</span><span class="channel-count-real" data-channel-count="general">0</span></button>
+        <button type="button" class="channelReal" data-channel="payapang-isip" role="tab" aria-selected="false"><span># payapang-isip</span><span class="channel-count-real" data-channel-count="payapang-isip">0</span></button>
+        <button type="button" class="channelReal" data-channel="ctrlzone" role="tab" aria-selected="false"><span># ctrlzone</span><span class="channel-count-real" data-channel-count="ctrlzone">0</span></button>
+        <button type="button" class="channelReal" data-channel="shop-talk" role="tab" aria-selected="false"><span># shop-talk</span><span class="channel-count-real" data-channel-count="shop-talk">0</span></button>
+        <button type="button" class="channelReal" data-channel="announcements" role="tab" aria-selected="false"><span># announcements</span><span class="channel-count-real" data-channel-count="announcements">0</span></button>
+      </div>
+      <div class="channel-real-note">Only messages that actually exist in the selected channel are shown.</div>
+    </div>
+
+    <div class="rail-section rules">
+      <div class="rail-section-head rules-title"><span class="rules-logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5.3c0 4.7-3 7.8-7 9.7-4-1.9-7-5-7-9.7V6l7-3z"></path><path d="m8.8 12.1 2.1 2.1 4.3-4.3"></path></svg><i></i></span><h3>Chat Rules</h3></div>
+      <ul>
+        <li>Be respectful to everyone</li>
+        <li>No spamming or excessive caps</li>
+        <li>No hate speech or toxic behavior</li>
+        <li>Keep the chat friendly and fun</li>
+      </ul>
+    </div>
+    <button type="button" class="mobile-rail-close" id="closeLeftRail">Close</button>
+  </aside>
+
+  <div class="chat-center panel chat-panel">
+    <div class="chat-focus-head">
+      <div class="chat-title">
+        <div class="globe chat-globe-logo" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"></circle><path d="M3.7 12h16.6M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5S14.4 18.1 12 20.5M12 3.5C9.6 5.9 8.4 8.7 8.4 12s1.2 6.1 3.6 8.5"></path></svg></div>
+        <div><h1 id="globalChatChannelTitle">Global Chat</h1><p>Live messages from TUBAL HUB members • real-time</p></div>
+      </div>
+      <div class="center-actions">
+        <span class="count"><i></i><span id="onlineCount">0</span> Online</span>
+        <button type="button" class="mobile-rail-toggle" id="openMembers" aria-label="Open online members">☰</button>
+        <button type="button" class="mobile-rail-toggle" id="openDMs" aria-label="Open direct messages">✉</button>
+      </div>
+    </div>
+    <div id="chatStatus" class="status-msg chat-connect"><span class="status-dot"></span>Connecting to TUBAL HUB...</div>
+    <div id="moderationNotice" class="moderation-notice" role="alert" aria-live="assertive"></div>
+    <div class="messages chat-messages" id="messages"><div class="chat-build-marker-real" id="chatBuildMarkerReal">Today</div><div class="empty-chat"><strong>No messages yet.</strong>Start the first conversation in Global Chat.</div></div>
+    <div id="replyingBar" class="replying"><span>Replying to <b id="replyingName"></b></span><button id="cancelReply" type="button">Cancel</button></div>
+    <form class="composer chat-composer" id="chatForm">
+      <div class="composer-tools"><button type="button" class="tool" id="imageBtn" title="Upload image to Firebase">▧</button><button type="button" class="tool" id="imageLinkBtnReal" title="Send image by direct URL" aria-label="Send image by direct URL">🔗</button><button type="button" class="tool" id="gifBtn" title="Send GIF file">GIF</button><button type="button" class="tool" id="emojiBtn" title="Emoji" aria-label="Emoji">☺</button></div>
+      <input id="messageInput" maxlength="500" placeholder="Mag chat ka dito... real message • hindi fake" autocomplete="off">
+      <button class="send" id="sendButton" type="submit">Send ➤</button>
+      <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+      <input id="gifInput" type="file" accept="image/gif" hidden>
+      <div id="gifStickerPicker" class="gif-sticker-picker" hidden role="dialog" aria-label="GIF stickers">
+        <div class="gif-sticker-head">
+          <div class="gif-sticker-brand"><strong>GIF Stickers</strong><span>Your uploaded GIF stickers</span></div>
+          <button type="button" class="gif-sticker-close" id="gifStickerClose" aria-label="Close GIF stickers">×</button>
+        </div>
+        <div class="gif-sticker-tabs">
+          <button type="button" class="gif-sticker-tab active" id="gifStickerRecentTab">Recent</button>
+        </div>
+        <div class="gif-sticker-grid" id="gifStickerGrid"></div>
+        <button type="button" class="gif-sticker-upload" id="gifStickerUploadBtn">＋ Upload GIF Sticker</button>
+        <p class="gif-sticker-note">Real GIF files only. Uploaded stickers are kept for reuse on this device.</p>
+      </div>
+      <div id="emojiPicker" class="emoji-picker" hidden role="dialog" aria-label="Emoji picker">
+        <div class="emoji-picker-head">
+          <div class="emoji-picker-brand"><strong>Emoji</strong><span class="emoji-picker-meta" id="emojiPickerMeta">Loading Unicode emoji…</span></div>
+          <button type="button" class="emoji-tone" id="emojiTone" title="Skin tone" aria-label="Skin tone">🖐️</button>
+        </div>
+        <div class="emoji-search-wrap"><input id="emojiSearch" class="emoji-search" type="search" autocomplete="off" placeholder="Search emoji..." aria-label="Search emoji"></div>
+        <div class="emoji-tabs" id="emojiTabs" role="tablist" aria-label="Emoji categories"></div>
+        <div class="emoji-stage">
+          <div class="emoji-section-title" id="emojiSectionTitle">Smileys &amp; Emotion</div>
+          <div class="emoji-grid" id="emojiGrid" role="grid" aria-label="Emoji"></div>
+        </div>
+        <div class="emoji-tone-menu" id="emojiToneMenu" hidden></div>
+        <div class="emoji-variation" id="emojiVariation" hidden>
+          <div class="emoji-variation-label" id="emojiVariationLabel">Skin tones &amp; variations</div>
+          <div class="emoji-variation-grid" id="emojiVariationGrid"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <aside class="chat-rail chat-right" id="chatRightRail" aria-label="Private chats">
+    <div class="dm-head">
+      <div>
+        <span class="rail-kicker">DIRECT</span>
+        <h2>Private Chats</h2>
+      </div>
+      <button type="button" class="new-chat-btn" id="newDmButton">＋ New chat</button>
+    </div>
+    <div class="rail-search"><span>⌕</span><input id="dmSearch" type="search" autocomplete="off" placeholder="Search private chats..." aria-label="Search private chats"></div>
+    <div id="dmList" class="dm-list"><div class="dm-empty"><strong>No private chats yet.</strong><span>Start a private conversation with an online member.</span></div></div>
+
+    <div class="invite-card">
+      <div class="invite-icon">✦</div>
+      <div><strong>Invite friends</strong><span>Share TUBAL HUB with people you play with.</span></div>
+      <button type="button" id="inviteFriendsBtn">Invite</button>
+    </div>
+    <button type="button" class="mobile-rail-close" id="closeRightRail">Close</button>
+  </aside>
+
+  <div class="chat-drawer-backdrop" id="chatDrawerBackdrop" hidden></div>
+</section>
+
+<section id="privateChatPanel" class="private-chat-panel" hidden><div class="private-chat-head"><button type="button" id="closePrivateChat" class="private-back">←</button><div id="privateChatAvatar" class="private-avatar">M</div><div class="private-person"><b id="privateChatName">Member</b><span id="privateChatStatus">● Online</span></div><button type="button" id="privateVideoCall" class="private-call" title="Video call">📹</button></div><div id="privateMessages" class="private-messages"><div class="private-empty">Select an online member to start a private conversation.</div></div><form id="privateForm" class="private-composer"><input id="privateInput" maxlength="500" placeholder="Message..." autocomplete="off"><button type="submit">Send ➤</button></form></section><footer class="footer chat-footer"><div><b>TUBAL HUB</b><span>YOUR HUB. YOUR COMMUNITY.</span></div><div>© 2026 TUBAL HUB. All rights reserved. &nbsp; | &nbsp; Play • Create • Connect</div><div class="social">● ● ● ●</div></main></div>
+<script type="module">
+import { app, auth } from "../assets/js/firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, orderBy, limit, limitToLast, onSnapshot, doc, setDoc, getDoc, deleteDoc, serverTimestamp, where, updateDoc, getDocsFromServer } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-functions.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+
+const db=getFirestore(app), storage=getStorage(app), functionsReal=getFunctions(app);
+const sendMessageFnReal=httpsCallable(functionsReal,'sendMessageReal');
+const sendReplyFnReal=httpsCallable(functionsReal,'sendReplyReal');
+const sendPrivateMessageFnReal=httpsCallable(functionsReal,'sendPrivateMessageReal');
+const sendGlobalMediaFnReal=httpsCallable(functionsReal,'sendGlobalMediaMessageReal');
+const cleanupGlobalChatMediaFnReal=httpsCallable(functionsReal,'cleanupGlobalChatMediaReal');
+const TUBAL_VERSION_REAL='1.2.16';
+const lock=document.getElementById('chatLock'),content=document.getElementById('chatContent'),messages=document.getElementById('messages'),form=document.getElementById('chatForm'),input=document.getElementById('messageInput'),sendButton=document.getElementById('sendButton'),statusEl=document.getElementById('chatStatus'),memberList=document.getElementById('memberList'),onlineCount=document.getElementById('onlineCount'),onlineMembers=document.getElementById('onlineMembers'),globalMessageCount=document.getElementById('globalMessageCount'),replyingBar=document.getElementById('replyingBar'),replyingName=document.getElementById('replyingName'),cancelReply=document.getElementById('cancelReply'),emojiPicker=document.getElementById('emojiPicker');
+let currentUser=null,stopMessages=null,heartbeatTimer=null,stopPresence=null,stopUsersPresence=null,heartbeatPresenceRefresh=null,stopBanStatus=null,stopReactions=null,stopReplies=null,stopDmList=null,replyTarget=null,lastMessageTime=0,reactionState={};
+let activeChannelReal="general";
+let privateTarget=null,stopPrivateMessages=null,privateLastMessageTime=0;
+let pendingExternalImageUrlReal="";
+const emojis=['😀','😂','😍','🥰','😎','😭','😡','😮','👍','👎','❤️','🔥','💯','🎮','🎉','👏','🤣','🤔','😅','🙌','💚','✨','👀','🙏','🥳','😴','🤝','🚀','💀','😇','😱','🤩','💪','🌿','⭐','🎯','🏆','❤️‍🔥','🫶','😊'];
+function enableMemberNameClick(){if(!memberList||memberList.dataset.privateClickReady)return;memberList.dataset.privateClickReady='1';memberList.addEventListener('click',e=>{const nameBtn=e.target.closest?.('.private-member-name');if(!nameBtn)return;const member=nameBtn.closest?.('.member');if(!member)return;const uid=member.dataset.uid;if(!uid||uid===currentUser?.uid)return;const name=nameBtn.textContent||'Member';const img=member.querySelector('.mini img');e.preventDefault();e.stopPropagation();openPrivateChat({uid,displayName:name,photoURL:img?.src||''})},true)}
+
+enableMemberNameClick();
+setupChatFocusUi();
+function esc(v){const d=document.createElement('div');d.textContent=v??'';return d.innerHTML}function initials(n){return(n||'Member').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'M'}function avatarHtml(u,cls='msg-avatar'){return u.photoURL?`<div class="${cls}"><img src="${esc(u.photoURL)}" alt=""></div>`:`<div class="${cls}">${esc(initials(u.displayName||u.email))}</div>`}function timeText(ts){return ts?.toDate?ts.toDate().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'Sending...'}function setStatus(t,error=false){statusEl.textContent=t;statusEl.classList.toggle('error',error)}function isRealUser(u=currentUser){return !!u&&!u.isAnonymous}
+async function updatePresence(user,online=true){if(!isRealUser(user))return;const profile={uid:user.uid,displayName:user.displayName||user.email?.split('@')[0]||'Member',photoURL:user.photoURL||''};await setDoc(doc(db,'presence',user.uid),{...profile,online,lastSeen:Date.now(),presenceUpdatedAt:serverTimestamp()},{merge:true});await setDoc(doc(db,'users',user.uid),{...profile,lastSeen:serverTimestamp()},{merge:true})}
+function setReplyTarget(messageId,name,preview,parentReplyId=null){replyTarget={messageId,name,preview,parentReplyId};replyingName.textContent=name;replyingBar.style.display='block';input.focus()}
+function clearReply(){replyTarget=null;replyingBar.style.display='none'}
+let reactionUsersState={};
+let reactionFxTimers=new Map();
+let reactionSnapshotReady=false;
+
+function reactionButtonHtml(messageId,emoji,count,isActive=false,isNew=false,index=0,countChanged=false){
+  const delay=(index*0.05).toFixed(2)+'s';
+  return '<button type="button" class="reaction-chip'+(isActive?' active':'')+(isNew?' reaction-new':'')+'" data-message="'+esc(messageId)+'" data-react="'+esc(emoji)+'" style="--reaction-delay:'+delay+'" aria-label="React with '+esc(emoji)+'">'+
+    '<span class="react-emoji">'+emoji+'</span><span class="react-count'+(countChanged?' count-update':'')+'">'+count+'</span></button>';
+}
+
+function reactionHtml(messageId,previousCounts={}){
+  const counts=reactionState[messageId]||{};
+  const users=reactionUsersState[messageId]||{};
+  const ready=reactionSnapshotReady;
+  return Object.entries(counts).filter(([,n])=>n>0).map(([e,n],index)=>{
+    const previous=Number(previousCounts[e]||0);
+    const active=users[e]?.has(currentUser?.uid);
+    const changed=ready && n!==previous;
+    const isNew=ready && n>0 && previous===0;
+    return reactionButtonHtml(messageId,e,n,!!active,isNew,index,changed);
+  }).join('');
+}
+function hapticTick(){
+  try{if('vibrate' in navigator)navigator.vibrate(8)}catch(_){}
+}
+
+function burstReactionParticles(target,count=6){
+  if(!target)return;
+  const wrap=document.createElement('span');
+  wrap.className='reaction-particle-burst';
+  for(let i=0;i<count;i++){
+    const dot=document.createElement('i');
+    dot.style.setProperty('--p-angle',(i*(360/count)+((i%2)*9))+'deg');
+    dot.style.setProperty('--p-distance','24px');
+    dot.style.setProperty('--p-delay',(i*.025)+'s');
+    wrap.appendChild(dot);
+  }
+  target.appendChild(wrap);
+  setTimeout(()=>wrap.remove(),700);
+}
+
+function burstFiveConfetti(row,emoji){
+  if(!row)return;
+  const wrap=document.createElement('span');
+  wrap.className='reaction-confetti';
+  for(let i=0;i<12;i++){
+    const bit=document.createElement('i');
+    bit.style.setProperty('--c-angle',(i*(360/12))+'deg');
+    bit.style.setProperty('--c-distance','80px');
+    bit.style.setProperty('--c-delay',(i*.018)+'s');
+    wrap.appendChild(bit);
+  }
+  row.appendChild(wrap);
+  setTimeout(()=>wrap.remove(),900);
+}
+function animateReactionTarget(target){
+  if(!target)return;
+  target.classList.remove('reaction-pop');
+  void target.offsetWidth;
+  target.classList.add('reaction-pop');
+  setTimeout(()=>target.classList.remove('reaction-pop'),420);
+  const emoji=target.querySelector('.react-emoji');
+  if(emoji){
+    emoji.classList.remove('emoji-jump');
+    void emoji.offsetWidth;
+    emoji.classList.add('emoji-jump');
+    setTimeout(()=>emoji.classList.remove('emoji-jump'),420);
+  }
+  burstReactionParticles(target,6);
+  hapticTick();
+}
+
+function fireReactionFx(messageId,emoji){
+  requestAnimationFrame(()=>{
+    const row=document.querySelector('.msg[data-id="'+CSS.escape(messageId)+'"]');
+    if(!row)return;
+    row.querySelectorAll('.reaction-chip[data-react="'+CSS.escape(emoji)+'"]').forEach(animateReactionTarget);
+    const quick=row.querySelector('.quick-reaction[data-e="'+CSS.escape(emoji)+'"]');
+    if(quick)animateReactionTarget(quick);
+    reactionFxTimers.set(messageId+'_'+emoji,Date.now()+700);
+  });
+}
+
+function renderQuickReactionBar(){
+  return '<div class="quick-reaction-bar" aria-label="Quick reactions">'+
+    ['❤️','👍','😂','🔥','💚'].map((e,i)=>
+      '<button type="button" class="quick-reaction" data-e="'+esc(e)+'" style="--quick-delay:'+(i*.05)+'s" aria-label="React with '+esc(e)+'"><span>'+e+'</span></button>'
+    ).join('')+
+  '</div>';
+}
+
+const userRoleStateReal=new Map();
+
+function syncMessageAdminBadgeReal(row){
+  if(!row)return;
+  const badge=row.querySelector('.admin-role-badge');
+  if(!badge)return;
+  const role=row.dataset.roleReal||'user';
+  badge.hidden=role!=='admin';
+}
+
+function syncAllMessageAdminBadgesReal(){
+  document.querySelectorAll('.msg').forEach(syncMessageAdminBadgeReal);
+}
+
+function renderMessage(id,data){
+ const me=currentUser&&data.uid===currentUser.uid, user={displayName:data.displayName||data.name,email:data.email,photoURL:data.photoURL};
+ const row=document.createElement('div');row.className='msg'+(me?' me':'');row.dataset.id=id;row.dataset.uid=String(data.uid||'');row.dataset.roleReal=String(data.roleReal||'user');
+ const rawText=String(data.text??data.textReal??'');
+ const formatted=window.tubalFormatChatText?window.tubalFormatChatText(rawText):{html:esc(rawText),className:''};
+ let body='';
+ if(data.type==='image'||data.type==='gif'){
+   const mediaUrl=String(data.mediaUrl||data.imageUrlReal||'');
+   if(data.imageExpiredReal){
+     body='<div class="media-expired-real" style="width:min(250px,100%);min-height:120px;background:rgba(255,255,255,.04);border:1px dashed rgba(120,255,170,.2);border-radius:12px;margin-top:8px;padding:14px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;">'+
+       '<span style="font-size:24px;">🗑️</span>'+
+       '<strong style="font-size:11px;margin-top:5px;">Image expired</strong>'+
+       '<small style="font-size:9px;opacity:.58;margin-top:3px;">Auto-deleted to keep Global Chat storage clean.<br>'+(rawText?'Your text message was kept.':'No broken image URL remains.')+'</small>'+
+     '</div>';
+   }else{
+     body='<img class="media'+(data.type==='gif'?' gif-sticker-media':'')+'" src="'+esc(mediaUrl)+'" alt="'+(data.type==='gif'?'GIF Sticker':'Image')+'" loading="lazy" onerror="this.outerHTML=\'<small class=file-label>Image unavailable</small>\'">'+(rawText?'<div class="file-label">'+esc(rawText)+'</div>':'');
+   }
+ }else{
+   body='<div class="bubble '+(formatted.className||'')+'">'+formatted.html+'</div>';
+ }
+ row.innerHTML=avatarHtml(user)+'<div class="msg-body"><div class="msg-meta"><b>'+esc(data.displayName||data.name||data.email?.split('@')[0]||'Member')+'</b>'+(me?'<span class="admin">YOU</span>':'')+'<span class="admin-role-badge" hidden>ADMIN</span><span class="time">'+esc(timeText(data.createdAt))+'</span></div>'+(data.replyTo?'<div class="file-label">↪ Replying to '+esc(data.replyTo.name||'member')+': '+esc(data.replyTo.preview||'')+'</div>':'')+'<div class="message-content">'+body+'<button type="button" class="inline-react-btn" title="React to this message" aria-label="React to this message">😊</button></div>'+renderQuickReactionBar()+'<div class="reaction-bar">'+reactionHtml(id)+'</div><div class="message-actions"><button type="button" class="action-btn reply-btn">↩ Reply</button></div><div class="reply-box" id="replies-'+esc(id)+'"></div></div>';
+ if(me){
+   const del=document.createElement('button');del.type='button';del.className='action-btn delete-btn';del.textContent='🗑 Delete';del.title='Delete your message';row.querySelector('.message-actions').appendChild(del);
+   del.addEventListener('click',async ev=>{ev.stopPropagation();if(!confirm('Delete this message?'))return;del.disabled=true;try{await deleteDoc(doc(db,'globalChats',id))}catch(err){console.error(err);alert('Hindi ma-delete ang message. Check Firestore Rules.')}finally{del.disabled=false}});
+ }
+ row.querySelector('.reply-btn').addEventListener('click',e=>{e.stopPropagation();setReplyTarget(id,data.displayName||data.name||'Member',rawText.slice(0,100))});
+ row.querySelector('.inline-react-btn').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();document.querySelectorAll('.msg.reaction-open').forEach(x=>{if(x!==row)x.classList.remove('reaction-open')});row.classList.toggle('reaction-open');openReactionMenu(e.currentTarget,id)});
+ row.querySelectorAll('.reaction-chip').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();animateReactionTarget(btn);toggleReaction(id,btn.dataset.react)}));
+ row.querySelectorAll('.quick-reaction').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();toggleReaction(id,btn.dataset.e);row.classList.remove('reaction-open');}));
+ row.addEventListener('click',e=>{if(e.target.closest('.inline-react-btn,.quick-reaction,.reaction-chip,.reaction-menu-choice,.reply-btn,.action-btn'))return;document.querySelectorAll('.msg.selected').forEach(x=>{if(x!==row)x.classList.remove('selected')});row.classList.toggle('selected');});
+ return row;
+}
+function openReactionMenu(button,messageId){const existing=document.querySelector('.inline-reactions');if(existing)existing.remove();const box=document.createElement('div');box.className='inline-reactions';box.style.cssText='position:fixed;z-index:50;background:#061713;border:1px solid #1d7550;border-radius:12px;padding:7px;box-shadow:0 15px 40px #000b;display:flex;gap:3px;flex-wrap:wrap;max-width:260px';box.innerHTML=['❤️','👍','😂','🔥','💚'].map((e,i)=>`<button type="button" class="emoji-choice reaction-menu-choice" data-e="${e}" style="--quick-delay:${i*.05}s">${e}</button>`).join('');document.body.appendChild(box);const r=button.getBoundingClientRect();box.style.left=Math.min(r.left,innerWidth-270)+'px';box.style.top=Math.max(10,r.top-52)+'px';box.querySelectorAll('[data-e]').forEach(b=>b.onclick=async ev=>{ev.preventDefault();ev.stopPropagation();const emoji=b.dataset.e;animateReactionTarget(b);try{await toggleReaction(messageId,emoji)}finally{button.closest('.msg')?.classList.remove('reaction-open');box.remove()}});setTimeout(()=>document.addEventListener('click',function close(ev){if(!box.contains(ev.target)&&ev.target!==button){box.remove();button.closest('.msg')?.classList.remove('reaction-open');document.removeEventListener('click',close)}},{once:false}),0)}
+async function toggleReaction(messageId,emoji){if(!isRealUser())return;fireReactionFx(messageId,emoji);const id=`${messageId}_${currentUser.uid}`;const r=doc(db,'globalChatReactions',id);const snap=await getDoc(r);let arr=snap.exists()?Array.isArray(snap.data().reactions)?snap.data().reactions:[]:[];arr=arr.includes(emoji)?arr.filter(x=>x!==emoji):[...arr,emoji];if(arr.length)await setDoc(r,{messageId,uid:currentUser.uid,reactions:arr,updatedAt:serverTimestamp()},{merge:true});else if(snap.exists())await deleteDoc(r)}
+function renderReplyReactions(item,replyId){
+ const bar=item.querySelector('.reply-reaction-bar');if(!bar)return;
+ const key='reply_'+replyId;
+ const counts=reactionState[key]||{};
+ const users=reactionUsersState[key]||{};
+ bar.innerHTML=Object.entries(counts).filter(([,n])=>n>0).map(([e,n])=>{
+   const active=users[e]?.has(currentUser?.uid);
+   return '<button type="button" class="reaction-chip reply-reaction-chip" data-react="'+esc(e)+'">'+
+     '<span class="react-emoji">'+e+'</span><span class="react-count">'+n+'</span></button>'.replace(
+       '<button type="button" class="reaction-chip reply-reaction-chip"',
+       '<button type="button" class="reaction-chip reply-reaction-chip'+(active?' active':'')+(n===1?' reaction-new':'')+'"'
+     );
+ }).join('');
+ bar.querySelectorAll('.reply-reaction-chip').forEach(b=>b.onclick=e=>{
+   e.stopPropagation();
+   animateReactionTarget(b);
+   toggleReplyReaction(replyId,b.dataset.react);
+ });
+}
+function openReplyReactionMenu(button,replyId){const existing=document.querySelector('.reply-inline-reactions');if(existing)existing.remove();const box=document.createElement('div');box.className='reply-inline-reactions';box.style.cssText='position:fixed;z-index:60;background:#061713;border:1px solid #1d7550;border-radius:12px;padding:7px;box-shadow:0 15px 40px #000b;display:flex;gap:3px;flex-wrap:wrap;max-width:260px';box.innerHTML=emojis.slice(0,18).map(e=>`<button type="button" class="emoji-choice" data-e="${esc(e)}">${e}</button>`).join('');document.body.appendChild(box);const r=button.getBoundingClientRect();box.style.left=Math.min(r.left,innerWidth-270)+'px';box.style.top=Math.max(10,r.top-52)+'px';box.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{toggleReplyReaction(replyId,b.dataset.e);box.remove()});setTimeout(()=>document.addEventListener('click',function close(ev){if(!box.contains(ev.target)&&ev.target!==button){box.remove();document.removeEventListener('click',close)}},{once:false}),0)}
+async function toggleReplyReaction(replyId,emoji){if(!isRealUser())return;const id=`reply_${replyId}_${currentUser.uid}`;const r=doc(db,'globalChatReactions',id);const snap=await getDoc(r);let arr=snap.exists()?Array.isArray(snap.data().reactions)?snap.data().reactions:[]:[];arr=arr.includes(emoji)?arr.filter(x=>x!==emoji):[...arr,emoji];if(arr.length)await setDoc(r,{replyId,uid:currentUser.uid,reactions:arr,updatedAt:serverTimestamp()},{merge:true});else if(snap.exists())await deleteDoc(r)}
+function subscribeReactions(){
+ if(stopReactions)stopReactions();
+ const q=query(collection(db,'globalChatReactions'),limit(1000));
+ stopReactions=onSnapshot(q,snap=>{
+   const previous=reactionState;
+   const wasReady=reactionSnapshotReady;
+   reactionState={};
+   reactionUsersState={};
+
+   snap.forEach(d=>{
+     const x=d.data();
+     const key=x.replyId?'reply_'+x.replyId:x.messageId;
+     if(!key)return;
+     if(!reactionState[key])reactionState[key]={};
+     if(!reactionUsersState[key])reactionUsersState[key]={};
+     (x.reactions||[]).forEach(e=>{
+       reactionState[key][e]=(reactionState[key][e]||0)+1;
+       if(!reactionUsersState[key][e])reactionUsersState[key][e]=new Set();
+       if(x.uid)reactionUsersState[key][e].add(x.uid);
+     });
+   });
+
+   document.querySelectorAll('.msg').forEach(row=>{
+     const id=row.dataset.id;
+     const bar=row.querySelector('.reaction-bar');
+     if(bar){
+       const prevCounts=previous[id]||{};
+       bar.innerHTML=reactionHtml(id,prevCounts);
+       bar.querySelectorAll('.reaction-chip').forEach(btn=>{
+         btn.addEventListener('click',e=>{
+           e.stopPropagation();
+           animateReactionTarget(btn);
+           toggleReaction(id,btn.dataset.react);
+         });
+       });
+
+       if(wasReady){
+         Object.keys(reactionState[id]||{}).forEach(e=>{
+           const nextCount=reactionState[id]?.[e]||0;
+           const prevCount=prevCounts[e]||0;
+           if(nextCount>=5 && prevCount<5)burstFiveConfetti(row,e);
+         });
+       }
+     }
+
+     row.querySelectorAll('.quick-reaction').forEach(btn=>{
+       btn.addEventListener('click',e=>{
+         e.stopPropagation();
+         toggleReaction(id,btn.dataset.e);
+       });
+     });
+
+     row.querySelectorAll('.reply-item').forEach(item=>{
+       const rid=item.dataset.replyId;
+       if(rid)renderReplyReactions(item,rid);
+     });
+   });
+
+   reactionSnapshotReady=true;
+ },err=>console.error('Reaction error',err));
+}
+function subscribeReplies(){if(stopReplies)stopReplies();const q=query(collection(db,'globalChatReplies'),orderBy('createdAt','asc'),limit(500));stopReplies=onSnapshot(q,snap=>{document.querySelectorAll('.reply-box').forEach(x=>x.innerHTML='');snap.forEach(d=>{const x=d.data(),root=x.messageId,box=document.getElementById(`replies-${root}`);if(!box)return;const item=document.createElement('div');item.className='reply-item'+(x.parentReplyId?' nested-reply':'');item.dataset.replyId=d.id;item.innerHTML=`<div class="reply-meta"><b class="private-member-name">${esc(x.displayName||'Member')}</b> • ${esc(timeText(x.createdAt))}</div><div class="reply-text">${esc(x.text)}</div><div class="reply-actions"><button type="button" class="reply-react-btn" title="React">😊</button><button type="button" class="reply-to-reply">↩ Reply</button></div><div class="reply-reaction-bar"></div>`;item.querySelector('.reply-to-reply').onclick=e=>{e.stopPropagation();setReplyTarget(root,x.displayName||'Member',String(x.text||'').slice(0,100),d.id)};item.querySelector('.reply-react-btn').onclick=e=>{e.stopPropagation();openReplyReactionMenu(e.currentTarget,d.id)};renderReplyReactions(item,d.id);box.appendChild(item)});},err=>console.error('Reply error',err))}
+function renderChatSnapshotReal(snap, channelValue, sourceReal){
+  const docs=snap.docs
+    .map(d=>({id:d.id,data:d.data()}))
+    .filter(item=>item.data?.channel===channelValue)
+    .sort((a,b)=>{
+      const ta=a.data?.createdAt?.toMillis?.()
+        ?? a.data?.createdAt?.toDate?.()?.getTime?.()
+        ?? (typeof a.data?.createdAt==='number'?a.data.createdAt:0);
+      const tb=b.data?.createdAt?.toMillis?.()
+        ?? b.data?.createdAt?.toDate?.()?.getTime?.()
+        ?? (typeof b.data?.createdAt==='number'?b.data.createdAt:0);
+      return ta-tb || a.id.localeCompare(b.id);
+    })
+    .slice(-100);
+
+  messages.innerHTML='<div class="chat-build-marker-real" id="chatBuildMarkerReal">Today</div>';
+
+  if(!docs.length){
+    messages.innerHTML+='<div class="empty-chat"><strong>No messages in # '+esc(activeChannelReal)+'.</strong><span>This channel is empty until a real member posts here.</span></div>';
+  }else{
+    docs.forEach(item=>messages.appendChild(renderMessage(item.id,item.data)));
+  }
+
+  if(globalMessageCount)globalMessageCount.textContent=String(docs.length);
+
+  document.querySelectorAll('.channel-count-real').forEach(el=>{
+    if(el.dataset.channelCount===activeChannelReal)el.textContent=String(docs.length);
+  });
+
+  messages.scrollTop=messages.scrollHeight;
+  setStatus('Live • # '+activeChannelReal+' • '+docs.length+' real message'+(docs.length===1?'':'s')+(sourceReal==='fallback'?' • fallback':''));
+  window.dispatchEvent(new CustomEvent('tubalhub-chat-channel-loaded',{
+    detail:{channel:activeChannelReal,count:docs.length,source:sourceReal}
+  }));
+}
+
+function subscribeMessages(){
+  if(stopMessages)stopMessages();
+  const channelValue=activeChannelReal==='general'?'global-chat':activeChannelReal;
+
+  // Use a single-field channel query so Global Chat does not depend on
+  // a Firestore composite index. Results are sorted client-side in
+  // renderChatSnapshotReal() and capped to the latest 100 real messages.
+  const qReal=query(
+    collection(db,'globalChats'),
+    where('channel','==',channelValue)
+  );
+
+  stopMessages=onSnapshot(qReal,snap=>{
+    renderChatSnapshotReal(snap,channelValue,'realtime');
+  },err=>{
+    console.error('[TUBAL HUB chat query]',err);
+    messages.innerHTML='<div class="empty-chat"><strong>Chat temporarily unavailable.</strong><span>Firestore could not load the real messages for this channel.</span></div>';
+    setStatus('Could not load this channel. Check Firebase access/rules.',true);
+  });
+}
+function setActiveChannelReal(channel){
+  const allowed=['general','payapang-isip','ctrlzone','shop-talk','announcements'];
+  activeChannelReal=allowed.includes(String(channel))?String(channel):'general';
+  document.querySelectorAll('.channelReal').forEach(btn=>{
+    const active=btn.dataset.channel===activeChannelReal;
+    btn.classList.toggle('active',active);
+    btn.setAttribute('aria-selected',active?'true':'false');
+  });
+  const title=document.getElementById('globalChatChannelTitle');
+  if(title)title.textContent=activeChannelReal==='general'?'Global Chat':('# '+activeChannelReal);
+  subscribeMessages();
+  if(window.matchMedia?.('(max-width:900px)').matches){
+    document.getElementById('chatLeftRail')?.classList.remove('open');
+    document.getElementById('sidebarToggle')?.setAttribute('aria-expanded','false');
+  }
+}
+window.tubalHubSetChatChannelReal=setActiveChannelReal;
+
+async function subscribePresence(){
+  if(stopPresence)stopPresence();
+  if(stopUsersPresence)stopUsersPresence();
+  if(heartbeatPresenceRefresh)clearInterval(heartbeatPresenceRefresh);
+
+  const presenceRef=collection(db,'presence');
+  let presenceMap=new Map();
+
+  const onlineCutoff=()=>Date.now()-180000;
+  const render=()=>{
+    const m=[...presenceMap.values()]
+      .filter(x=>x.online===true&&((typeof x.lastSeen==='number'?x.lastSeen:(x.lastSeen?.toDate?.()?.getTime?.()||0))>=onlineCutoff()))
+      .sort((a,b)=>String(a.displayName||'').localeCompare(String(b.displayName||'')));
+
+    const debug=document.getElementById('presenceDebug');
+    if(debug)debug.textContent=`Presence: ${presenceMap.size} • Online: ${m.length} • Shown: ${Math.min(m.length,20)}`;
+    onlineCount.textContent=m.length;
+    onlineMembers.textContent=m.length;
+    memberList.innerHTML='';
+
+    if(!m.length){
+      memberList.innerHTML='<div class="empty-side">No members are online right now.</div>';
+      return;
+    }
+
+    m.slice(0,20).forEach(x=>{
+      const div=document.createElement('div');
+      div.className='member is-online';
+      div.dataset.uid=x.uid;
+      div.innerHTML=`${avatarHtml(x,'mini')}<div class="member-info"><button type="button" class="private-member-name" data-private-uid="${esc(x.uid)}">${esc(x.displayName||'Member')}</button><span>● Online</span></div>${x.uid===currentUser?.uid?'<span class="you-tag">YOU</span>':''}`;
+      memberList.appendChild(div);
+
+      if(x.uid!==currentUser?.uid){
+        div.title='Open private chat';
+        div.style.cursor='pointer';
+        div.addEventListener('click',e=>{
+          if(e.target.closest('.video-call-btn,.member-call-btn,.private-call'))return;
+          e.preventDefault();
+          e.stopPropagation();
+          openPrivateChat(x);
+        });
+        const nameEl=div.querySelector('.private-member-name');
+        nameEl.style.cursor='pointer';
+        nameEl.addEventListener('click',e=>{
+          e.preventDefault();
+          e.stopPropagation();
+          openPrivateChat(x);
+        });
+      }
+    });
+  };
+
+  const readPresence=snap=>{
+    presenceMap=new Map();
+    snap.forEach(d=>{
+      const x=d.data();
+      presenceMap.set(x.uid||d.id,{...x,uid:x.uid||d.id});
+    });
+    render();
+  };
+
+  stopPresence=onSnapshot(query(presenceRef),readPresence,err=>console.error('[TUBAL HUB presence]',err));
+}
+function dmTime(ts){
+  const d=ts?.toDate?ts.toDate():(typeof ts==='number'?new Date(ts):null);
+  if(!d)return '';
+  const now=new Date();
+  const same=now.toDateString()===d.toDateString();
+  return same?d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):d.toLocaleDateString([], {month:'short',day:'numeric'});
+}
+function deriveDmConversations(snapshot){
+  const me=currentUser?.uid;
+  if(!me)return [];
+  const map=new Map();
+  snapshot.forEach(s=>{
+    const d=s.data();
+    const participants=Array.isArray(d.participants)?d.participants:[];
+    const otherId=String(d.senderId||'')===String(me)
+      ? (d.receiverId||participants.find(x=>x!==me))
+      : (d.senderId||participants.find(x=>x!==me));
+    if(!otherId||otherId===me)return;
+    const ts=d.createdAt?.toMillis?.()||0;
+    const prev=map.get(otherId);
+    if(!prev || ts>prev.ts)map.set(otherId,{uid:otherId,data:d,ts});
+    if(!map.has(otherId)||(!map.get(otherId).displayName && d.displayName)){
+      const cur=map.get(otherId)||{uid:otherId,data:d,ts};
+      cur.displayName=d.displayName||cur.displayName;
+      cur.photoURL=d.senderPhotoURL||d.photoURL||cur.photoURL;
+      map.set(otherId,cur);
+    }
+  });
+  // Second pass fills profile data from any actual message sent by the other participant.
+  snapshot.forEach(s=>{
+    const d=s.data();
+    const senderId=String(d.senderId||'');
+    if(!senderId||senderId===String(me))return;
+    const cur=map.get(senderId);
+    if(cur){
+      cur.displayName=cur.displayName||d.displayName||d.name||'';
+      cur.photoURL=cur.photoURL||d.senderPhotoURL||d.photoURL||'';
+    }
+  });
+  return [...map.values()].sort((a,b)=>b.ts-a.ts);
+}
+function dmPreview(d){
+  if(d.type==='image')return 'Sent an image';
+  if(d.type==='gif')return 'Sent a GIF';
+  return String(d.text||'').replace(/\s+/g,' ').trim().slice(0,72);
+}
+function renderDmList(list){
+  const box=document.getElementById('dmList');
+  const queryText=(document.getElementById('dmSearch')?.value||'').trim().toLowerCase();
+  const filtered=list.filter(x=>(x.displayName||'').toLowerCase().includes(queryText)||(dmPreview(x.data)||'').toLowerCase().includes(queryText));
+  box.innerHTML='';
+  if(!filtered.length){
+    const empty=document.createElement('div');
+    empty.className='dm-empty';
+    const strong=document.createElement('strong');
+    strong.textContent=queryText?'No matching private chats.':'No private chats yet.';
+    const span=document.createElement('span');
+    span.textContent=queryText?'Try another member name or message.':'Start a private conversation with an online member.';
+    empty.append(strong,span);box.appendChild(empty);return;
+  }
+
+  const openDm=(row,x)=>{
+    if(!x||!x.uid)return;
+    privateTarget={uid:x.uid,displayName:x.displayName||'Member',photoURL:x.photoURL||''};
+    openPrivateChat(privateTarget);
+    box.querySelectorAll('.dm-row.active').forEach(r=>r.classList.remove('active'));
+    row.classList.add('active');
+  };
+
+  filtered.forEach(x=>{
+    const row=document.createElement('div');
+    row.className='dm-row'+((privateTarget?.uid===x.uid)?' active':'')+(document.querySelector('.member[data-uid="'+CSS.escape(String(x.uid))+'"]')?' online':'');
+    row.dataset.uid=x.uid;
+    row.setAttribute('role','button');
+    row.setAttribute('tabindex','0');
+    row.setAttribute('aria-label','Open private chat with '+(x.displayName||'Member'));
+
+    const avatar=document.createElement('div');
+    avatar.className='dm-avatar';
+    if(x.photoURL){const img=document.createElement('img');img.src=x.photoURL;img.alt='';avatar.appendChild(img)}
+    else avatar.textContent=initials(x.displayName||'Member');
+
+    const copy=document.createElement('div');copy.className='dm-copy';
+    const name=document.createElement('button');
+    name.type='button';name.className='dm-name';
+    name.textContent=x.displayName||'Member';
+    name.setAttribute('aria-label','Open chat with '+(x.displayName||'Member'));
+    const preview=document.createElement('span');preview.textContent=dmPreview(x.data)||'Private conversation';
+    copy.append(name,preview);
+
+    const side=document.createElement('div');side.className='dm-side';
+    const time=document.createElement('span');time.className='dm-time';time.textContent=dmTime(x.data.createdAt);side.appendChild(time);
+    const unread=Number(x.data.unreadCount);
+    if(Number.isFinite(unread)&&unread>0){const pill=document.createElement('span');pill.className='unread-pill';pill.textContent=unread>99?'99+':unread;side.appendChild(pill)}
+
+    row.append(avatar,copy,side);
+
+    let pointerOpened=false;
+    const openFromPointer=e=>{
+      if(e.pointerType==='mouse'&&e.button!==0)return;
+      pointerOpened=true;
+      e.preventDefault();e.stopPropagation();
+      openDm(row,x);
+      requestAnimationFrame(()=>{pointerOpened=false});
+    };
+    row.addEventListener('pointerdown',openFromPointer,{passive:false});
+    row.addEventListener('click',e=>{
+      if(pointerOpened)return;
+      if(e.target.closest('.dm-name'))return;
+      openDm(row,x);
+    });
+    row.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();openDm(row,x)}
+    });
+    name.addEventListener('pointerdown',openFromPointer,{passive:false});
+    name.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();if(pointerOpened)return;openDm(row,x)});
+    avatar.addEventListener('pointerdown',openFromPointer,{passive:false});
+
+    box.appendChild(row);
+  });
+}
+
+function refreshDmOnlineStates(){
+  document.querySelectorAll('.dm-row').forEach(row=>{
+    row.classList.toggle('online',!!document.querySelector('.member[data-uid="'+CSS.escape(row.dataset.uid||'')+'"]'));
+  });
+}
+function subscribeDirectMessages(){
+  if(stopDmList)stopDmList();
+  if(!currentUser||!isRealUser())return;
+  const q=query(collection(db,'messages'),where('participants','array-contains',currentUser.uid),limit(200));
+  stopDmList=onSnapshot(q,snap=>{
+    const list=deriveDmConversations(snap);
+    window.__tubalDmList=list;
+    renderDmList(list);
+  },err=>{
+    console.error('[TUBAL HUB DMs]',err);
+    const box=document.getElementById('dmList');
+    if(box)box.innerHTML='<div class="dm-empty"><strong>Private chats unavailable.</strong><span>Check your connection or Firebase rules.</span></div>';
+  });
+}
+function privateDmListRefresh(){
+  renderDmList(window.__tubalDmList||[]);
+  refreshDmOnlineStates();
+}
+function setupChatFocusUi(){
+  const left=document.getElementById('chatLeftRail');
+  const right=document.getElementById('chatRightRail');
+  const backdrop=document.getElementById('chatDrawerBackdrop');
+  const memberSearch=document.getElementById('memberSearch');
+  const dmSearch=document.getElementById('dmSearch');
+  const closeLeft=document.getElementById('closeLeftRail');
+  const closeRight=document.getElementById('closeRightRail');
+  const openMembers=document.getElementById('openMembers');
+  const openDMs=document.getElementById('openDMs');
+  const topOpenMembers=document.getElementById('topOpenMembers');
+  const topOpenDMs=document.getElementById('topOpenDMs');
+  const newDm=document.getElementById('newDmButton');
+  const invite=document.getElementById('inviteFriendsBtn');
+  const openLeft=()=>{left?.classList.add('drawer-open');right?.classList.remove('drawer-open');if(backdrop)backdrop.hidden=false};
+  const openRight=()=>{right?.classList.add('drawer-open');left?.classList.remove('drawer-open');if(backdrop)backdrop.hidden=false};
+  const close=()=>{left?.classList.remove('drawer-open');right?.classList.remove('drawer-open');if(backdrop)backdrop.hidden=true};
+  openMembers?.addEventListener('click',openLeft);
+  openDMs?.addEventListener('click',openRight);
+  topOpenMembers?.addEventListener('click',openLeft);
+  topOpenDMs?.addEventListener('click',openRight);
+  closeLeft?.addEventListener('click',close);
+  closeRight?.addEventListener('click',close);
+  backdrop?.addEventListener('click',close);
+  memberSearch?.addEventListener('input',()=>{
+    const q=memberSearch.value.trim().toLowerCase();
+    document.querySelectorAll('#memberList .member').forEach(row=>{
+      const name=row.querySelector('.private-member-name')?.textContent?.toLowerCase()||'';
+      row.style.display=!q||name.includes(q)?'flex':'none';
+    });
+  });
+  dmSearch?.addEventListener('input',privateDmListRefresh);
+  newDm?.addEventListener('click',()=>{openLeft();requestAnimationFrame(()=>memberSearch?.focus())});
+  invite?.addEventListener('click',async()=>{
+    const shareData={title:'TUBAL HUB',text:'Join me on TUBAL HUB — Play • Create • Connect',url:location.href};
+    try{
+      if(navigator.share)await navigator.share(shareData);
+      else if(navigator.clipboard){await navigator.clipboard.writeText(location.href);invite.textContent='Copied';setTimeout(()=>{invite.textContent='Invite'},1300);}
+    }catch(_){}
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+}
+function privateAvatarHtml(target){return target?.photoURL?`<img src="${esc(target.photoURL)}" alt="">`:esc(initials(target?.displayName||'Member'))}
+function privateTime(ts){return ts?.toDate?ts.toDate().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'Sending...'}
+function renderPrivateMessage(id,d){const me=d.senderId===currentUser?.uid;const row=document.createElement('div');row.className='private-msg '+(me?'mine':'theirs');row.dataset.id=id;row.innerHTML=`<div class="private-bubble">${esc(d.text||'')}</div><span class="private-time">${esc(privateTime(d.createdAt))}</span>`;return row}
+function subscribePrivateMessages(){if(stopPrivateMessages)stopPrivateMessages();if(!privateTarget||!isRealUser())return;const q=query(collection(db,'messages'),where('participants','array-contains',currentUser.uid),limit(200));stopPrivateMessages=onSnapshot(q,snap=>{const list=[];snap.forEach(s=>{const d=s.data();if(Array.isArray(d.participants)&&d.participants.includes(privateTarget.uid))list.push({id:s.id,data:d})});list.sort((a,b)=>(a.data.createdAt?.toMillis?.()||0)-(b.data.createdAt?.toMillis?.()||0));const box=document.getElementById('privateMessages');box.innerHTML='';if(!list.length)box.innerHTML='<div class="private-empty">No private messages yet. Say hello! 👋</div>';else{list.forEach(x=>box.appendChild(renderPrivateMessage(x.id,x.data)));box.scrollTop=box.scrollHeight;}},err=>{console.error(err);document.getElementById('privateMessages').innerHTML='<div class="private-empty error">Private chat is unavailable. Check Firestore Rules.</div>'})}
+function openPrivateChat(target){if(!isRealUser()||!target?.uid||target.uid===currentUser.uid)return;privateTarget={uid:target.uid,displayName:target.displayName||'Member',photoURL:target.photoURL||''};const panel=document.getElementById('privateChatPanel');const name=document.getElementById('privateChatName'),avatar=document.getElementById('privateChatAvatar'),status=document.getElementById('privateChatStatus'),box=document.getElementById('privateMessages');name.textContent=privateTarget.displayName;avatar.innerHTML=privateAvatarHtml(privateTarget);status.textContent='● Online';panel.hidden=false;box.innerHTML='<div class="private-empty">Loading messages…</div>';requestAnimationFrame(()=>{document.getElementById('privateInput')?.focus();subscribePrivateMessages()})}
+function closePrivateChat(){privateTarget=null;if(stopPrivateMessages){stopPrivateMessages();stopPrivateMessages=null}document.getElementById('privateChatPanel').hidden=true}
+async function sendPrivateMessage(text){
+  if(!privateTarget||!isRealUser())return;
+  const cleanText=String(text||'').trim();
+  if(!cleanText)return;
+  try{
+    const result=await sendPrivateMessageFnReal({
+      text:cleanText,
+      receiverId:privateTarget.uid
+    });
+    privateLastMessageTime=Date.now();
+    return result?.data;
+  }catch(fnError){
+    console.error('[TUBAL HUB] secure private message failed.',fnError);
+    throw fnError;
+  }
+}
+document.getElementById('closePrivateChat').onclick=closePrivateChat;
+document.getElementById('privateVideoCall').onclick=()=>{if(privateTarget)window.dispatchEvent(new CustomEvent('tubalhub-private-call',{detail:privateTarget}))};
+document.getElementById('privateForm').addEventListener('submit',async e=>{e.preventDefault();const field=document.getElementById('privateInput'),text=field.value.trim();if(!text||!privateTarget)return;const btn=e.submitter||e.currentTarget.querySelector('button[type="submit"]');btn.disabled=true;try{await sendPrivateMessage(text);field.value=''}catch(err){console.error(err);alert(err.code==='functions/resource-exhausted'?'Please wait a moment.':err.code==='functions/invalid-argument'?'Message blocked by server moderation.':'Private message was not sent. Check your Firebase connection.')}finally{btn.disabled=false;field.focus()}});
+async function uploadMedia(file,type){
+  if(!isRealUser())throw new Error('LOGIN_REQUIRED');
+  if(!file)return;
+  const max=8*1024*1024;
+  if(file.size>max)throw new Error('FILE_TOO_LARGE');
+  try{await cleanupGlobalChatMediaFnReal({});}catch(cleanupError){console.warn('[TUBAL HUB Global Chat cleanup]',cleanupError);}
+  const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  const fileNameReal=Date.now()+'_'+safe;
+  const path='global-chat/'+currentUser.uid+'/'+fileNameReal;
+  const storageRef=ref(storage,path);
+  await uploadBytes(storageRef,file,{contentType:file.type});
+  return {url:await getDownloadURL(storageRef),path,fileNameReal};
+}
+function moderationResultReal(text){
+  const result=window.tubalHubChatGuardReal?.moderateTextReal?.(text);
+  if(result)return result;
+  const raw=String(text||'').trim();
+  if(!raw)return {allowed:false,reason:'Empty',cleanText:'',hadBadWord:false};
+  return {allowed:true,reason:'',cleanText:raw,hadBadWord:false};
+}
+function moderateText(text){
+  return !moderationResultReal(text).allowed;
+}
+function moderationWarning(){
+ const key='tubalHubModerationWarnings';
+ const count=Number(localStorage.getItem(key)||0)+1;
+ localStorage.setItem(key,String(count));
+ if(count>=3)showModerationNotice('🚫 MODERATION: Multiple warnings detected. Stop using offensive language. Your chat access may be restricted by an administrator.',true);
+ else showModerationNotice('⚠️ WARNING '+count+'/3: Offensive language is not allowed. Your message was blocked. Please keep Global Chat respectful.');
+}
+async function getModerationStatus(){
+ try{const snap=await getDoc(doc(db,'users',currentUser.uid));if(!snap.exists())return {chatStatus:'active',warnings:0};const d=snap.data();return {chatStatus:d.chatStatus||'active',warnings:Number(d.warnings||0),mutedUntil:d.mutedUntil||null,banReason:d.banReason||''};}catch(e){console.error('Moderation status unavailable:',e);return {chatStatus:'active',warnings:0};}}
+function moderationBlocked(status){if(status.chatStatus==='banned')return '🚫 Your Global Chat access is banned. Reason: '+(status.banReason||'Community guidelines violation.');if(status.chatStatus==='muted'){const until=status.mutedUntil?.toDate?status.mutedUntil.toDate():new Date(status.mutedUntil||0);if(until>new Date())return '🔇 You are temporarily muted until '+until.toLocaleString()+'.';}return ''}
+async function sendMessage(payload){
+  if(!isRealUser())throw new Error('LOGIN_REQUIRED');
+  const status=await getModerationStatus();
+  const blocked=moderationBlocked(status);
+  if(blocked){alert('🛡️ TUBAL HUB AI MODERATION\\n\\n'+blocked);throw new Error('MODERATION_BLOCKED');}
+
+  const channel=activeChannelReal;
+  if(payload?.type==='text'){
+    const cleanText=String(payload.text||'').trim();
+    if(!cleanText)throw new Error('EMPTY_MESSAGE');
+    const result=await sendMessageFnReal({text:cleanText,channel});
+    lastMessageTime=Date.now();
+    if(result?.data?.moderated)showModerationNotice('🛡️ Server moderation cleaned this message before publishing.');
+    return result?.data;
+  }
+
+  if(payload?.type==='image'||payload?.type==='gif'){
+    const limited=window.tubalHubChatGuardReal?.isRateLimitedReal?.(currentUser.uid) ?? (Date.now()-lastMessageTime<2000);
+    if(limited)throw new Error('RATE_LIMIT');
+
+    const result=await sendGlobalMediaFnReal({
+      type:String(payload.type),
+      channel,
+      mediaUrl:String(payload.mediaUrl||''),
+      storagePath:String(payload.storagePath||''),
+      text:String(payload.text||payload.textReal||'').trim()
+    });
+    lastMessageTime=Date.now();
+    if(result?.data?.moderated)showModerationNotice('🛡️ Server moderation cleaned this caption before publishing.');
+    return result?.data;
+  }
+
+  throw new Error('INVALID_MESSAGE_TYPE');
+}
+async function sendReply(text){
+  if(!replyTarget||!isRealUser())return;
+  const status=await getModerationStatus();
+  const blocked=moderationBlocked(status);
+  if(blocked){alert('🛡️ TUBAL HUB AI MODERATION\n\n'+blocked);throw new Error('MODERATION_BLOCKED');}
+
+  const result=await sendReplyFnReal({
+    text:String(text||'').trim(),
+    messageId:replyTarget.messageId,
+    parentReplyId:replyTarget.parentReplyId||null
+  });
+  lastMessageTime=Date.now();
+  clearReply();
+  if(result?.data?.moderated){
+    showModerationNotice('🛡️ Server moderation cleaned this reply before publishing.');
+  }
+  return result?.data;
+}
+
+document.getElementById('imageLinkBtnReal')?.addEventListener('click',()=>{
+  if(!isRealUser()){alert('Please login first.');return}
+  const url=prompt('Paste the direct Imgur image URL\\nExample: https://i.imgur.com/abc123.png');
+  const clean=String(url||'').trim();
+  if(!clean)return;
+
+  let parsed;
+  try{ parsed=new URL(clean); }catch(_){ alert('Invalid image URL.'); return; }
+
+  const host=parsed.hostname.toLowerCase();
+  const isImgur=host==='i.imgur.com';
+  const isImageExt=/\\.(png|jpe?g|webp|gif)$/i.test(parsed.pathname);
+  if(!isImgur||!isImageExt){
+    alert('Use a direct Imgur image URL like https://i.imgur.com/abc123.png');
+    return;
+  }
+
+  pendingExternalImageUrlReal=clean;
+  input.value='';
+  input.dataset.externalImageUrl=clean;
+  input.placeholder='Ready: Imgur image • press Send ➤';
+  input.focus();
+  showModerationNotice('🔗 Direct image ready. Press Send to post it without Firebase Storage.');
+});
+document.getElementById('gifInput').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;sendButton.disabled=true;try{const x=await uploadMedia(f,'gif');await sendMessage({type:'gif',isSticker:true,mediaUrl:x.url,storagePath:x.path,storagePathReal:x.path,fileNameReal:x.fileNameReal,versionReal:TUBAL_VERSION_REAL,text:''});window.dispatchEvent(new CustomEvent('tubal-gif-uploaded',{detail:{url:x.url,storagePath:x.path,name:f.name||'GIF Sticker'}}));document.getElementById('gifStickerPicker')?.classList.remove('is-open');document.getElementById('gifStickerPicker').hidden=true;}catch(err){console.error(err);alert(err.message==='FILE_TOO_LARGE'?'Maximum file size is 8 MB.':'GIF upload failed. Make sure Firebase Storage is enabled.')}finally{sendButton.disabled=false;e.target.value='';input.focus()}};window.addEventListener('tubal-send-gif-sticker',async e=>{const d=e.detail||{};if(!d.url||sendButton.disabled)return;sendButton.disabled=true;try{await sendMessage({type:'gif',isSticker:true,mediaUrl:String(d.url),storagePath:String(d.storagePath||''),storagePathReal:String(d.storagePath||''),fileNameReal:String(d.name||'').trim(),versionReal:TUBAL_VERSION_REAL,text:''})}catch(err){console.error(err);alert(err.message==='RATE_LIMIT'?'Please wait a moment before sending another GIF.':err.message==='MODERATION_BLOCKED'?'GIF blocked by TUBAL HUB moderation.':'GIF sticker was not sent. Check Firebase Firestore Rules.')}finally{sendButton.disabled=false;input.focus()}});
+document.getElementById('emojiBtn').onclick=e=>{e.preventDefault();e.stopPropagation();window.tubalEmojiPicker?.toggle()};cancelReply.onclick=clearReply;
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const text=input.value.trim();
+  if(!text&&!replyTarget&&!pendingExternalImageUrlReal)return;
+  if(!isRealUser()){alert('Please login first.');return}
+  sendButton.disabled=true;
+  try{
+    if(replyTarget){
+      await sendReply(text);
+    }else if(pendingExternalImageUrlReal){
+      await sendMessage({
+        type:'image',
+        mediaUrl:pendingExternalImageUrlReal,
+        externalReal:true,
+        sourceReal:'imgur-direct'
+      });
+    }else{
+      await sendMessage({type:'text',text});
+    }
+    input.value='';
+    pendingExternalImageUrlReal='';
+    input.removeAttribute('data-external-image-url');
+    input.placeholder='Mag chat ka dito... real message • hindi fake';
+  }catch(err){
+    console.error(err);
+    alert(
+      err.code==='functions/resource-exhausted'||err.message==='RATE_LIMIT'
+        ?'Please wait a moment before sending another message.'
+        :err.code==='functions/invalid-argument'||err.message==='MODERATION_BLOCKED'
+          ?'Message blocked by server moderation.'
+          :'Message was not sent. Check your Firebase connection.'
+    );
+  }finally{
+    sendButton.disabled=false;
+    input.focus();
+  }
+});
+
+onAuthStateChanged(auth,async user=>{if(!user||user.isAnonymous){currentUser=null;lock.style.display='block';content.style.display='none';content.setAttribute('aria-hidden','true');if(stopMessages)stopMessages();if(stopPresence)stopPresence();if(stopReactions)stopReactions();if(stopReplies)stopReplies();if(stopDmList)stopDmList();window.__tubalDmList=[];renderDmList([]);reactionSnapshotReady=false;reactionState={};reactionUsersState={};if(stopBanStatus)stopBanStatus();if(window.__banPollTimer)clearInterval(window.__banPollTimer);if(stopPrivateMessages)stopPrivateMessages();privateTarget=null;document.getElementById('privateChatPanel').hidden=true;if(heartbeatTimer)clearInterval(heartbeatTimer);document.getElementById('profileName').textContent='TUBAL HUB';document.getElementById('profileStatus').textContent='● Login required';return}currentUser=user;lock.style.display='none';content.style.display='grid';content.setAttribute('aria-hidden','false');const name=user.displayName||user.email?.split('@')[0]||'Member';document.getElementById('profileName').textContent=name;document.getElementById('profileStatus').textContent='● Online';document.getElementById('profileAvatar').innerHTML=user.photoURL?`<img src="${esc(user.photoURL)}" alt="">`:esc(initials(name));sendButton.disabled=false;input.disabled=false;try{await updatePresence(user,true)}catch(e){console.error(e)}if(stopBanStatus)stopBanStatus();let chatAccessActive=false;const applyBanStatus=d=>{const until=d.banUntil?.toMillis?.()||d.banUntil?.toDate?.()?.getTime?.()||0;const banned=d.chatStatus==='banned'&&(until===0||until>Date.now());if(banned){input.disabled=true;sendButton.disabled=true;const banMessage='🚫 GLOBAL CHAT ACCESS BANNED'+(d.banReason?'\nReason: '+d.banReason+'.':'')+(until?'\nBan ends: '+new Date(until).toLocaleString()+'.':'\nPermanent ban.');const notice=document.getElementById('moderationNotice');if(notice){notice.textContent=banMessage;notice.className='moderation-notice show danger';clearTimeout(window.__moderationNoticeTimer);}setStatus('Chat access blocked while your ban is active.',true);if(stopMessages){stopMessages();stopMessages=null}if(stopReactions){stopReactions();stopReactions=null}if(stopReplies){stopReplies();stopReplies=null}chatAccessActive=false}else{input.disabled=false;sendButton.disabled=false;document.getElementById('moderationNotice').classList.remove('show');setStatus('Connected to TUBAL HUB');if(!chatAccessActive){subscribeMessages();subscribePresence();subscribeReactions();subscribeReplies();subscribeDirectMessages();chatAccessActive=true}}};stopBanStatus=onSnapshot(doc(db,'users',user.uid),snap=>applyBanStatus(snap.exists()?snap.data():{}),err=>console.error('Ban status listener failed:',err));const checkBanStatus=async()=>{try{const snap=await getDoc(doc(db,'users',user.uid));applyBanStatus(snap.exists()?snap.data():{});}catch(e){console.error('Ban status check failed:',e)}};await checkBanStatus();if(window.__banPollTimer)clearInterval(window.__banPollTimer);window.__banPollTimer=setInterval(checkBanStatus,3000);if(heartbeatTimer)clearInterval(heartbeatTimer);heartbeatTimer=setInterval(()=>updatePresence(currentUser,true).catch(()=>{}),20000)});
+document.addEventListener('visibilitychange',()=>{if(currentUser&&!document.hidden){updatePresence(currentUser,true).catch(()=>{});subscribePresence()}});window.addEventListener('pageshow',()=>{if(currentUser)updatePresence(currentUser,true).catch(()=>{})});window.addEventListener('focus',()=>{if(currentUser)updatePresence(currentUser,true).catch(()=>{})});window.addEventListener('beforeunload',()=>{if(currentUser)updatePresence(currentUser,false).catch(()=>{})});
+</script>
+
+<script type="module" src="../assets/js/video-call.js?v=20260920-webRTC2"></script>
+
+<script src="../js/global-chat.js?v=1.2.16" defer></script>
+<script src="../assets/js/theme.js?v=20260922" defer></script>
+<script src="../assets/js/global-chat-emoji.js?v=20260924-v4" defer></script>
+<script src="../assets/js/global-chat-gif-stickers.js?v=20260924-v1" defer></script>
+<script src="../assets/js/global-chat-premium.js?v=20260924-v3" defer></script>
+<script src="../assets/js/global-chat-focus.js?v=20260924-v2" defer></script>
+</body></html>

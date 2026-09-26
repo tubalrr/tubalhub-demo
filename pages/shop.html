@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050a08">
+<title>Shop | TUBAL HUB</title>
+<link rel="icon" type="image/png" href="../tubal-hub-logo.png">
+<link rel="stylesheet" href="../assets/css/style.css?v=20260924">
+<link rel="stylesheet" href="../assets/css/global-theme.css?v=20260924">
+<link rel="stylesheet" href="../assets/css/premium-logos.css?v=20260924-logo1">
+<link rel="stylesheet" href="../assets/css/shop.css?v=20260925-v13">
+</head>
+<body class="shop-page theme-midnight">
+<header class="shop-topbar">
+  <a class="shop-brand" href="../index.html">
+    <span class="shop-brand-mark shop-main-logo"><img src="../tubal-hub-logo.png" width="42" height="42" alt="TUBAL HUB"><i></i></span>
+    <span><strong>TUBAL HUB</strong><small>SHOP • COLLECT • CONNECT</small></span>
+  </a>
+  <div class="shop-top-actions">
+    <div class="shop-search"><span class="shop-search-icon">⌕</span><input id="productSearch" type="search" placeholder="Search products..." autocomplete="off" aria-label="Search products"><button id="filterBtn" class="shop-filter-btn" type="button" aria-label="Filters">☷</button></div>
+    <div class="shop-theme-switcher">
+      <button data-theme-btn="midnight" class="theme-btn active" type="button">Midnight</button>
+      <button data-theme-btn="forest" class="theme-btn" type="button">Forest</button>
+      <button data-theme-btn="light" class="theme-btn" type="button">Light</button>
+    </div>
+    <button id="cartBtn" class="shop-cart-btn" type="button" aria-label="Open cart">🛒<b id="cartBadge">0</b></button>
+  </div>
+</header>
+
+<main class="shop-main">
+  <section class="shop-hero glass-surface">
+    <div class="shop-hero-copy"><span class="eyebrow">OFFICIAL MARKETPLACE</span><h1>Official Hub <em>Collection</em></h1><p>Premium drops for TUBAL HUB, Payapang Isip, and CTRLZONE.</p><button id="heroShopNow" class="gradient-btn hero-shop-btn" type="button">Shop Now <span>→</span></button></div>
+    <div class="shop-hero-image-wrap"><img id="heroCollectionImage" src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=1280&q=86" alt="Official Hub Collection"><div class="hero-glass-label"><span class="hero-logo-mark th-mark"><img src="../tubal-hub-logo.png" width="26" height="26" alt="TUBAL HUB"></span><b>OFFICIAL DROP</b><small>New arrivals</small></div></div>
+  </section>
+
+  <section class="collection-tabs-wrap">
+    <div class="collection-tabs" role="tablist" aria-label="Shop categories">
+      <button class="collection-tab active" data-category-tab="all" type="button"><span class="tab-brand-mark th-logo">✦</span><span>All Categories</span><small id="count-category-all">0 products</small></button>
+      <button class="collection-tab" data-category-tab="merchandise" type="button"><span class="tab-brand-mark th-logo">◆</span><span>Merchandise</span><small id="count-category-merchandise">0 products</small></button>
+      <button class="collection-tab" data-category-tab="clothing" type="button"><span class="tab-brand-mark th-logo">◇</span><span>Clothing</span><small id="count-category-clothing">0 products</small></button>
+      <button class="collection-tab" data-category-tab="accessories" type="button"><span class="tab-brand-mark th-logo">✦</span><span>Accessories</span><small id="count-category-accessories">0 products</small></button>
+      <button class="collection-tab" data-category-tab="digital-products" type="button"><span class="tab-brand-mark th-logo">▣</span><span>Digital Products</span><small id="count-category-digital-products">0 products</small></button>
+      <button class="collection-tab" data-category-tab="apps-software" type="button"><span class="tab-brand-mark th-logo">⌘</span><span>Apps &amp; Software</span><small id="count-category-apps-software">0 products</small></button>
+      <button class="collection-tab" data-category-tab="gaming" type="button"><span class="tab-brand-mark th-logo">◈</span><span>Gaming</span><small id="count-category-gaming">0 products</small></button>
+      <button class="collection-tab" data-category-tab="mods-addons" type="button"><span class="tab-brand-mark th-logo">+</span><span>Mods &amp; Add-ons</span><small id="count-category-mods-addons">0 products</small></button>
+      <button class="collection-tab" data-category-tab="media" type="button"><span class="tab-brand-mark th-logo">▶</span><span>Media</span><small id="count-category-media">0 products</small></button>
+      <button class="collection-tab" data-category-tab="wellness" type="button"><span class="tab-brand-mark th-logo">⌁</span><span>Wellness</span><small id="count-category-wellness">0 products</small></button>
+      <button class="collection-tab" data-category-tab="other" type="button"><span class="tab-brand-mark th-logo">•</span><span>Other</span><small id="count-category-other">0 products</small></button>
+    </div>
+  </section>
+
+  <section class="shop-catalog" id="catalog">
+    <div class="shop-brand-strip">
+      <div class="shop-brand-chip active"><span class="brand-chip-logo th-logo"><img src="../tubal-hub-logo.png" width="36" height="36" alt="TUBAL HUB"></span><b>TUBAL HUB</b><small>Community Goods</small></div>
+      <div class="shop-brand-chip"><span class="brand-chip-logo pi-logo"><svg viewBox="0 0 44 44"><path d="M34 6C20 6 10 13 10 24c0 8 6 14 14 14 10 0 14-11 10-32Z"/><path d="M8 37c5-9 12-15 22-20"/></svg></span><b>PAYAPANG ISIP</b><small>Calm Collection</small></div>
+      <div class="shop-brand-chip"><span class="brand-chip-logo cz-logo"><svg viewBox="0 0 48 38"><path d="M9 11h30a8 8 0 0 1 7.3 11.1l-4 8a4 4 0 0 1-7.3.1l-3-5.8H16l-3 5.8a4 4 0 0 1-7.3-.1l-4-8A8 8 0 0 1 9 11Z"/><path d="M13 16v9M8.5 20.5h9M34 17h.01M39 21h.01"/></svg></span><b>CTRLZONE</b><small>Gaming Gear</small></div>
+    </div>
+    <div class="catalog-head"><div><span class="eyebrow"><span class="eyebrow-mark">✦</span> CURATED PRODUCTS</span><h2 id="catalogTitle">TUBAL HUB</h2></div><div class="catalog-meta"><span id="resultCount">Loading products…</span><span class="catalog-dot"></span><span id="catalogStatus">Available now</span></div></div>
+    <div id="filterPanel" class="filter-panel glass-surface" hidden>
+      <div class="shop-category-filters"><button class="filter-chip category-chip active" data-category-filter="all" type="button">All Categories</button><button class="filter-chip category-chip" data-category-filter="merchandise" type="button">Merchandise</button><button class="filter-chip category-chip" data-category-filter="clothing" type="button">Clothing</button><button class="filter-chip category-chip" data-category-filter="accessories" type="button">Accessories</button><button class="filter-chip category-chip" data-category-filter="digital-products" type="button">Digital Products</button><button class="filter-chip category-chip" data-category-filter="apps-software" type="button">Apps & Software</button><button class="filter-chip category-chip" data-category-filter="gaming" type="button">Gaming</button><button class="filter-chip category-chip" data-category-filter="mods-addons" type="button">Mods & Add-ons</button><button class="filter-chip category-chip" data-category-filter="media" type="button">Media</button><button class="filter-chip category-chip" data-category-filter="wellness" type="button">Wellness</button><button class="filter-chip category-chip" data-category-filter="other" type="button">Other</button></div><div class="shop-price-filters"><button class="filter-chip active" data-stock-filter="all" type="button">All products</button><button class="filter-chip" data-stock-filter="in-stock" type="button">In stock</button><button class="filter-chip" data-price-filter="under-1000" type="button">Under ₱1,000</button><button class="filter-chip" data-price-filter="1000-2500" type="button">₱1,000–₱2,500</button><button class="filter-chip" data-price-filter="over-2500" type="button">₱2,500+</button></div>
+    </div>
+    <div id="productsGrid" class="products-grid"></div>
+    <section id="myProductsSection" class="my-products-section glass-surface" hidden><div class="catalog-head"><div><span class="eyebrow"><span class="eyebrow-mark">✓</span> MY PRODUCTS</span><h2>Owned Products</h2></div><span id="myProductsStatus" class="catalog-status">Sign in to view licenses</span></div><div id="myProductsGrid" class="my-products-grid"></div></section>
+    <div id="emptyProducts" class="shop-empty glass-surface" hidden><div class="empty-icon">⌕</div><strong>No products found</strong><span>Try another search or collection.</span></div>
+  </section>
+</main>
+
+<aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+  <div class="cart-head"><div><span class="eyebrow">TUBAL HUB SHOP</span><h2>Cart <span id="cartTitleCount">0 items</span></h2></div><button id="closeCart" class="glass-close" type="button">×</button></div>
+  <div id="cartList" class="cart-list"></div>
+  <div id="cartEmpty" class="cart-empty" hidden><div class="cart-empty-icon">🛒</div><strong>No items</strong><span>Your cart is ready for something worth adding.</span><button id="emptyShopNow" class="gradient-btn" type="button">Shop Now</button></div>
+  <footer class="cart-footer"><div class="totals"><div><span>Subtotal</span><b id="cartSubtotal">₱0</b></div><div><span>Shipping</span><b id="cartShipping">₱0</b></div><div class="total-row"><span>Total</span><strong id="cartTotal">₱0</strong></div></div><button id="checkoutBtn" class="gradient-btn checkout-btn" type="button">Continue Payment <span>→</span></button><div class="pay-icons"><span>GCash</span><span>Maya</span><span>PayPal</span><b>🔒 Secure</b></div></footer>
+</aside>
+<div id="cartBackdrop" class="shop-backdrop" hidden></div>
+
+<div id="quickViewLayer" class="quickview-layer" hidden>
+  <section class="quickview-modal glass-surface" role="dialog" aria-modal="true">
+    <button id="quickViewClose" class="glass-close quickview-close" type="button">×</button>
+    <div class="quickview-gallery"><div class="quickview-main"><img id="quickViewImage" alt=""></div><div class="quickview-thumbs" id="quickViewThumbs"></div></div>
+    <div class="quickview-copy"><span id="quickViewBadge" class="product-badge">NEW</span><h2 id="quickViewTitle">Product</h2><div class="quickview-shop" id="quickViewShop">TUBAL HUB Shop</div><div class="quickview-price"><strong id="quickViewPrice">₱0</strong><span id="quickViewOriginal">₱0</span></div><div id="quickViewDigitalMeta" class="digital-product-meta" hidden><div><span>Version</span><b id="quickViewVersion">—</b></div><div><span>License</span><b id="quickViewLicense">—</b></div><div><span>Release</span><b id="quickViewRelease">—</b></div></div><p id="quickViewDescription"></p><div id="quickViewIncludes" class="quickview-includes" hidden><b>What's included</b><p id="quickViewIncludesText"></p></div><div class="variant-block"><b>Size</b><div id="quickViewSizes" class="variant-row"></div></div><div class="variant-block"><b>Color</b><div id="quickViewColors" class="variant-row"></div></div><div class="quickview-stock" id="quickViewStock"></div><div class="quickview-actions"><div id="quickViewQtyWrap" class="qty-stepper"><button id="quickViewMinus" type="button">−</button><span id="quickViewQty">1</span><button id="quickViewPlus" type="button">+</button></div><button id="quickViewAdd" class="gradient-btn" type="button">Add to Cart</button><button id="quickViewBuy" class="buy-now-btn" type="button">Buy Now</button><a id="quickViewDownload" class="gradient-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>Download</a><button id="quickViewUpgrade" class="buy-now-btn" type="button" hidden>Upgrade</button></div><div class="share-row"><button data-share="facebook" type="button">f</button><button data-share="messenger" type="button">⌁</button><button data-share="whatsapp" type="button">◔</button><button data-share="x" type="button">X</button><button data-share="copy" type="button">⌘</button></div><details class="product-details"><summary>Product details <span>+</span></summary><div id="quickViewDetails"></div></details></div>
+  </section>
+</div>
+
+<div id="checkoutLayer" class="quickview-layer" hidden>
+  <section class="checkout-modal glass-surface payment-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+    <button id="backCheckout" class="payment-back" type="button" aria-label="Back to shop">← <span>Back</span></button><button id="closeCheckoutX" class="glass-close payment-close" type="button" aria-label="Close payment">×</button>
+    <span class="eyebrow">SECURE PAYMENT</span><h2 id="checkoutTitle">Choose payment method</h2><p id="checkoutCopy">Select how you want to continue.</p>
+    <div class="payment-methods">
+      <button class="payment-method active" data-payment="card" type="button"><span class="payment-method-icon payment-brand-logos"><img src="https://cdn.simpleicons.org/visa/1a1f71" alt="Visa"><img src="https://cdn.simpleicons.org/mastercard/eb001b" alt="Mastercard"></span><span><b>Card</b><small>Visa / Mastercard</small></span><i>✓</i></button>
+      <button class="payment-method" data-payment="bank" type="button"><span class="payment-method-icon payment-bank-logo" aria-hidden="true">BANK</span><span><b>Bank Transfer</b><small>Online banking</small></span><i>✓</i></button>
+      <button class="payment-method" data-payment="paypal" type="button"><span class="payment-method-icon payment-brand-logos"><img src="https://cdn.simpleicons.org/paypal/003087" alt="PayPal"></span><span><b>PayPal</b><small>Pay with PayPal</small></span><i>✓</i></button>
+    </div>
+    <div class="payment-summary"><span>Total to pay</span><strong id="checkoutTotal">₱0</strong></div>
+    <div id="paymentFields" class="payment-fields">
+<div class="payment-form-head"><b id="paymentFormTitle">Card details</b><span id="paymentFormBrand">VISA / MASTERCARD</span></div>
+<div class="payment-form-grid">
+<label class="payment-field-full">Cardholder name<input id="cardholderName" type="text" autocomplete="cc-name" placeholder="Full name"></label>
+<label class="payment-field-full">Card number<input id="cardNumber" type="text" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="1234 5678 9012 3456"></label>
+<label>Expiry date<input id="cardExpiry" type="text" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/YY"></label>
+<label>CVV<input id="cardCvv" type="password" inputmode="numeric" autocomplete="cc-csc" maxlength="4" placeholder="123"></label>
+</div></div>
+    <div class="checkout-note">Secure checkout</div>
+    <button id="finishCheckout" class="gradient-btn checkout-confirm" type="button">Continue Payment →</button>
+    <button id="closeCheckout" class="ghost-btn" type="button">Back to Shop</button>
+  </section>
+</div>
+
+<div id="orderReviewLayer" class="quickview-layer" hidden>
+  <section class="checkout-modal glass-surface payment-modal order-review-modal" role="dialog" aria-modal="true" aria-labelledby="orderReviewTitle">
+    <button id="closeOrderReview" class="glass-close payment-close" type="button" aria-label="Close order review">×</button>
+    <span class="eyebrow">ORDER REVIEW</span>
+    <h2 id="orderReviewTitle">Review your order</h2>
+    <p>Check your items and payment details before placing the order.</p>
+    <div id="orderReviewItems" class="order-review-items"></div>
+    <div class="order-review-summary">
+      <div><span>Subtotal</span><b id="reviewSubtotal">₱0</b></div>
+      <div><span>Shipping</span><b id="reviewShipping">₱0</b></div>
+      <div class="total-row"><span>Total</span><strong id="reviewTotal">₱0</strong></div>
+    </div>
+    <div class="order-review-payment"><span>Payment method</span><strong id="reviewPayment">Card</strong></div>
+    <button id="placeOrderBtn" class="gradient-btn checkout-confirm" type="button">Place Order →</button>
+    <button id="backToPayment" class="ghost-btn" type="button">Back to Payment</button>
+  </section>
+</div>
+
+<div id="orderSuccessLayer" class="quickview-layer" hidden>
+  <section class="checkout-modal glass-surface payment-modal order-success-modal" role="dialog" aria-modal="true" aria-labelledby="orderSuccessTitle">
+    <span class="eyebrow">ORDER SUBMITTED</span>
+    <h2 id="orderSuccessTitle">Your order is pending verification</h2>
+    <p id="orderSuccessCopy">Your order was submitted. Admin must verify the payment before any digital ownership or download is unlocked.</p>
+    <div class="order-success-icon">✓</div>
+    <div class="order-success-summary">
+      <div><span>Order number</span><strong id="orderNumber">—</strong></div>
+      <div><span>Total</span><strong id="successTotal">₱0</strong></div>
+      <div><span>Payment</span><strong id="successPayment">Card</strong></div>
+    </div>
+    <button id="closeOrderSuccess" class="gradient-btn checkout-confirm" type="button">Back to Shop</button>
+  </section>
+</div>
+
+<div id="filterToast" class="shop-toast" role="status" aria-live="polite"></div><div id="particleLayer" class="particle-layer" aria-hidden="true"></div>
+<footer class="shop-footer"><div><strong>TUBAL HUB</strong><span>YOUR HUB. YOUR COMMUNITY.</span></div><nav><a href="../index.html">Home</a><a href="feeds.html">Feeds</a><a class="active" href="shop.html">Shop</a><a href="chat.html">Global Chat</a></nav><small>© 2026 TUBAL HUB • Play • Create • Connect</small></footer>
+<script src="../assets/js/theme.js?v=20260922" defer></script>
+<script type="module" src="../assets/js/shop.js?v=20260925-v16"></script>
+</body>
+</html>

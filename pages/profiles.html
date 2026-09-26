@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Profile | TUBAL HUB</title>
+<link rel="stylesheet" href="../assets/css/platform-pages.css">
+<link rel="stylesheet" href="../assets/css/profiles.css">
+<link rel="stylesheet" href="../assets/css/global-theme.css?v=20260921">
+  <link rel="stylesheet" href="../assets/css/premium-logos.css?v=20260924-logo1">
+<link rel="stylesheet" href="../assets/css/profile-premium.css?v=20260924-p2">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="../index.html" aria-label="TUBAL HUB Home" title="TUBAL HUB Home">
+    <img src="../tubal-hub-logo.png" alt="TUBAL HUB">
+    <span>TUBAL HUB<small>PLAY • SHARE • CONNECT</small></span>
+  </a>
+  <nav class="topnav">
+    <a href="../index.html">⌂ <span>Home</span></a>
+    <a href="games.html">🎮 <span>Games</span></a>
+    <a href="community.html">👥 <span>Community</span></a>
+    <a href="news.html">▣ <span>News</span></a>
+    <a href="events.html">▧ <span>Events</span></a>
+  </nav>
+  <div class="top-user">
+    <div class="top-search">⌕ <span>Search players, posts, or content...</span></div>
+    <span class="bell">♧</span>
+    <div class="top-avatar" id="topAvatar">…</div>
+    <b id="topName">Loading…</b>
+    <span>⌄</span>
+  </div>
+</header>
+
+<div class="profile-layout">
+  <aside class="sidebar">
+    <a href="../index.html">⌂ <span>Home</span></a>
+    <a href="games.html">🎮 <span>Games</span></a>
+    <a href="community.html">👥 <span>Community</span></a>
+    <a href="news.html">▣ <span>News</span></a>
+    <a href="events.html">▧ <span>Events</span></a>
+    <a href="gallery.html">▧ <span>Gallery</span></a>
+    <a href="live.html">◉ <span>Stream</span></a>
+    <a class="active" href="profiles.html">● <span>Profile</span></a>
+    <a href="chat.html">✉ <span>Messages</span></a>
+    <a href="settings.html">⚙ <span>Settings</span></a>
+    <div class="sidebar-quote">“Good Games<br>Good People<br>Brighter Tomorrow” <i>◆</i></div>
+  </aside>
+
+  <main class="profile-main">
+    <section class="cover" id="cover">
+      <button class="cover-btn" id="editCover" type="button" aria-label="Edit cover" title="Edit cover">✎</button>
+      <div class="cover-copy"><span>PLAY</span><strong>CREATE</strong><span>CONNECT</span></div><div class="cover-glass"></div>
+    </section>
+
+    <section class="profile-head">
+      <div class="avatar-wrap" id="avatarWrap">
+        <div class="main-avatar" id="mainAvatar">…</div>
+        <span class="avatar-status offline" id="profileStatusDot" aria-label="Offline"></span>
+        <button class="camera-btn" id="avatarButton" type="button" title="Edit profile photo">✎</button>
+        <span class="level-badge" id="profileLevel" hidden>♛ Lv.—</span>
+      </div>
+
+      <div class="identity">
+        <div class="identity-kicker">TUBAL HUB PROFILE</div>
+        <h1 id="profileName">Loading…</h1>
+        <div class="handle" id="profileHandle">Loading profile…</div>
+        <p id="profileBio">Loading your profile…</p>
+        <div class="meta">
+          <span>⌖ <b id="profileLocation">Not set</b></span>
+          <span>◷ <b id="joinedDate">Member</b></span>
+          <span id="profileOnlineText">○ Offline</span>
+        </div>
+        <div class="profile-actions">
+          <button class="edit-profile" id="editProfile" type="button">✎ <span>Edit Profile</span></button>
+          <button class="share-profile" id="shareProfile" type="button">↗ <span>Share</span></button>
+          <button class="message-profile" id="messageProfile" type="button">💬 <span>Message</span><i id="messageStatusMini"></i></button>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <div><strong id="postCount">0</strong><span>Posts</span></div>
+        <div><strong id="followerCount">0</strong><span>Followers</span></div>
+        <div><strong id="followingCount">0</strong><span>Following</span></div>
+        <div class="views-stat"><strong id="viewCount">0</strong><span>Total Views</span></div>
+      </div>
+
+    </section>
+
+    <nav class="profile-tabs" id="profileTabs">
+      <a class="active" href="#overview">Posts</a>
+      <a href="#media">Media</a>
+      <a href="#likes">Likes</a>
+      <a href="#aboutSection">About</a>
+      <a href="#achievements">Achievements</a>
+    </nav>
+
+    <div class="dashboard-grid" id="overview">
+      <div class="left-column">
+        <section class="panel profile-about-card" id="aboutSection">
+          <div class="panel-title"><div><span class="panel-kicker">IDENTITY</span><h2>About me</h2></div><button id="aboutEdit" type="button">Edit</button></div>
+          <p id="aboutText">No bio added yet.</p>
+          <div class="info-list">
+            <div><b>Name</b><span id="aboutName">—</span></div>
+            <div><b>Location</b><span id="aboutLocation">—</span></div>
+            <div><b>Interests</b><span id="aboutInterests">—</span></div>
+            <div><b>Favorite Games</b><span id="aboutGames">—</span></div>
+          </div>
+          <div class="profile-quote">“<span>Play • Share • Connect</span>”</div>
+        </section>
+
+        <section class="panel content-panel" id="posts">
+          <div class="panel-title"><div><span class="panel-kicker">ACTIVITY</span><h2>Recent posts</h2></div><span class="real-label">REAL DATA</span></div>
+          <div class="empty-content premium-empty"><div class="empty-orbit">✦</div><strong id="postEmptyTitle">No posts yet</strong><small>Posts created by this account will appear here.</small></div>
+        </section>
+
+        <section class="panel content-panel" id="media">
+          <div class="panel-title"><div><span class="panel-kicker">MEDIA</span><h2>Media</h2></div><span class="real-label">REAL DATA</span></div>
+          <div class="empty-content premium-empty"><div class="empty-orbit">◉</div><strong>No media yet</strong><small>Uploaded images and videos will appear here.</small></div>
+        </section>
+
+        <section class="panel content-panel" id="likes">
+          <div class="panel-title"><div><span class="panel-kicker">SAVED ACTIVITY</span><h2>Likes</h2></div><span class="real-label">REAL DATA</span></div>
+          <div class="empty-content premium-empty"><div class="empty-orbit">♡</div><strong>No liked content yet</strong><small>Liked posts will appear here when available.</small></div>
+        </section>
+
+        <section class="panel achievements-panel" id="achievements">
+          <div class="panel-title"><div><span class="panel-kicker">PROGRESS</span><h2>Achievements</h2></div><span class="real-label">REAL DATA</span></div>
+          <div class="badges-row" id="badgeRow"></div>
+          <div class="achievement-progress"><div class="progress-label"><span>Achievement progress</span><b id="achievementProgressText">0%</b></div><div class="progress-track"><span id="achievementProgressBar"></span></div></div>
+        </section>
+      </div>
+
+      <aside class="right-column">
+        <section class="panel profile-side-card">
+          <div class="panel-title"><div><span class="panel-kicker">PROFILE</span><h2>Details</h2></div></div>
+          <div class="side-detail"><span>Joined</span><b id="sideJoinedDate">—</b></div>
+          <div class="side-detail"><span>Location</span><b id="sideLocation">—</b></div>
+          <div class="side-detail"><span>Website</span><a id="sideWebsite" href="#" target="_blank" rel="noopener" hidden>Website</a><b id="sideWebsiteEmpty">Not set</b></div>
+          <div class="side-status"><span id="sideStatusDot"></span><b id="sideStatusText">Offline</b></div>
+        </section>
+
+        <section class="panel gaming">
+          <div class="panel-title"><div><span class="panel-kicker">GAMING</span><h2>Currently playing</h2></div><button id="gamingEdit" type="button">Edit</button></div>
+          <div class="game-current">
+            <div class="game-icon">🎮</div>
+            <div><b>Now playing</b><span id="currentlyPlaying">Not set</span></div>
+          </div>
+          <div class="favorite-title"><b>Favorite games</b></div>
+          <div class="game-list" id="gameList"><span>No favorite games added.</span></div>
+        </section>
+
+        <section class="panel profile-side-card">
+          <div class="panel-title"><div><span class="panel-kicker">COMMUNITY</span><h2>Friends</h2></div><span class="real-label">REAL DATA</span></div>
+          <div class="friend-stack" id="friendStack"><span class="friend-placeholder">No friends added yet.</span></div>
+          <div class="friend-countline"><span id="friendCountLabel">0 friends</span></div>
+        </section>
+
+        <section class="panel activity-card">
+          <div class="panel-title"><div><span class="panel-kicker">ACTIVITY</span><h2>Activity graph</h2></div></div>
+          <div class="activity-grid" id="activityGrid"></div>
+          <small class="activity-note">Based on recorded account activity.</small>
+        </section>
+
+        <section class="panel social">
+          <div class="panel-title"><div><span class="panel-kicker">CONNECT</span><h2>Social links</h2></div><button id="socialEdit" type="button">Edit</button></div>
+          <div class="social-list" id="socialList"><div class="social-empty">No social links connected yet.</div></div>
+        </section>
+      </aside>
+    </div></div>
+  </main>
+</div>
+
+<footer class="profile-footer">
+  <div><b>TUBAL HUB</b><small>PLAY • SHARE • CONNECT</small></div>
+  <nav><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="../LICENSE.md">License</a><a href="license.html">License</a><a href="help.html">Help</a><a href="contact.html">Contact</a></nav>
+  <span>© 2026 TUBAL HUB. All rights reserved.</span>
+</footer>
+
+<div class="modal" id="profileModal" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose" type="button">×</button>
+    <h2>Edit Profile</h2>
+    <p class="modal-note">Changes are saved to your own Firebase account.</p>
+    <label>Display Name</label><input id="editName" maxlength="40">
+    <label>Bio</label><textarea id="editBio" maxlength="180"></textarea>
+    <label>Location</label><input id="editLocation" maxlength="80">
+    <label>Interests</label><input id="editInterests" maxlength="150" placeholder="Gaming, Tech, Nature...">
+    <label>Favorite Games</label><input id="editGames" maxlength="180" placeholder="Mobile Legends, HoK...">
+    <label>Currently Playing</label><input id="editPlaying" maxlength="80" placeholder="Game title">
+    <label>Profile Photo URL</label><input id="editPhoto" type="url" maxlength="500">
+    <label>Cover Photo URL</label><input id="editCoverUrl" type="url" maxlength="500">
+    <label>Facebook</label><input id="editFacebook" type="url" maxlength="500">
+    <label>YouTube</label><input id="editYoutube" type="url" maxlength="500">
+    <label>TikTok</label><input id="editTiktok" type="url" maxlength="500">
+    <div class="modal-status" id="modalStatus"></div>
+    <div class="modal-actions"><button id="cancelEdit" type="button">Cancel</button><button class="save" id="saveProfile" type="button">Save Profile</button></div>
+  </div>
+</div>
+
+<script type="module">
+import { app, auth } from "../assets/js/firebase-config.js";
+import { onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+const db = getFirestore(app);
+const $ = id => document.getElementById(id);
+let currentUser = null;
+let profile = {};
+
+function esc(v){return String(v ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+function initials(name){return (name||"Member").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase()||"M";}
+function commaList(v){return Array.isArray(v) ? v.join(", ") : String(v || "");}
+function avatar(el,url,name){
+  el.innerHTML = url ? `<img src="${esc(url)}" alt="">` : esc(initials(name));
+}
+function animateNumber(el,target,duration=650){
+  if(!el)return;
+  const end=Math.max(0,Number(target)||0);
+  const start=Number(el.dataset.value||0);
+  el.dataset.value=String(end);
+  if(start===end){el.textContent=end.toLocaleString();return}
+  const t0=performance.now();
+  const tick=now=>{const p=Math.min(1,(now-t0)/duration);const eased=1-Math.pow(1-p,3);el.textContent=Math.round(start+(end-start)*eased).toLocaleString();if(p<1)requestAnimationFrame(tick)};
+  requestAnimationFrame(tick);
+}
+function setOnlineState(online){
+  const dot=$("profileStatusDot"),mini=$("messageStatusMini"),sideDot=$("sideStatusDot"),sideText=$("sideStatusText"),onlineText=$("profileOnlineText");
+  [dot,mini,sideDot].forEach(x=>x?.classList.toggle("online",!!online));
+  [dot,mini,sideDot].forEach(x=>x?.classList.toggle("offline",!online));
+  if(dot)dot.setAttribute("aria-label",online?"Online":"Offline");
+  if(sideText)sideText.textContent=online?"Online":"Offline";
+  if(onlineText)onlineText.textContent=online?"● Online":"○ Offline";
+}
+function setupProfileInteractions(){
+  const root=document.querySelector(".profile-main");
+  root?.addEventListener("pointermove",e=>{const r=root.getBoundingClientRect();root.style.setProperty("--profile-mx",e.clientX-r.left+"px");root.style.setProperty("--profile-my",e.clientY-r.top+"px")},{passive:true});
+  $("avatarWrap")?.addEventListener("click",()=>{const a=$("mainAvatar");a.classList.remove("avatar-pop");void a.offsetWidth;a.classList.add("avatar-pop");const burst=document.createElement("span");burst.className="avatar-particle-burst";for(let i=0;i<6;i++){const p=document.createElement("i");p.style.setProperty("--a",(i*60)+"deg");burst.appendChild(p)}$("avatarWrap").appendChild(burst);setTimeout(()=>burst.remove(),620)});
+  $("shareProfile")?.addEventListener("click",async()=>{
+    const url=location.href;try{if(navigator.share)await navigator.share({title:$("profileName").textContent,text:$("profileBio").textContent,url});else{await navigator.clipboard.writeText(url);$("shareProfile").classList.add("is-pop");setTimeout(()=>$("shareProfile").classList.remove("is-pop"),450)}}catch(_){}
+  });
+  $("messageProfile")?.addEventListener("click",()=>{location.href="chat.html"});
+  document.querySelectorAll(".profile-tabs a").forEach(a=>a.addEventListener("click",()=>{document.querySelectorAll(".profile-tabs a").forEach(x=>x.classList.remove("active"));a.classList.add("active")}));
+  document.querySelectorAll(".profile-stats div").forEach(card=>card.addEventListener("click",()=>{card.classList.remove("is-pop");void card.offsetWidth;card.classList.add("is-pop");setTimeout(()=>card.classList.remove("is-pop"),450)}));
+}
+
+function formatDate(v){
+  if(!v) return "Member";
+  const d = typeof v.toDate === "function" ? v.toDate() : new Date(v);
+  return isNaN(d) ? "Member" : "Joined " + d.toLocaleDateString(undefined,{month:"short",year:"numeric"});
+}
+function openModal(){
+  $("editName").value=profile.displayName||currentUser.displayName||"";
+  $("editBio").value=profile.bio||"";
+  $("editLocation").value=profile.location||"";
+  $("editInterests").value=commaList(profile.interests);
+  $("editGames").value=commaList(profile.favoriteGames);
+  $("editPlaying").value=profile.currentlyPlaying||"";
+  $("editPhoto").value=profile.photoURL||currentUser.photoURL||"";
+  $("editCoverUrl").value=profile.coverURL||"";
+  $("editFacebook").value=profile.social?.facebook||"";
+  $("editYoutube").value=profile.social?.youtube||"";
+  $("editTiktok").value=profile.social?.tiktok||"";
+  $("modalStatus").textContent="";
+  $("profileModal").classList.add("open");
+  $("profileModal").setAttribute("aria-hidden","false");
+}
+function closeModal(){ $("profileModal").classList.remove("open"); $("profileModal").setAttribute("aria-hidden","true"); }
+
+function render(){
+  const name=profile.displayName||currentUser.displayName||currentUser.email?.split("@")[0]||"Member";
+  const handle=profile.username ? "@"+String(profile.username).replace(/^@/,"") : "@"+(currentUser.email?.split("@")[0]||"member");
+  $("topName").textContent=name;
+  const isVerified=profile.verified===true||currentUser.emailVerified===true; $("profileName").innerHTML=esc(name)+(isVerified?` <span class="verified" title="Verified">✓</span>`:"");
+  $("profileHandle").innerHTML=esc(handle)+` <span>•</span> <strong>● Online</strong>`;
+  $("profileBio").textContent=profile.bio||"No bio added yet.";
+  $("aboutText").textContent=profile.bio||"No bio added yet. Edit your profile to tell the community about yourself.";
+  $("profileLocation").textContent=profile.location||"Location not set";
+  $("aboutName").textContent=name;
+  $("aboutLocation").textContent=profile.location||"Not set";
+  $("aboutInterests").textContent=commaList(profile.interests)||"Not set";
+  $("aboutGames").textContent=commaList(profile.favoriteGames)||"Not set";
+  $("currentlyPlaying").textContent=profile.currentlyPlaying||"Not set";
+  $("joinedDate").textContent=formatDate(profile.createdAt||currentUser.metadata?.creationTime);
+  animateNumber($("postCount"),profile.postCount||0);
+  animateNumber($("followerCount"),profile.followerCount||0);
+  animateNumber($("followingCount"),profile.followingCount||0);
+  $("viewCount").textContent=Number(profile.totalViews||0);
+  $("friendCountLabel").textContent=Number(profile.friendCount||0)+" friends";
+  const friends=Array.isArray(profile.friends)?profile.friends.filter(Boolean):[];
+  $("friendStack").innerHTML=friends.length
+    ?friends.slice(0,7).map(f=>'<span class="friend-avatar-stack" title="'+esc(f.displayName||f.name||"Friend")+'">'+(f.photoURL?'<img src="'+esc(f.photoURL)+'" alt="">':esc(initials(f.displayName||f.name||"Friend")))+"</span>").join("")+(friends.length>7?'<span class="friend-avatar-stack friend-more">+'+(friends.length-7)+'</span>':'')
+    :'<span class="friend-placeholder">No friends added yet.</span>';
+  $("sideJoinedDate").textContent=formatDate(profile.createdAt||currentUser.metadata?.creationTime).replace(/^Joined\s+/,"");
+  $("sideLocation").textContent=profile.location||"Not set";
+  const website=profile.social?.website||profile.website||"";
+  if(website){$("sideWebsite").href=website;$("sideWebsite").hidden=false;$("sideWebsiteEmpty").hidden=true}else{$("sideWebsite").hidden=true;$("sideWebsiteEmpty").hidden=false}
+  const level=Number(profile.level);
+  if(Number.isFinite(level)){ $("profileLevel").hidden=false;$("profileLevel").textContent="♛ Lv."+level } else $("profileLevel").hidden=true;
+  $("messageStatusMini").classList.toggle("online",false);
+  $("messageStatusMini").classList.toggle("offline",true);
+  const badges=Array.isArray(profile.badges)?profile.badges:[];
+  $("badgeRow").innerHTML=badges.length?badges.slice(0,8).map((b,i)=>'<span class="profile-badge earned" title="'+esc(b.name||b.title||"Badge")+'">'+esc(b.icon||["🎮","💬","🌿","🏆"][i%4])+'</span>').join(""):'<div class="badge-empty">No badges recorded yet.</div>';
+  const ach=Number(profile.achievementProgress);
+  if(Number.isFinite(ach)){const pct=Math.max(0,Math.min(100,ach));$("achievementProgressText").textContent=pct+"%";$("achievementProgressBar").style.width=pct+"%"}else{$("achievementProgressText").textContent="0%";$("achievementProgressBar").style.width="0%";}
+  const activity=Array.isArray(profile.activity)?profile.activity.slice(-35):[];
+  $("activityGrid").innerHTML=activity.length?activity.map(v=>'<span style="--a:'+Math.max(0,Math.min(4,Number(v)||0))+'"></span>').join(""):'<div class="activity-empty">No activity recorded yet.</div>';
+
+  avatar($("topAvatar"),profile.photoURL||currentUser.photoURL,name);
+  avatar($("mainAvatar"),profile.photoURL||currentUser.photoURL,name);
+
+  const games=commaList(profile.favoriteGames).split(",").map(x=>x.trim()).filter(Boolean);
+  $("gameList").innerHTML=games.length ? games.map(g=>`<span class="game-chip">${esc(g)}</span>`).join("") : `<span>No favorite games added.</span>`;
+
+  const social=profile.social||{};
+  const links=[["facebook","Facebook",social.facebook],["youtube","YouTube",social.youtube],["tiktok","TikTok",social.tiktok],["discord","Discord",social.discord],["website","Website",social.website]].filter(x=>x[2]);
+  $("socialList").innerHTML=links.length ? links.map(x=>`<a class="social-row" href="${esc(x[2])}" target="_blank" rel="noopener"><span>${esc(x[1])}</span><b>↗</b></a>`).join("") : `<div class="social-empty">No social links connected yet.</div>`;
+
+  if(profile.coverURL){
+    $("cover").style.backgroundImage=`linear-gradient(90deg,rgba(2,12,9,.72),rgba(2,12,9,.18)),url("${profile.coverURL.replace(/"/g,'&quot;')}")`;
+    $("cover").classList.add("has-cover");
+  }else{
+    $("cover").style.backgroundImage="";
+    $("cover").classList.remove("has-cover");
+  }
+}
+
+async function loadProfile(user){
+  const ref=doc(db,"users",user.uid);
+  const snap=await getDoc(ref);
+  if(snap.exists()) profile={uid:user.uid,...snap.data()};
+  else{
+    profile={uid:user.uid,email:user.email||"",displayName:user.displayName||user.email?.split("@")[0]||"Member",photoURL:user.photoURL||"",createdAt:serverTimestamp()};
+    await setDoc(ref,profile,{merge:true});
+  }
+  render();
+}
+
+$("editProfile").onclick=openModal;
+$("aboutEdit").onclick=openModal;
+$("gamingEdit").onclick=openModal;
+$("socialEdit").onclick=openModal;
+$("avatarButton").onclick=openModal;
+$("editCover").onclick=openModal;
+$("modalClose").onclick=closeModal;
+$("cancelEdit").onclick=closeModal;
+$("profileModal").addEventListener("click",e=>{if(e.target===$("profileModal"))closeModal();});
+
+$("saveProfile").onclick=async()=>{
+  if(!currentUser)return;
+  const status=$("modalStatus");
+  status.textContent="Saving…";
+  const displayName=$("editName").value.trim() || currentUser.email?.split("@")[0] || "Member";
+  const photoURL=$("editPhoto").value.trim();
+  const coverURL=$("editCoverUrl").value.trim();
+  const data={
+    uid:currentUser.uid,email:currentUser.email||"",
+    displayName,bio:$("editBio").value.trim(),location:$("editLocation").value.trim(),
+    interests:$("editInterests").value.trim(),favoriteGames:$("editGames").value.trim(),
+    currentlyPlaying:$("editPlaying").value.trim(),photoURL,coverURL,
+    social:{facebook:$("editFacebook").value.trim(),youtube:$("editYoutube").value.trim(),tiktok:$("editTiktok").value.trim(),...(profile.social||{})},
+    updatedAt:serverTimestamp()
+  };
+  try{
+    await updateProfile(currentUser,{displayName,photoURL:photoURL||null});
+    await setDoc(doc(db,"users",currentUser.uid),data,{merge:true});
+    profile={...profile,...data};
+    render(); status.textContent="Profile saved."; setTimeout(closeModal,500);
+  }catch(err){console.error(err);status.textContent="Save failed: "+(err?.message||"Please try again.");}
+};
+
+setupProfileInteractions();
+onAuthStateChanged(auth,async user=>{
+  if(!user || user.isAnonymous){
+    location.replace("./login.html?returnTo=profiles.html");
+    return;
+  }
+  currentUser=user;
+  try{
+    onSnapshot(doc(db,"presence",user.uid),snap=>setOnlineState(snap.exists()&&snap.data()?.online===true),()=>setOnlineState(false));
+    await loadProfile(user);
+  }catch(err){
+    console.error(err);
+    $("profileName").textContent="Profile could not load";
+    $("profileBio").textContent="Check your Firestore rules and try again.";
+  }
+});
+</script>
+<script src="../assets/js/theme.js?v=20260921" defer></script>
+<script type="module" src="../assets/js/presence.js?v=20260923"></script>
+</body>
+</html>

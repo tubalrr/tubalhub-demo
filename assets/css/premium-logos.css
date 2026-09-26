@@ -1,0 +1,496 @@
+/* =========================================================
+   TUBAL HUB — PREMIUM LOGO SYSTEM
+   Cohesive 3D family, unique page language, SVG-first surfaces
+   ========================================================= */
+
+@keyframes hubLogoFloat{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(0,-8px,0)}
+}
+@keyframes hubLogoGlow{
+  0%,100%{filter:drop-shadow(0 0 14px rgba(29,255,145,.40))}
+  50%{filter:drop-shadow(0 0 28px rgba(29,255,145,.68))}
+}
+@keyframes hubLogoShine{
+  0%{transform:translate3d(-145%,0,0)}
+  100%{transform:translate3d(145%,0,0)}
+}
+@keyframes hubLogoPop{
+  0%{transform:scale(1)}
+  28%{transform:scale(.80)}
+  60%{transform:scale(1.30) rotate(3deg)}
+  100%{transform:scale(1)}
+}
+@keyframes hubLogoGlitch{
+  0%,100%{transform:translate3d(0,0,0)}
+  35%{transform:translate3d(-2px,1px,0)}
+  70%{transform:translate3d(2px,-1px,0)}
+}
+@keyframes hubLogoPulseRing{
+  0%{opacity:.55;transform:translate3d(-50%,-50%,0) scale(.86)}
+  70%,100%{opacity:0;transform:translate3d(-50%,-50%,0) scale(1.45)}
+}
+
+/* MAIN TUBAL HUB LOGO */
+.brand,
+.top-nav-logo{
+  perspective:900px;
+}
+.brand img,
+.top-nav-logo img{
+  position:relative;
+  width:64px!important;
+  height:64px!important;
+  flex:0 0 64px;
+  object-fit:contain;
+  border-radius:50%!important;
+  padding:4px;
+  border:3px solid transparent;
+  background:
+    linear-gradient(rgba(2,8,5,.82),rgba(2,8,5,.82)) padding-box,
+    linear-gradient(135deg,#1dff91,#7d5aff,#00d4ff) border-box;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.12),
+    inset 0 -8px 16px rgba(0,0,0,.45),
+    0 8px 24px rgba(0,0,0,.52),
+    0 0 30px rgba(29,255,145,.38);
+  filter:
+    saturate(1.08)
+    contrast(1.05)
+    drop-shadow(0 0 16px rgba(29,255,145,.30));
+  transform:translate3d(0,0,0) rotateY(0deg) scale(1);
+  transform-style:preserve-3d;
+  animation:hubLogoFloat 6s ease-in-out infinite,hubLogoGlow 2s ease-in-out infinite;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),filter .35s ease,box-shadow .35s ease;
+}
+.brand::after,
+.top-nav-logo::after{
+  content:"";
+  position:absolute;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  pointer-events:none;
+  background:linear-gradient(105deg,transparent 28%,rgba(255,255,255,.30) 48%,transparent 67%);
+  transform:translate3d(-145%,0,0);
+  opacity:.72;
+}
+.brand:hover img,
+.top-nav-logo:hover img{
+  transform:translate3d(0,0,0) rotateY(10deg) scale(1.05);
+  filter:saturate(1.16) contrast(1.08) drop-shadow(0 0 28px rgba(29,255,145,.62));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.18),
+    inset 0 -10px 18px rgba(0,0,0,.42),
+    0 12px 30px rgba(0,0,0,.58),
+    0 0 34px rgba(29,255,145,.58);
+}
+.brand:hover::after,
+.top-nav-logo:hover::after{animation:hubLogoShine .85s cubic-bezier(.16,1,.3,1) both}
+.brand:active img,
+.top-nav-logo:active img{animation:hubLogoPop .45s cubic-bezier(.34,1.56,.64,1) both}
+
+/* Glass logo frame for page-specific marks */
+.symbol,
+.payapang-brand .leaf,
+.ctrl-icon,
+.community-icon,
+.shop-icon,
+.game-icon{
+  position:relative;
+  isolation:isolate;
+  overflow:visible!important;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.16),
+    inset 0 -8px 16px rgba(0,0,0,.22),
+    0 8px 24px rgba(0,0,0,.45);
+  transform:translate3d(0,0,0);
+  will-change:transform,filter;
+  transition:transform .30s cubic-bezier(.16,1,.3,1),filter .30s ease,box-shadow .30s ease;
+}
+.symbol::before,
+.payapang-brand .leaf::before,
+.ctrl-icon::before,
+.community-icon::before,
+.shop-icon::before,
+.game-icon::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(110deg,transparent 28%,rgba(255,255,255,.30) 48%,transparent 68%);
+  transform:translate3d(-140%,0,0);
+}
+.symbol:hover,
+.payapang-brand .leaf:hover,
+.ctrl-icon:hover,
+.community-icon:hover,
+.shop-icon:hover,
+.game-icon:hover{
+  transform:translate3d(0,-3px,0) scale(1.12) rotate(3deg);
+  filter:drop-shadow(0 0 22px rgba(29,255,145,.38));
+}
+.symbol:hover::before,
+.payapang-brand .leaf:hover::before,
+.ctrl-icon:hover::before,
+.community-icon:hover::before,
+.shop-icon:hover::before,
+.game-icon:hover::before{animation:hubLogoShine .75s cubic-bezier(.16,1,.3,1) both}
+
+/* Payapang Isip — organic leaf / zen */
+body.payapang-ai .payapang-brand .leaf{
+  width:48px!important;height:48px!important;
+  border-radius:20px 12px 20px 12px!important;
+  background:linear-gradient(145deg,rgba(197,255,124,.20),rgba(29,255,145,.08))!important;
+  color:#c8ff9a!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 8px 24px rgba(56,105,54,.28),0 0 24px rgba(142,214,109,.26)!important;
+  font-size:0!important;
+}
+body.payapang-ai .payapang-brand .leaf::after{
+  content:"";
+  position:absolute;
+  width:25px;height:34px;
+  left:10px;top:6px;
+  border-radius:90% 10% 90% 10%;
+  background:linear-gradient(145deg,#c5ff7c,#1dff91);
+  transform:rotate(-15deg);
+  box-shadow:inset -3px -4px 7px rgba(0,74,38,.18);
+  clip-path:ellipse(55% 50% at 50% 50%);
+}
+body.payapang-ai .payapang-brand .leaf{animation:payapangLeafSway 4.2s ease-in-out infinite}
+@keyframes payapangLeafSway{
+  0%,100%{transform:rotate(-2deg) translate3d(0,0,0)}
+  50%{transform:rotate(5deg) translate3d(0,-4px,0)}
+}
+
+/* CTRLZONE — cyber controller */
+body:has(.ctrl-shell) .ctrl-orb{
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(29,255,145,.42);
+  box-shadow:0 0 55px rgba(125,90,255,.22),inset 0 0 45px rgba(29,255,145,.07);
+}
+body:has(.ctrl-shell) .ctrl-orb::before{
+  content:"";
+  width:90px;height:62px;
+  border:2px solid #1dff91;
+  border-radius:15px 15px 20px 20px;
+  background:
+    linear-gradient(rgba(29,255,145,.05),rgba(125,90,255,.08)),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 4px);
+  box-shadow:0 0 24px rgba(29,255,145,.28),inset 0 0 22px rgba(125,90,255,.16);
+}
+body:has(.ctrl-shell) .ctrl-orb::after{
+  content:"✦";
+  position:absolute;
+  color:#7d5aff;
+  font-size:18px;
+  text-shadow:0 0 16px rgba(125,90,255,.80);
+  transform:translate3d(24px,-17px,0);
+}
+body:has(.ctrl-shell) .ctrl-icon{
+  width:48px!important;height:48px!important;
+  border-radius:12px!important;
+  background:linear-gradient(145deg,rgba(29,255,145,.09),rgba(125,90,255,.14))!important;
+  color:#dffff0;
+}
+
+/* Profiles — glass star identity */
+body:has(.profile-layout) .topbar .brand img{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),inset 0 -8px 16px rgba(0,0,0,.42),0 8px 24px rgba(0,0,0,.5),0 0 28px rgba(125,90,255,.28)!important;
+}
+body:has(.profile-layout) .main-avatar{
+  box-shadow:inset 0 1px rgba(255,255,255,.22),inset 0 -9px 16px rgba(0,0,0,.28),0 10px 28px rgba(0,0,0,.42),0 0 26px rgba(125,90,255,.24)!important;
+}
+body:has(.profile-layout) .main-avatar::after{
+  content:"✦";
+  position:absolute;
+  right:-5px;top:-7px;
+  font-size:15px;color:#b8ff8c;
+  text-shadow:0 0 12px rgba(184,255,140,.8);
+  animation:profileSparkle 2s ease-in-out infinite;
+}
+@keyframes profileSparkle{
+  50%{transform:scale(1.22) rotate(12deg);opacity:.65}
+}
+
+/* Community — people glass badge */
+body:has(.community-shell) .community-icon{
+  width:48px!important;height:48px!important;
+  border-radius:16px!important;
+  background:linear-gradient(145deg,rgba(103,255,218,.13),rgba(139,124,255,.18))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.15),0 8px 24px rgba(0,0,0,.34),0 0 22px rgba(103,255,218,.16);
+}
+
+/* Videos / Events / News / Shop */
+body:has(.news-shell) .hero .symbol,
+body:has(.event-list) .hero .symbol{
+  width:112px;height:112px;
+  right:10%;
+  display:grid;
+  place-items:center;
+  border-radius:24px;
+  font-size:54px;
+  opacity:1;
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(29,255,145,.05));
+}
+body:has(.event-list) .hero .symbol{
+  border-radius:12px;
+  background:linear-gradient(145deg,rgba(29,255,145,.07),rgba(125,90,255,.12));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 8px 28px rgba(0,0,0,.5),0 0 28px rgba(29,255,145,.24);
+}
+body:has(.shop-page) .shop-orbit{
+  width:170px!important;height:170px!important;
+  border:2px solid rgba(29,255,145,.28)!important;
+  box-shadow:0 0 36px rgba(29,255,145,.14),inset 0 0 30px rgba(125,90,255,.10)!important;
+  animation:hubLogoFloat 5.5s ease-in-out infinite;
+}
+body:has(.shop-page) .shop-orbit::before{
+  color:#baff8c!important;
+  text-shadow:0 0 20px rgba(29,255,145,.42)!important;
+}
+
+/* Main-home brand cards get deep emblem treatment */
+.hub-home .brand-visual{
+  font-size:76px!important;
+  text-shadow:0 5px 14px rgba(0,0,0,.45),0 0 28px rgba(29,255,145,.20);
+  transform:translate3d(0,0,0);
+  animation:hubLogoFloat 5s ease-in-out infinite;
+}
+.hub-home .brand-card:hover .brand-visual{
+  transform:translate3d(0,-4px,0) scale(1.04);
+}
+
+/* Theme packs */
+body.theme-midnight .brand img,
+body.theme-midnight .top-nav-logo img{
+  border-radius:12px!important;
+  background:linear-gradient(rgba(2,6,4,.92),rgba(2,6,4,.92)) padding-box,linear-gradient(135deg,#1dff91,#7d5aff) border-box;
+  box-shadow:inset 0 0 0 1px rgba(29,255,145,.15),inset 0 -10px 18px rgba(0,0,0,.60),0 10px 28px rgba(0,0,0,.62),0 0 30px rgba(29,255,145,.48);
+}
+body.theme-midnight .symbol,
+body.theme-midnight .payapang-brand .leaf,
+body.theme-midnight .ctrl-icon,
+body.theme-midnight .community-icon{
+  border-radius:10px!important;
+  background:
+    linear-gradient(rgba(2,6,4,.88),rgba(2,6,4,.88)),
+    repeating-linear-gradient(0deg,rgba(29,255,145,.05) 0 1px,transparent 1px 5px);
+  box-shadow:inset 0 0 0 1px rgba(29,255,145,.10),0 8px 24px rgba(0,0,0,.55),0 0 24px rgba(29,255,145,.34);
+}
+body.theme-midnight .ctrl-icon:hover{animation:hubLogoGlitch .2s steps(2,end) both}
+body.theme-midnight .symbol{clip-path:polygon(0 10px,10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px))}
+
+body.theme-forest .brand img,
+body.theme-forest .top-nav-logo img{
+  border-radius:26px!important;
+  background:linear-gradient(rgba(10,31,18,.84),rgba(10,31,18,.84)) padding-box,linear-gradient(135deg,#8ed66d,#b8ef8d,#5dff9a) border-box;
+  box-shadow:inset 0 0 0 1px rgba(233,255,218,.13),inset 0 -10px 18px rgba(0,40,15,.25),0 10px 28px rgba(10,42,18,.35),0 0 28px rgba(142,214,109,.34);
+}
+body.theme-forest .symbol,
+body.theme-forest .ctrl-icon,
+body.theme-forest .community-icon{
+  border-radius:26px!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.14),0 8px 24px rgba(22,66,26,.32),0 0 24px rgba(142,214,109,.20);
+}
+body.theme-forest .symbol::after,
+body.theme-forest .community-icon::after{
+  content:"";
+  position:absolute;
+  width:70%;
+  height:70%;
+  inset:15%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(142,214,109,.10),transparent 68%);
+  pointer-events:none;
+}
+
+body.theme-light .brand img,
+body.theme-light .top-nav-logo img{
+  background:linear-gradient(#f8faf8,#f8faf8) padding-box,linear-gradient(135deg,#aaffc5,#c9c0ff,#9deaff) border-box;
+  box-shadow:inset 0 1px rgba(255,255,255,.96),0 10px 28px rgba(64,86,70,.13),0 0 22px rgba(170,255,197,.20);
+}
+body.theme-light .symbol,
+body.theme-light .payapang-brand .leaf,
+body.theme-light .ctrl-icon,
+body.theme-light .community-icon{
+  background:rgba(255,255,255,.70)!important;
+  border-color:rgba(61,91,71,.12)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.96),0 8px 24px rgba(65,84,70,.12),0 0 22px rgba(170,255,197,.16);
+}
+body.theme-light .symbol{color:#294235;opacity:.9}
+body.theme-light .brand img,
+body.theme-light .top-nav-logo img{filter:saturate(.92) drop-shadow(0 0 12px rgba(115,193,147,.18))}
+
+@media(max-width:700px){
+  .brand img,
+  .top-nav-logo img{width:52px!important;height:52px!important;flex-basis:52px}
+  .brand::after,.top-nav-logo::after{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .brand img,.top-nav-logo img,.hub-home .brand-visual,.body .payapang-brand .leaf{animation:none!important}
+  .brand:hover img,.top-nav-logo:hover img{transform:none}
+}
+
+
+/* 120px hero TUBAL HUB emblem — deeper chrome/glass treatment */
+.hub-home .hero-logo-large,
+body:has(.hero-logo-large) .hero-logo-large{
+  width:280px!important;
+  height:280px!important;
+  perspective:1000px;
+  transform-style:preserve-3d;
+}
+.hub-home .hero-logo-large::before,
+body:has(.hero-logo-large) .hero-logo-large::before{
+  content:"";
+  position:absolute;
+  width:235px;height:235px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 25%,rgba(255,255,255,.24),transparent 22%),
+    radial-gradient(circle at 68% 78%,rgba(29,255,145,.18),transparent 42%),
+    linear-gradient(145deg,#d9eee5 0%,#53675f 18%,#09110c 52%,#40534b 82%,#d3e4dd 100%);
+  border:3px solid transparent;
+  background-clip:padding-box;
+  box-shadow:
+    inset 0 8px 12px rgba(255,255,255,.16),
+    inset 0 -14px 22px rgba(0,0,0,.62),
+    0 14px 38px rgba(0,0,0,.52),
+    0 0 34px rgba(29,255,145,.32);
+  transform:translate3d(0,0,-20px);
+  opacity:.92;
+}
+.hub-home .hero-logo-large a,
+body:has(.hero-logo-large) .hero-logo-large a{position:relative;z-index:2;display:grid;place-items:center}
+.hub-home .hero-logo-large img,
+body:has(.hero-logo-large) .hero-logo-large img{
+  width:120px!important;
+  height:120px!important;
+  padding:7px;
+  border:3px solid transparent;
+  border-radius:50%;
+  background:linear-gradient(rgba(3,10,7,.70),rgba(3,10,7,.70)) padding-box,linear-gradient(135deg,#1dff91,#7d5aff,#00d4ff) border-box;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.16),
+    inset 0 -10px 16px rgba(0,0,0,.55),
+    0 12px 30px rgba(0,0,0,.55),
+    0 0 32px rgba(29,255,145,.52);
+  animation:hubLogoFloat 6s ease-in-out infinite,hubLogoGlow 2s ease-in-out infinite;
+}
+.hub-home .hero-logo-large::after,
+body:has(.hero-logo-large) .hero-logo-large::after{
+  content:"";
+  position:absolute;
+  inset:30px;
+  border-radius:50%;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 30% 35%,rgba(117,166,126,.14),transparent 27%),
+    radial-gradient(circle at 65% 65%,rgba(0,0,0,.45),transparent 60%);
+  box-shadow:inset 0 0 35px rgba(0,0,0,.48);
+}
+
+/* Logo pseudo layers must follow their host, not the header. */
+.brand,.top-nav-logo{position:relative;display:flex;align-items:center}
+.top-nav-logo{gap:8px;text-decoration:none}
+
+/* Page-specific hero identity marks */
+body:has(.ctrl-shell) .ctrl-hero::after{
+  content:"";
+  position:absolute;
+  right:9%;
+  top:50%;
+  width:96px;height:68px;
+  transform:translateY(-50%) rotate(-5deg);
+  border:2px solid #1dff91;
+  border-radius:15px 15px 22px 22px;
+  background:
+    radial-gradient(circle at 73% 32%,#1dff91 0 2px,transparent 3px),
+    radial-gradient(circle at 82% 45%,#7d5aff 0 2px,transparent 3px),
+    linear-gradient(transparent 45%,rgba(29,255,145,.035) 45% 49%,transparent 49%);
+  box-shadow:0 0 24px rgba(29,255,145,.30),0 0 36px rgba(125,90,255,.20),inset 0 0 22px rgba(125,90,255,.16);
+  pointer-events:none;
+  animation:hubLogoGlitch 3.5s ease-in-out infinite;
+}
+body:has(.community-shell) .community-hero-card:first-child::after{
+  content:"◉";
+  position:absolute;
+  right:24px;top:22px;
+  width:58px;height:58px;
+  display:grid;place-items:center;
+  border-radius:18px;
+  color:#b8ffe1;
+  font-size:25px;
+  background:linear-gradient(145deg,rgba(103,255,218,.12),rgba(125,90,255,.16));
+  border:1px solid rgba(120,255,220,.22);
+  box-shadow:inset 0 1px rgba(255,255,255,.14),0 10px 26px rgba(0,0,0,.28),0 0 22px rgba(103,255,218,.16);
+}
+body:has(.news-shell) .news-hero::after{
+  content:"▶";
+  position:absolute;
+  right:8%;top:50%;
+  width:84px;height:84px;
+  display:grid;place-items:center;
+  transform:translateY(-50%);
+  border-radius:50%;
+  font-size:30px;
+  color:#eafff2;
+  background:linear-gradient(145deg,rgba(29,255,145,.12),rgba(125,90,255,.14));
+  border:1px solid rgba(29,255,145,.23);
+  box-shadow:inset 0 1px rgba(255,255,255,.13),0 14px 32px rgba(0,0,0,.36),0 0 26px rgba(29,255,145,.18);
+}
+body:has(.shop-page) .shop-orbit::after{
+  content:"◇";
+  position:absolute;
+  inset:42px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  color:#9cff57;
+  font-size:26px;
+  text-shadow:0 0 16px rgba(29,255,145,.60);
+  background:rgba(255,255,255,.025);
+}
+body:has(.profile-layout) .profile-head::after{
+  content:"✦";
+  position:absolute;
+  right:28px;top:28px;
+  color:#b8ff8c;
+  font-size:24px;
+  text-shadow:0 0 18px rgba(125,90,255,.75),0 0 28px rgba(29,255,145,.28);
+  animation:profileSparkle 1.8s ease-in-out infinite;
+}
+body:has(.event-list) .hero .symbol{
+  font-size:0!important;
+}
+body:has(.event-list) .hero .symbol::after{
+  content:"▦";
+  font-size:54px;
+  color:#c8ffd7;
+  text-shadow:0 0 18px rgba(29,255,145,.45);
+}
+
+
+/* Settings header uses its own brand class. Keep it inside the same 3D logo family. */
+.settings-brand{position:relative;display:flex;align-items:center;gap:10px;perspective:900px}
+.settings-brand img{
+  width:52px!important;height:52px!important;
+  padding:3px;
+  border-radius:50%!important;
+  border:2px solid transparent;
+  background:linear-gradient(rgba(3,8,5,.88),rgba(3,8,5,.88)) padding-box,linear-gradient(135deg,#1dff91,#7d5aff,#00d4ff) border-box;
+  box-shadow:inset 0 1px rgba(255,255,255,.15),inset 0 -7px 12px rgba(0,0,0,.40),0 8px 24px rgba(0,0,0,.42),0 0 24px rgba(29,255,145,.30);
+  transform:translate3d(0,0,0) rotateY(0) scale(1);
+  transition:transform .32s cubic-bezier(.16,1,.3,1),filter .32s ease,box-shadow .32s ease;
+}
+.settings-brand:hover img{
+  transform:rotateY(10deg) scale(1.05);
+  filter:drop-shadow(0 0 18px rgba(29,255,145,.48));
+}
+body[data-settings-theme="midnight"] .settings-brand img{border-radius:12px!important}
+body[data-settings-theme="forest"] .settings-brand img{border-radius:26px!important;background:linear-gradient(#0a1f12,#0a1f12) padding-box,linear-gradient(135deg,#8ed66d,#b8ef8d) border-box}
+body[data-settings-theme="light"] .settings-brand img{background:linear-gradient(#f8faf8,#f8faf8) padding-box,linear-gradient(135deg,#aaffc5,#c9c0ff) border-box;box-shadow:0 8px 22px rgba(64,86,70,.12),0 0 18px rgba(170,255,197,.16)}

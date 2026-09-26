@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — TUBAL HUB</title>
+<link rel="stylesheet" href="../assets/css/auth.css">
+<link rel="stylesheet" href="../assets/css/global-theme.css">
+</head>
+<body>
+<main class="auth-card">
+  <h1>TUBAL HUB</h1>
+  <p>Login to your TUBAL HUB account.</p>
+
+  <form id="loginForm" class="auth-form">
+    <label for="loginEmail">Email</label>
+    <input id="loginEmail" type="email" autocomplete="email" required>
+    <label for="loginPassword">Password</label>
+    <input id="loginPassword" type="password" autocomplete="current-password" required>
+    <button type="submit">Login with Email</button>
+    <p id="loginMessage" class="auth-message"></p>
+  </form>
+
+  <div class="auth-divider">OR</div>
+  <button class="provider-btn google-btn" type="button" data-google-login data-message-target="loginMessage"><img src="../assets/images/google-g.svg" alt="" aria-hidden="true"><span>Continue with Google</span></button>
+  <button class="provider-btn guest-btn" type="button" data-anonymous-login data-message-target="loginMessage">Continue as Guest</button>
+
+  <section class="phone-auth">
+    <h2>Phone Number</h2>
+    <input id="phoneNumber" type="tel" placeholder="+63 9XX XXX XXXX" autocomplete="tel">
+    <div id="recaptcha-container"></div>
+    <button class="provider-btn phone-btn" type="button" id="phoneSendCode">Send SMS Code</button>
+    <div id="phoneCodeBox" hidden>
+      <input id="phoneCode" type="text" inputmode="numeric" placeholder="6-digit code" autocomplete="one-time-code">
+      <button class="provider-btn phone-btn" type="button" id="phoneVerifyCode">Verify Code</button>
+    </div>
+    <p id="phoneMessage" class="auth-message"></p>
+  </section>
+
+  <div class="auth-links">
+    <a href="signup.html">Create an account</a>
+    <a href="../index.html">← Back to Home</a>
+  </div>
+</main>
+<script type="module" src="../assets/js/firebase-auth.js"></script>
+<script src="../assets/js/theme.js" defer></script>
+</body>
+</html>

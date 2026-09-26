@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Announcements | TUBAL HUB</title><link rel="stylesheet" href="../assets/css/platform-pages.css"><link rel="stylesheet" href="../assets/css/global-theme.css">
+</head><body><header><a class="brand" href="../index.html"><img src="../tubal-hub-logo.png" alt="TUBAL HUB"><span>TUBAL HUB<small>THREE BRANDS. ONE HUB.</small></span></a><nav><a class="" href="../index.html">Home</a><a class="" href="payapang-isip.html">Payapang Isip</a><a class="" href="ctrlzone.html">CTRLZONE</a><a class="" href="profiles.html">Profiles</a><a class="" href="news.html">News</a><a class="" href="shop.html">Shop</a><a class="" href="community.html">Community</a><a class="" href="chat.html">Global Chat</a></nav></header><main><section class="hero"><div><span class="kicker">TUBAL HUB / ANNOUNCEMENTS</span><h1>Latest <em>Announcements.</em></h1><p>Important platform updates and notices from TUBAL HUB.</p></div><div class="symbol">♢</div></section><section class="content"><div class="title-row"><div><span>PLATFORM UPDATES</span><h2>Stay <em>informed.</em></h2></div></div><div class="community-grid" data-announcements-list><a class="community-card"><b>◉</b><h3>Website Official Launch</h3><p>We're officially live.</p></a><a class="community-card"><b>▱</b><h3>New Shop Items</h3><p>New products are coming soon.</p></a><a class="community-card"><b>◌</b><h3>Join Our Community</h3><p>Be part of the TUBAL HUB family.</p></a><a class="community-card"><b>♧</b><h3>Maintenance Notice</h3><p>Platform notices will appear here.</p></a></div></section><section class="content"><div class="title-row"><div><span>HUB POSTS</span><h2>Latest <em>Updates.</em></h2></div></div><div class="community-grid" id="hubAnnouncementList"><div class="community-card"><b>◈</b><h3>No announcements yet</h3><p>Published announcements will appear here.</p></div></div></section><script type="module">
+import {subscribeHubPosts} from "../assets/js/hub-content.js";
+const list=document.getElementById("hubAnnouncementList"),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+if(list)subscribeHubPosts(items=>{const x=items.filter(i=>i.contentType==="announcement"&&Array.isArray(i.destinations)&&i.destinations.includes("community"));list.innerHTML=x.length?x.map(i=>'<a class="community-card" href="#"><b>◈</b><h3>'+esc(i.title)+'</h3><p>'+esc(i.text)+'</p></a>').join(""):'<div class="community-card"><b>◈</b><h3>No announcements yet</h3><p>Published announcements will appear here.</p></div>'});
+</script>
+</main><footer><div><b>TUBAL HUB</b><span>Three Brands. One Hub.</span></div><nav><a href="../index.html">Home</a><a href="community.html">Community</a><a href="privacy.html">Privacy</a><a href="cookies.html">Cookies</a><a href="terms.html">Terms</a><a href="../LICENSE.md">License</a></nav><small>© 2026 TUBAL HUB. All rights reserved.</small></footer><script src="../assets/js/data.js"></script><script src="../assets/js/main.js"></script>
+<script type="module">
+import {getFirestore,collection,getDocs,query,orderBy,limit} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import {app} from "../assets/js/firebase-config.js";
+const db=getFirestore(app);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+const grid=document.querySelector("[data-announcements-list]");
+try{
+ const snap=await getDocs(query(collection(db,"announcements"),orderBy("createdAt","desc"),limit(100)));
+ if(!snap.empty) grid.innerHTML=snap.docs.map(d=>{const x=d.data();return `<a class="community-card" href="#"><b>◈</b><h3>${esc(x.title)}</h3><p>${esc(x.text)}</p></a>`}).join("");
+}catch(e){console.warn("Firestore announcements unavailable; showing default content.",e);}
+</script><script src="../assets/js/theme.js" defer></script>
+<script type="module" src="../assets/js/presence.js?v=20260923"></script>
+</body>
+</html>

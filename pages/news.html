@@ -1,0 +1,107 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>News | TUBAL HUB</title><link rel="stylesheet" href="../assets/css/platform-pages.css"><link rel="stylesheet" href="../assets/css/global-theme.css?v=20260921">
+  <link rel="stylesheet" href="../assets/css/premium-logos.css?v=20260924-logo1">
+<link rel="stylesheet" href="../assets/css/news-premium.css?v=20260924-news1">
+</head><body class="news-premium"><header><a class="brand" href="../index.html"><img src="../tubal-hub-logo.png" loading="eager" decoding="async" fetchpriority="high" width="180" height="180" alt="TUBAL HUB"><span>TUBAL HUB<small>THREE BRANDS. ONE HUB.</small></span></a><nav><a class="" href="../index.html">Home</a><a class="" href="payapang-isip.html">Payapang Isip</a><a class="" href="ctrlzone.html">CTRLZONE</a><a class="" href="profiles.html">Profiles</a><a class="active" href="news.html">News</a><a class="" href="shop.html">Shop</a><a class="" href="community.html">Community</a><a class="" href="chat.html">Global Chat</a></nav></header><main class="news-page-shell">
+  <section class="news-live-ticker" id="newsTicker" hidden aria-label="Live news">
+    <span class="news-live-dot"></span>
+    <span class="news-live-label">LIVE</span>
+    <div class="news-ticker-window"><div class="news-ticker-track" id="newsTickerTrack"></div></div>
+  </section>
+
+  <section id="newsFeaturedSlot" aria-label="Featured news"></section>
+
+  <div class="news-under">
+    <div class="news-main-column">
+      <div class="news-filter-bar" id="newsFilters">
+        <button class="news-filter-pill active" data-filter="all" type="button">All</button>
+        <button class="news-filter-pill" data-filter="gaming" type="button">Gaming</button>
+        <button class="news-filter-pill" data-filter="community" type="button">Community</button>
+        <button class="news-filter-pill" data-filter="stories" type="button">Stories</button>
+        <button class="news-filter-pill" data-filter="events" type="button">Events</button>
+        <button class="news-filter-pill" data-filter="tech" type="button">Tech</button>
+        <label class="news-search-box"><span>⌕</span><input id="newsSearchInput" type="search" autocomplete="off" placeholder="Search news..." aria-label="Search news"></label>
+        <span id="newsResultCount" style="color:#708178;font-size:9px;white-space:nowrap"></span>
+      </div>
+
+      <section aria-labelledby="latestNewsHeading">
+        <div class="news-section-heading"><div><h2 id="latestNewsHeading">Latest stories</h2></div><p>Published in TUBAL HUB</p></div>
+        <div class="news-grid" id="newsGrid" aria-live="polite"></div>
+      </section>
+
+      <section class="news-related" aria-labelledby="relatedHeading">
+        <div class="news-section-heading"><div><h2 id="relatedHeading">Related articles</h2></div><p>More from the newsroom</p></div>
+        <div class="news-related-grid" id="relatedGrid"></div>
+      </section>
+
+      <section class="news-newsletter" aria-labelledby="newsletterHeading">
+        <h3 id="newsletterHeading">Stay close to the hub.</h3>
+        <p>Get newsroom updates when newsletter delivery is connected.</p>
+        <form class="news-newsletter-form" id="newsNewsletterForm">
+          <input id="newsNewsletterEmail" type="email" autocomplete="email" placeholder="you@example.com" aria-label="Email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <p id="newsNewsletterNote" hidden style="margin-top:8px"></p>
+      </section>
+    </div>
+
+    <aside class="news-side" aria-label="News sidebar">
+      <section class="news-side-card">
+        <div class="news-side-head"><h3>Trending Now 🔥</h3></div>
+        <div class="news-side-list" id="trendingList"></div>
+      </section>
+
+      <section class="news-side-card">
+        <div class="news-side-head">
+          <h3>Editor&apos;s Pick</h3>
+          <span class="news-editors-logo">◇</span>
+        </div>
+        <div class="news-side-copy"><p>The featured story is selected from real published news data. Featured flags are respected when present.</p></div>
+      </section>
+
+      <div class="news-ad">Premium placement</div>
+    </aside>
+  </div>
+</main>
+
+<div class="news-reader-progress" id="newsReaderProgress" aria-hidden="true"></div>
+
+<div class="news-reader" id="newsReader" hidden aria-modal="true" role="dialog" aria-label="Article reader">
+  <article class="news-reader-shell" id="newsReaderShell">
+    <div class="news-reader-top">
+      <span class="news-category-pill" id="newsReaderCategory">News</span>
+      <div style="display:flex;gap:7px">
+        <button class="news-share-trigger" id="newsShareTrigger" type="button" aria-label="Share article">↗</button>
+        <button class="news-reader-close" id="newsReaderClose" type="button" aria-label="Close article">×</button>
+      </div>
+    </div>
+    <div class="news-reader-body">
+      <img class="news-reader-cover" id="newsReaderCover" alt="" hidden>
+      <h1 class="news-reader-title" id="newsReaderTitle"></h1>
+      <div class="news-author-row" id="newsReaderByline"></div>
+      <div class="news-reader-text" id="newsReaderText"></div>
+      <section class="news-reader-comments" aria-labelledby="commentsHeading">
+        <h3 id="commentsHeading">Comments</h3>
+        <div id="newsCommentsList"></div>
+      </section>
+      <div class="news-related" style="margin-top:28px">
+        <div class="news-section-heading"><div><h2 style="font-size:22px">Read next</h2></div></div>
+        <div class="news-related-grid" id="readerRelatedGrid"></div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<div class="news-share-sheet" id="newsShareSheet" hidden>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px">
+    <strong style="font-size:12px;color:#eef8f2">Share article</strong>
+    <button type="button" id="newsShareClose" class="news-reader-close" style="width:28px;height:28px">×</button>
+  </div>
+  <div class="news-share-actions">
+    <input class="news-share-copy" id="newsShareCopy" readonly aria-label="Share link">
+    <button type="button" id="newsShareCopyBtn">Copy</button>
+  </div>
+</div><footer class="news-footer"><div><b>TUBAL HUB</b><span>Three Brands. One Hub.</span></div><nav><a href="../index.html">Home</a><a href="community.html">Community</a><a href="privacy.html">Privacy</a><a href="cookies.html">Cookies</a><a href="terms.html">Terms</a><a href="license.html">License</a></nav><small>© 2026 TUBAL HUB. All rights reserved.</small></footer><script type="module" src="../assets/js/news-premium.js?v=20260924-news3"></script>
+<script src="../assets/js/theme.js?v=20260922" defer></script>
+<script type="module" src="../assets/js/presence.js?v=20260923"></script>
+</body>
+</html>

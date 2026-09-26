@@ -1,0 +1,24 @@
+<!-- TUBAL HUB — Tubal AI Assistant -->
+<div id="tubalAiAssistant" class="tubal-ai" aria-label="Tubal AI Assistant">
+  <button class="tubal-ai-fab" id="tubalAiFab" type="button" aria-label="Open Tubal AI" aria-expanded="false">
+    <span class="tubal-ai-pulse" aria-hidden="true"></span><span class="tubal-ai-robot" aria-hidden="true">🤖</span>
+    <span class="tubal-ai-status is-online" id="tubalAiStatus" aria-label="Online"></span><span class="tubal-ai-badge" id="tubalAiBadge" hidden>0</span>
+  </button>
+  <section class="tubal-ai-window" id="tubalAiWindow" aria-hidden="true">
+    <div class="tubal-ai-spotlight" aria-hidden="true"></div>
+    <header class="tubal-ai-header">
+      <div class="tubal-ai-avatar"><span>🤖</span><i class="tubal-ai-header-status is-online" id="tubalAiHeaderStatus"></i></div>
+      <div class="tubal-ai-identity"><strong>Tubal AI</strong><span id="tubalAiSubtitle">Online • AI Assistant</span></div>
+      <div class="tubal-ai-actions"><button type="button" id="tubalAiMinimize" aria-label="Minimize">−</button><button type="button" id="tubalAiClear" aria-label="Clear chat">⌫</button><button type="button" id="tubalAiClose" aria-label="Close">×</button></div>
+    </header>
+    <div class="tubal-ai-suggestions" id="tubalAiSuggestions" aria-label="Suggested prompts">
+      <button type="button" data-prompt="Ano laro ngayon? 🎮">🎮 Laro ngayon</button><button type="button" data-prompt="Ano bago sa shop? 🛒">🛒 Bagong shop</button><button type="button" data-prompt="May event ba bukas? 📅">📅 Events</button><button type="button" data-prompt="Payapang Isip tips 🌿">🌿 Payapang Isip</button>
+    </div>
+    <main class="tubal-ai-body" id="tubalAiBody" role="log" aria-live="polite"></main>
+    <div class="tubal-ai-typing" id="tubalAiTyping" hidden><span>🤖</span><i></i><i></i><i></i><b>Tubal is typing…</b></div>
+    <form class="tubal-ai-inputbar" id="tubalAiForm">
+      <button class="tubal-ai-tool" type="button" id="tubalAiAttach" aria-label="Attach">📎</button><button class="tubal-ai-tool tubal-ai-emoji-btn" type="button" id="tubalAiEmoji" aria-label="Emoji">☺</button>
+      <div class="tubal-ai-emoji-picker" id="tubalAiEmojiPicker" hidden></div><input id="tubalAiInput" type="text" autocomplete="off" maxlength="1000" placeholder="Tanong mo kay Tubal AI..." aria-label="Message Tubal AI"><button class="tubal-ai-send" type="submit" aria-label="Send">➤</button>
+    </form>
+  </section>
+</div>

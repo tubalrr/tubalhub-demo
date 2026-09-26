@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#020604">
+<title>CTRLZONE — Game • Create • Level Up</title>
+<link rel="icon" type="image/png" href="../tubal-hub-logo.png">
+<link rel="stylesheet" href="../assets/css/global-theme.css?v=20260924">
+<link rel="stylesheet" href="../assets/css/premium-logos.css?v=20260924-logo1">
+<link rel="stylesheet" href="../assets/css/ctrlzone.css?v=20260924-v5">
+</head>
+<body class="ctrlzone-page theme-midnight">
+<header class="ctrl-header">
+  <a class="ctrl-brand" href="../index.html">
+    <span class="ctrl-brand-mark"><img src="../tubal-hub-logo.png" alt="TUBAL HUB"></span>
+    <span><strong>🎮 CTRLZONE</strong><small>Game • Create • Level Up</small></span>
+  </a>
+  <div class="ctrl-header-live"><span class="live-dot"></span><strong id="headerLivePlayers">…</strong><span>Live Members</span></div>
+  <div class="ctrl-header-actions">
+    <nav class="ctrl-nav">
+      <a href="../index.html">Home</a><a class="active" href="ctrlzone.html">CTRLZONE</a><a href="videos.html">Videos</a><a href="shop.html">Shop</a>
+    </nav>
+    <div class="ctrl-theme-switcher" aria-label="Theme">
+      <button data-theme-btn="midnight" class="theme-btn active" type="button">Midnight</button>
+      <button data-theme-btn="forest" class="theme-btn" type="button">Forest</button>
+      <button data-theme-btn="light" class="theme-btn" type="button">Light</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="ctrl-hero">
+    <video class="ctrl-hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=1920&q=86">
+      <source src="https://videos.pexels.com/video-files/3129595/3129595-hd_1920_1080_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="ctrl-hero-overlay"></div>
+    <div class="ctrl-circuit-layer"></div>
+    <div class="ctrl-hero-content">
+      <div class="eyebrow"><span>CTRLZONE / GAME LIBRARY</span><i></i><span>STEAM • EPIC LEVEL</span></div>
+      <h1>Game. Create. <em>Level Up.</em></h1>
+      <p>Discover official games, jump into your next session, and keep your whole gaming library in one premium hub.</p>
+      <div class="ctrl-hero-actions">
+        <button id="playNowBtn" class="ctrl-play-now" type="button">Play Now <span>→</span></button>
+        <a class="ctrl-glass-btn" href="#games">Explore Games <span>↓</span></a>
+      </div>
+    </div>
+    <div class="ctrl-hero-mini-stats">
+      <div><strong>09</strong><span>Games</span></div>
+      <div><strong>05</strong><span>Genres</span></div>
+      <div><strong>100%</strong><span>Official Links</span></div>
+    </div>
+  </section>
+
+  <section class="ctrl-featured">
+    <div class="section-head">
+      <div><span class="eyebrow-text">FEATURED GAME</span><h2>Spotlight <em>Session</em></h2></div>
+      <span class="section-note">Live activity • curated entry</span>
+    </div>
+    <div id="featuredStage" class="featured-stage">
+      <div id="featuredTrack" class="featured-track" aria-live="polite"></div>
+      <button id="featuredPrev" class="featured-control prev" type="button" aria-label="Previous featured game">‹</button>
+      <button id="featuredNext" class="featured-control next" type="button" aria-label="Next featured game">›</button>
+      <div id="featuredDots" class="featured-dots" aria-label="Featured games"></div>
+    </div>
+  </section>
+
+  <section id="games" class="ctrl-games-section">
+    <div class="section-head">
+      <div><span class="eyebrow-text">GAME LIBRARY</span><h2>Find your <em>next game.</em></h2></div>
+      <span id="gameCount" class="section-note">9 games</span>
+    </div>
+
+    <div class="game-filter-bar glass-surface">
+      <div id="genreFilters" class="genre-filters" role="tablist" aria-label="Game genres"></div>
+      <label class="game-search">
+        <span>🔍</span>
+        <input id="gameSearch" type="search" autocomplete="off" placeholder="Search games..." aria-label="Search games">
+      </label>
+    </div>
+
+    <div id="gamesGrid" class="games-grid"></div>
+    <div id="gameEmpty" class="game-empty glass-surface" hidden>
+      <strong>No game found</strong><span>Try another title or genre.</span>
+    </div>
+  </section>
+</main>
+
+<footer class="ctrl-footer">
+  <div><strong>TUBAL HUB / CTRLZONE</strong><span>Game • Create • Level Up</span></div>
+  <nav><a href="../index.html">Home</a><a href="community.html">Community</a><a href="shop.html">Shop</a><a href="chat.html">Global Chat</a></nav>
+  <small>Game names, logos and marks belong to their respective owners. CTRLZONE is an independent TUBAL HUB interface.</small>
+</footer>
+
+<div id="ctrlToast" class="ctrl-toast" role="status" aria-live="polite"></div>
+<div id="ctrlParticles" class="ctrl-particles" aria-hidden="true"></div>
+
+<script src="../assets/js/theme.js?v=20260924" defer></script>
+<script type="module" src="../assets/js/ctrlzone.js?v=20260925-catalog1"></script>
+</body>
+</html>

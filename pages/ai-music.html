@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#020604">
+<meta name="description" content="TUBAL HUB AI Music Studio — real MusicGen generation, local audio library, playback and sharing.">
+<title>AI Music Studio | TUBAL HUB</title>
+<link rel="icon" type="image/png" href="../tubal-hub-logo.png">
+<link rel="stylesheet" href="../assets/css/global-theme.css?v=20260924">
+<link rel="stylesheet" href="../assets/css/premium-logos.css?v=20260924-logo1">
+<link rel="stylesheet" href="../assets/css/ai-music.css?v=20260924-v2">
+</head>
+<body class="ai-music-page theme-midnight">
+<header class="am-header glass">
+  <a class="am-brand" href="../index.html">
+    <span class="am-brand-mark emoji" aria-hidden="true">🎵</span>
+    <span><strong>TUBAL HUB</strong><small>AI MUSIC STUDIO</small></span>
+  </a>
+  <nav class="am-nav" aria-label="Primary">
+    <a href="../index.html">Home</a>
+    <a class="active" href="ai-music.html">AI Music</a>
+    <a href="feeds.html">Feeds</a>
+    <a href="ctrlzone.html">CTRLZONE</a>
+    <a href="payapang-isip.html">Payapang Isip</a>
+    <a href="shop.html">Shop</a>
+  </nav>
+  <div class="am-themes" role="group" aria-label="Theme">
+    <button type="button" data-theme="midnight" class="active">Midnight</button>
+    <button type="button" data-theme="forest">Forest</button>
+    <button type="button" data-theme="light">Light</button>
+  </div>
+</header>
+
+<main class="am-wrap">
+  <section class="am-hero glass organic">
+    <div>
+      <span class="eyebrow"><span class="emoji" aria-hidden="true">✦</span> REAL AI AUDIO WORKFLOW</span>
+      <h1>AI Music <span>Studio</span></h1>
+      <p>Create music from your own description with Hugging Face MusicGen. No demo tracks, no random playlists, no placeholder audio.</p>
+    </div>
+    <div class="am-hero-status">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>Provider: <strong>facebook/musicgen-small</strong></span>
+    </div>
+  </section>
+
+  <section class="am-studio-grid">
+    <article class="generator-card glass organic">
+      <div class="card-head">
+        <div><span class="eyebrow">01 / GENERATOR</span><h2>Describe your vibe</h2></div>
+        <span class="secure-chip"><span class="emoji" aria-hidden="true">🔐</span> Real API</span>
+      </div>
+
+      <label class="field-label" for="musicPrompt">Music prompt</label>
+      <textarea id="musicPrompt" maxlength="1800" placeholder="Describe your vibe... e.g. chill lo-fi rain in Surigao night OPM"></textarea>
+
+      <div class="genre-block">
+        <div class="field-label">Genre</div>
+        <div class="chip-row" id="genreChips" role="group" aria-label="Genre">
+          <button type="button" class="genre-chip active" data-genre="Lo-fi Hip-Hop">Lo-fi Hip-Hop</button>
+          <button type="button" class="genre-chip" data-genre="Ambient">Ambient</button>
+          <button type="button" class="genre-chip" data-genre="EDM">EDM</button>
+          <button type="button" class="genre-chip" data-genre="Acoustic">Acoustic</button>
+          <button type="button" class="genre-chip" data-genre="OPM">OPM</button>
+        </div>
+      </div>
+
+      <div class="control-grid">
+        <div class="control-field">
+          <label class="field-label" for="moodRange">Mood <span id="moodValue">Balanced</span></label>
+          <input id="moodRange" type="range" min="0" max="100" value="50">
+          <div class="range-labels"><span>Happy</span><span>Sad</span></div>
+        </div>
+        <div class="control-field">
+          <div class="field-label">Duration</div>
+          <div class="duration-row" id="durationRow">
+            <button type="button" data-duration="30">30s</button>
+            <button type="button" data-duration="60" class="active">60s</button>
+            <button type="button" data-duration="120">120s</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="api-panel">
+        <label class="field-label" for="hfToken">Hugging Face API key</label>
+        <div class="secret-input">
+          <input id="hfToken" type="password" autocomplete="off" spellcheck="false" placeholder="hf_...">
+          <button id="showToken" type="button" aria-label="Show API key">Show</button>
+        </div>
+        <p class="security-note"><span class="emoji" aria-hidden="true">⚠️</span> This public website sends the key directly to Hugging Face from your browser. It is not saved to localStorage or IndexedDB. Never paste a key into the source code or GitHub.</p>
+      </div>
+
+      <button id="generateMusic" class="generate-btn" type="button"><span class="emoji" aria-hidden="true">✦</span> Generate Music</button>
+
+      <div id="generationState" class="generation-state" aria-live="polite">
+        <span class="state-light" aria-hidden="true"></span>
+        <span>Enter a real API key and generate your first track.</span>
+      </div>
+      <div id="loadingWaveform" class="loading-waveform" hidden aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </article>
+
+    <article class="player-card glass organic">
+      <div class="card-head">
+        <div><span class="eyebrow">02 / PLAYER</span><h2>Now playing</h2></div>
+        <span id="playerState" class="state-chip">READY</span>
+      </div>
+
+      <div class="visualizer-shell">
+        <canvas id="visualizer" width="900" height="270" aria-label="Real-time frequency visualizer"></canvas>
+        <div id="playerEmpty" class="player-empty">
+          <span class="player-empty-icon emoji" aria-hidden="true">🎧</span>
+          <strong>No audio loaded</strong>
+          <small>Generated audio will appear here.</small>
+        </div>
+      </div>
+
+      <div class="track-head">
+        <div>
+          <h3 id="playerTitle">No track selected</h3>
+          <p id="playerMeta">Create a real track to start playback.</p>
+        </div>
+        <button id="likeTrack" class="icon-btn" type="button" aria-label="Like current track" disabled><span class="emoji" aria-hidden="true">♡</span></button>
+      </div>
+
+      <audio id="audioPlayer" preload="metadata" crossorigin="anonymous"></audio>
+      <div class="player-controls">
+        <button id="prevTrack" class="circle-btn" type="button" aria-label="Previous track" disabled>⏮</button>
+        <button id="playPause" class="play-btn" type="button" aria-label="Play" disabled>▶</button>
+        <button id="nextTrack" class="circle-btn" type="button" aria-label="Next track" disabled>⏭</button>
+      </div>
+
+      <div class="time-row">
+        <span id="currentTime">0:00</span>
+        <input id="seekBar" type="range" min="0" max="0" step="0.01" value="0" aria-label="Playback progress">
+        <span id="durationTime">0:00</span>
+      </div>
+
+      <div class="volume-row">
+        <span class="emoji" aria-hidden="true">🔊</span>
+        <input id="volumeBar" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume">
+        <span id="listenerCount">0 active listener</span>
+      </div>
+
+      <div class="player-actions">
+        <button id="shareTrack" class="secondary-btn" type="button" disabled><span class="emoji" aria-hidden="true">↗</span> Share to Feeds</button>
+        <button id="downloadTrack" class="secondary-btn" type="button" disabled><span class="emoji" aria-hidden="true">↓</span> Download</button>
+        <button id="deleteTrack" class="danger-outline" type="button" disabled><span class="emoji" aria-hidden="true">×</span> Delete</button>
+      </div>
+
+      <div id="playerNotice" class="player-notice" role="status" aria-live="polite"></div>
+    </article>
+  </section>
+
+  <section class="library-section">
+    <div class="library-head">
+      <div>
+        <span class="eyebrow">03 / LIBRARY</span>
+        <h2>Your real tracks</h2>
+        <p>Only audio stored in this browser’s IndexedDB is shown here.</p>
+      </div>
+      <div class="library-tools">
+        <span id="libraryCount">0 tracks</span>
+        <input id="librarySearch" type="search" placeholder="Search real titles..." autocomplete="off">
+      </div>
+    </div>
+    <div id="libraryList" class="library-list glass" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer class="am-footer">
+  <strong>TUBAL HUB / AI MUSIC STUDIO</strong>
+  <span>Real AI Music uses Web Audio playback/visualization + Hugging Face MusicGen API. Internet is required for generation.</span>
+  <small>Provider output is saved as the real audio Blob returned by the API. The downloaded file keeps its actual media format; this page does not rename WAV audio as MP3.</small>
+</footer>
+
+<div id="amToast" class="am-toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/theme.js?v=20260924" defer></script>
+<script type="module" src="../assets/js/ai-music.js?v=20260924-v2"></script>
+</body>
+</html>

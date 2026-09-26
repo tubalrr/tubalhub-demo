@@ -1,0 +1,36 @@
+<!-- TUBAL HUB — REAL UPDATE NOTIFIER -->
+<div class="th-update-banner" id="thUpdateBanner" hidden>
+  <div class="th-update-banner-icon" aria-hidden="true">🔄</div>
+  <div class="th-update-banner-copy">
+    <strong>May bagong update ang Tubal Hub!</strong>
+    <span id="thUpdateBannerMessage">Website update available.</span>
+  </div>
+  <button id="thUpdateRefreshTop" class="th-update-refresh" type="button">Refresh Now</button>
+  <button id="thUpdateDismissTop" class="th-update-dismiss" type="button" aria-label="Dismiss update">×</button>
+</div>
+
+<div class="th-update-toast" id="thUpdateToast" hidden role="status" aria-live="polite">
+  <div class="th-update-toast-head">
+    <div><strong>Update Available</strong><small id="thUpdateToastVersion">New website version detected.</small></div>
+    <button id="thUpdateDismissToast" class="th-update-toast-close" type="button" aria-label="Dismiss update notification">×</button>
+  </div>
+  <div class="th-update-toast-message" id="thUpdateToastMessage">A new version of TUBAL HUB is ready.</div>
+  <div class="th-update-toast-progress"><i id="thUpdateToastProgress"></i></div>
+  <div class="th-update-toast-actions">
+    <button id="thUpdateRefreshToast" class="th-update-toast-refresh" type="button">Refresh</button>
+    <button id="thUpdateLater" class="th-update-toast-later" type="button">Later</button>
+  </div>
+</div>
+
+<div class="th-update-overlay" id="thUpdateOverlay" hidden>
+  <div class="th-update-loading glass-surface" role="status" aria-live="polite">
+    <div class="th-update-spinner"></div>
+    <strong>Updating Tubal Hub...</strong>
+    <span id="thUpdateLoadingCopy">Applying the latest website version.</span>
+  </div>
+</div>
+
+<div class="th-version-badge" id="thVersionBadge" aria-live="polite">
+  <span class="th-version-dot" id="thVersionDot"></span>
+  <span id="thVersionText">v—</span>
+</div>
